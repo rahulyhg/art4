@@ -10,7 +10,7 @@ $dark: #303e54 !default;
 $base: #778aa6 !default;
 $font-family-sans-serif: "Source Sans Pro", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
 $font-family-light-sans-serif: "Source Sans Pro", "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
-$button-border-radius:30px;
+$button-border-radius: 30px;
 @font-face {
   font-family: 'Source Sans Pro';
   src: url("../fonts/SourceSansPro-Bold.ttf");
@@ -38,9 +38,9 @@ $button-border-radius:30px;
     }
   }
 }
-.btn-all{
-  .button{
-      border-radius: $button-border-radius;
+.btn-all {
+  .button {
+    border-radius: $button-border-radius;
   }
 }
 // scss start
@@ -50,7 +50,9 @@ $button-border-radius:30px;
 .color-dark {
   color: $dark;
 }
-
+.color-assertive{
+  color:$assertive;
+}
 .mt25 {
   margin-top: 25%;
 }
@@ -122,12 +124,28 @@ $button-border-radius:30px;
     color: $dark;
   }
   .item {
-    border-bottom: 1px solid  $base;
+    border-bottom: 1px solid $base;
     input {
       color: $base;
       @include placeholder {
-        color:$dark;
+        color: $dark;
       }
     }
+  }
+}
+.profile-bg {
+  padding: 15px;
+  background: url(../img/profile-bg.jpg)no-repeat;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  .pro-img {
+    padding-top: 50px;
+  }
+  .edit-btn {
+    font-size: 25px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
   }
 }

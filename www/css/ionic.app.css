@@ -43,6 +43,9 @@ $dark:                            #444 !default;
 .color-dark {
   color: #303e54; }
 
+.color-assertive {
+  color: #75c911; }
+
 .mt25 {
   margin-top: 25%; }
 
@@ -123,6 +126,20 @@ $dark:                            #444 !default;
       color: #303e54; }
     .psw-form .item input:-ms-input-placeholder {
       color: #303e54; }
+
+.profile-bg {
+  padding: 15px;
+  background: url(../img/profile-bg.jpg) no-repeat;
+  position: relative;
+  background-size: cover;
+  background-position: center; }
+  .profile-bg .pro-img {
+    padding-top: 50px; }
+  .profile-bg .edit-btn {
+    font-size: 25px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px; }
 
 /*!
   Ionicons, v2.0.1

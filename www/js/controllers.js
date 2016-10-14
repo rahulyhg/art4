@@ -18,7 +18,7 @@ angular.module('starter.controllers', [])
     $scope.modal.hide();
   };
 })
-.controller('PlaylistsCtrl', function($scope) {
+.controller('ProfileCtrl', function($scope) {
 
 })
 
