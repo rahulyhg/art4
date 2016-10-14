@@ -1,5 +1,32 @@
-<ion-view >
-  <ion-content>
-    <h1>login</h1>
+<ion-view>
+  <ion-content class="bg-login">
+    <div class="logo mt25">
+      <img src="img/logo.jpg" alt="Coach Mentor" >
+    </div>
+    <div class="login-form padding-horizontal">
+      <form action=""  name="formName" ng-submit="submitForm(formData);">
+        <div class="list">
+          <label class="item item-input ps-relative">
+            <i class="ln-envelope"></i>
+            <input type="email" placeholder="Email Address" name="email" required>
+            <div class="error-msg" ng-show="myForm.email.$error.required && myForm.email.$dirty">Email Address is required</div>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-lock"></i>
+            <input type="password" placeholder="Password" name="password" required>
+              <div class="error-msg" ng-show="myForm.password.$error.required && myForm.password.$dirty">Password is required</div>
+          </label>
+
+        </div>
+        <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
+          <button class="button button-assertive button-block" ui-sref="app.profile">
+            Submit
+          </button>
+        </div>
+        <div class="text-center pr15 fr-pw">
+          <a href="" class="color-dark" ng-click="openModal()">Forgot Password ?</a>
+        </div>
+      </form>
+    </div>
   </ion-content>
 </ion-view>
