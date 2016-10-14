@@ -4,8 +4,19 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope) {
-
+.controller('LoginCtrl', function($scope,$ionicModal, $timeout) {
+  $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function () {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
 })
 .controller('PlaylistsCtrl', function($scope) {
 

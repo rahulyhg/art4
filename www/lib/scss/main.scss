@@ -4,7 +4,7 @@ $positive: #2489ea !default;
 $calm: #11c1f3 !default;
 $balanced: #33cd5f !default;
 $energized: #ffc900 !default;
-$assertive: #ef74a8 !default;
+$assertive: #75c911 !default;
 $royal: #886aea !default;
 $dark: #303e54 !default;
 $base: #778aa6 !default;
@@ -50,6 +50,7 @@ $button-border-radius:30px;
 .color-dark {
   color: $dark;
 }
+
 .mt25 {
   margin-top: 25%;
 }
@@ -85,5 +86,48 @@ $button-border-radius:30px;
   font-size: 16px;
   a {
     text-decoration: none;
+  }
+}
+.error-msg {
+  background-color: $assertive;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  top: 2px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  &:after {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid $assertive;
+    bottom: -4px;
+    content: '';
+    position: absolute;
+    left: 50%;
+  }
+}
+.right-badge-modal {
+  position: absolute;
+  right: 15px;
+  top: 14px;
+  display: inline-block;
+}
+.psw-form {
+  @extend .login-form;
+  i {
+    color: $dark;
+  }
+  .item {
+    border-bottom: 1px solid  $base;
+    input {
+      color: $base;
+      @include placeholder {
+        color:$dark;
+      }
+    }
   }
 }
