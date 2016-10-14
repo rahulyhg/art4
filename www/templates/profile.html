@@ -8,5 +8,39 @@
       <i class="ln-edit2 color-assertive"></i>
     </div>
   </div>
+  <div class="login-form padding-horizontal">
+    <form action=""  name="formName" ng-submit="submitForm(formData);">
+      <div class="list">
+
+        <label class="item item-input ps-relative">
+          <i class="ln-user"></i>
+          <input type="text" placeholder="Full name" name="email" required>
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+        </label>
+        <label class="item item-input ps-relative">
+          <i class="ln-envelope"></i>
+          <input type="email" placeholder="Email" name="email" required>
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+        </label>
+        <label class="item item-input ps-relative">
+          <i class="ln-iphone"></i>
+          <input type="tel" placeholder="Mobile Number" name="number" required>
+            <div class="error-msg" ng-show="formName.number.$error.required && formName.number.$dirty">Password is required</div>
+        </label>
+        <label class="item item-input ps-relative">
+          <i class="ln-at-sign"></i>
+          <input type="text" placeholder="Website" name="web" required>
+            <div class="error-msg" ng-show="formName.web.$error.required && formName.web.$dirty">Password is required</div>
+        </label>
+
+      </div>
+      <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
+        <button class="button button-assertive button-block" ui-sref="app.profile">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
   </ion-content>
 </ion-view>

@@ -4,7 +4,7 @@ $positive: #2489ea !default;
 $calm: #11c1f3 !default;
 $balanced: #33cd5f !default;
 $energized: #ffc900 !default;
-$assertive: #75c911 !default;
+$assertive: #e05d5d !default;
 $royal: #886aea !default;
 $dark: #303e54 !default;
 $base: #778aa6 !default;
@@ -50,8 +50,8 @@ $button-border-radius: 30px;
 .color-dark {
   color: $dark;
 }
-.color-assertive{
-  color:$assertive;
+.color-assertive {
+  color: $assertive;
 }
 .mt25 {
   margin-top: 25%;
@@ -147,5 +147,17 @@ $button-border-radius: 30px;
     position: absolute;
     right: 20px;
     bottom: 20px;
+  }
+}
+.src-btn {
+  .button-light {
+    float: right;
+    z-index: 99;
+    background: transparent !important;
+    color: $light !important;
+    font-size: 24px;
+  }
+  .activated{
+    border: none;
   }
 }
