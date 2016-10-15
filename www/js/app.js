@@ -40,6 +40,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+  .state('app.artist', {
+    url: '/artist',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/artist.html',
+          controller: 'ArtishCtrl'
+      }
+    }
+  })
 
   .state('login', {
       url: '/login',

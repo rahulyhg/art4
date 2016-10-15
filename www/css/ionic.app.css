@@ -179,6 +179,32 @@ $dark:                            #444 !default;
   border-left: 6px solid transparent !important;
   color: #e05d5d !important; }
 
+.search .item {
+  border-color: #778aa6; }
+  .search .item i {
+    color: #778aa6; }
+
+.all-cat {
+  margin-top: 10px; }
+  .all-cat p {
+    line-height: 150%;
+    color: #778aa6; }
+    .all-cat p i {
+      padding-right: 8px;
+      color: #303e54;
+      font-size: 16px;
+      vertical-align: text-top; }
+
+.chck {
+  position: absolute;
+  z-index: 9;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%); }
+  .chck .checkbox input:checked:before, .chck .checkbox input:checked + .checkbox-icon:before {
+    background: #e05d5d;
+    border-color: #e05d5d; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
