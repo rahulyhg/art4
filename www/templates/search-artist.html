@@ -1,0 +1,103 @@
+<ion-view view-title="Search Artish">
+  <ion-content>
+    <div class="profile-bg">
+      <div class="pro-img display-inline vertical-btm">
+        <img src="img/profile.png" alt="">
+      </div>
+      <div class="name display-inline ml20">
+        <h4>Pooja Shah</h4>
+        <span>Poojashah@gmail.com</span>
+        <p>9002579648</p>
+      </div>
+    </div>
+    <div class="login-form padding-horizontal">
+      <form action="" name="formName" ng-submit="submitForm(formData);">
+        <div class="list">
+
+          <label class="item item-input ps-relative">
+            <i class="ln-calendar3"></i>
+            <input type="date" placeholder="Full name" name="email" required>
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+          </label>
+          <label class="item item-input ps-relative item-select sl-sft">
+            <i class="ln-bottle"></i>
+
+              <div class="input-label">
+                Event Type
+              </div>
+              <select class="mt15">
+                <option>Sport</option>
+                <option selected>Sport</option>
+                <option>Sport</option>
+              </select>
+
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+          </label>
+          <label class="item item-input ps-relative item-select sl-sft">
+            <i class="ln-map-marker"></i>
+
+              <div class="input-label">
+                Event City
+              </div>
+              <select class="mt15">
+                <option>Mumbai</option>
+                <option selected>Delhi</option>
+                <option>Pune</option>
+              </select>
+
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+          </label>
+          <label class="item item-input ps-relative item-select sl-sft">
+            <i class="ln-crown"></i>
+
+              <div class="input-label">
+                Talent
+              </div>
+              <select class="mt15">
+                <option>Sport</option>
+                <option selected>Sport</option>
+                <option>Sport</option>
+              </select>
+
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+          </label>
+          <label class="item item-input ps-relative item-select sl-sft">
+            <i class="ln-playlist"></i>
+
+              <div class="input-label">
+                Genre
+              </div>
+              <select class="mt15">
+                <option>Sport</option>
+                <option selected>Sport</option>
+                <option>Sport</option>
+              </select>
+
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+          </label>
+          <label class="item item-input ps-relative item-select sl-sft">
+            <i class="ln-cash"></i>
+
+              <div class="input-label">
+                Budget
+              </div>
+              <select class="mt15">
+                <option>Sport</option>
+                <option selected>Sport</option>
+                <option>Sport</option>
+              </select>
+
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div>
+          </label>
+
+        </div>
+        <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
+          <button class="button button-assertive button-block" ui-sref="app.profile">
+            Submit
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

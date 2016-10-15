@@ -56,6 +56,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+    .state('app.search-artist', {
+      url: '/search-artist',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/search-artist.html',
+          controller: 'SearchArtistCtrl'
+        }
+      }
+    })
 
   .state('app.single', {
     url: '/playlists/:playlistId',

@@ -21,6 +21,9 @@ angular.module('starter.controllers', [])
 .controller('ProfileCtrl', function($scope) {
 
 })
+.controller('SearchArtistCtrl', function($scope) {
+
+})
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });

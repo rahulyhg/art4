@@ -127,6 +127,9 @@ $dark:                            #444 !default;
     .psw-form .item input:-ms-input-placeholder {
       color: #303e54; }
 
+.pt50 {
+  padding-top: 50px; }
+
 .profile-bg {
   padding: 15px;
   background: url(../img/profile-bg.jpg) no-repeat;
@@ -150,6 +153,31 @@ $dark:                            #444 !default;
 
 .src-btn .activated {
   border: none; }
+
+.margin0 {
+  margin: 0; }
+
+.display-inline {
+  display: inline-block; }
+
+.ps-relative {
+  position: relative; }
+
+.mt15 {
+  margin-top: 15px; }
+
+.ml20 {
+  margin-left: 20px; }
+
+.vertical-btm {
+  vertical-align: bottom; }
+
+.item-select:after {
+  top: 62% !important;
+  border-top: 6px solid !important;
+  border-right: 6px solid transparent !important;
+  border-left: 6px solid transparent !important;
+  color: #e05d5d !important; }
 
 /*!
   Ionicons, v2.0.1
