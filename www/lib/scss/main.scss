@@ -212,19 +212,54 @@ $button-border-radius: 30px;
     }
   }
 }
-.chck{
+.chck {
   position: absolute;
-z-index: 9;
-right: 10px;
-top: 50%;
-transform: translateY(-50%);
-.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+  z-index: 9;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  .checkbox input:checked + .checkbox-icon:before,
+  .checkbox input:checked:before {
     background: $assertive;
     border-color: $assertive;
+  }
 }
-}
-.del-btn{
+.del-btn {
   text-decoration: none;
-  color:$assertive;
+  color: $assertive;
   font-size: 24px;
+}
+.mi-pad {
+  background: transparent;
+  padding: 20px 0 10px 15px !important;
+  display: inline-table !important;
+}
+.user-back {
+  height: 60px;
+  width: 60px;
+  background-size: cover;
+}
+.main-menu {
+  .item {
+    border-width: 0;
+    a {
+      font-size: 16px;
+      i {
+        padding-right: 10px;
+        font-size: 22px;
+        vertical-align: sub;
+        color: $base;
+      }
+    }
+  }
+}
+.actives {
+  .item-content {
+    background-color: #e7e7e7 !important;
+    color: $assertive !important;
+    border-left: 3px solid $assertive !important;
+    i {
+      color: $assertive !important;
+    }
+  }
 }

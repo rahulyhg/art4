@@ -11,30 +11,40 @@
       </ion-nav-buttons>
 
     </ion-nav-bar>
-    <ion-nav-view name="menuContent" >
+    <ion-nav-view name="menuContent">
       <div class="src-btn">
-  <button class="button button-light ln-magnifier" ></button>
-  </div>
+        <button class="button button-light ln-magnifier"></button>
+      </div>
     </ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
-    </ion-header-bar>
-    <ion-content>
+    <ion-header-bar class="bar-light mi-pad" >
+<div class="pr-img">
+     <div class="user-back" ng-style="{'background-image':'url(img/a3.png)'}" menu-close></div>
+</div>
+ </ion-header-bar>
+    <ion-content class="has-tabs-top main-menu">
       <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
+        <ion-item menu-close ui-sref="app.profile" ui-sref-active="actives">
+          <i class="ln-user"></i>
+          Profile
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
+        <ion-item menu-close ui-sref="app.artist" ui-sref-active="actives">
+          <i class="ln-medal"></i>
+          Artish
         </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
+        <ion-item menu-close ui-sref="app.search-artist" ui-sref-active="actives">
+          <i class="ln-magnifier"></i>
+          Search Artist
         </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
+        <ion-item menu-close ui-sref="app.change-password" ui-sref-active="actives">
+            <i class="ln-lock"></i>
+          Change Password
+        </ion-item>
+        <ion-item menu-close ui-sref="login" ui-sref-active="actives">
+            <i class="ln-arrow-right"></i>
+        Logout
         </ion-item>
       </ion-list>
     </ion-content>

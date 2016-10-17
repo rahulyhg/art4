@@ -210,6 +210,33 @@ $dark:                            #444 !default;
   color: #e05d5d;
   font-size: 24px; }
 
+.mi-pad {
+  background: transparent;
+  padding: 20px 0px 10px 15px !important;
+  display: inline-table !important; }
+
+.user-back {
+  height: 60px;
+  width: 60px;
+  background-size: cover; }
+
+.main-menu .item {
+  border-width: 0px; }
+  .main-menu .item a {
+    font-size: 16px; }
+    .main-menu .item a i {
+      padding-right: 10px;
+      font-size: 22px;
+      vertical-align: sub;
+      color: #778aa6; }
+
+.actives .item-content {
+  background-color: #e7e7e7 !important;
+  color: #e05d5d !important;
+  border-left: 3px solid #e05d5d !important; }
+  .actives .item-content i {
+    color: #e05d5d !important; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
