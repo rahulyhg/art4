@@ -201,7 +201,8 @@ $dark:                            #444 !default;
   right: 10px;
   top: 50%;
   transform: translateY(-50%); }
-  .chck .checkbox input:checked:before, .chck .checkbox input:checked + .checkbox-icon:before {
+  .chck .checkbox input:checked + .checkbox-icon:before,
+  .chck .checkbox input:checked:before {
     background: #e05d5d;
     border-color: #e05d5d; }
 
@@ -212,7 +213,7 @@ $dark:                            #444 !default;
 
 .mi-pad {
   background: transparent;
-  padding: 20px 0px 10px 15px !important;
+  padding: 20px 0 10px 15px !important;
   display: inline-table !important; }
 
 .user-back {
@@ -221,7 +222,7 @@ $dark:                            #444 !default;
   background-size: cover; }
 
 .main-menu .item {
-  border-width: 0px; }
+  border-width: 0; }
   .main-menu .item a {
     font-size: 16px; }
     .main-menu .item a i {
@@ -236,6 +237,18 @@ $dark:                            #444 !default;
   border-left: 3px solid #e05d5d !important; }
   .actives .item-content i {
     color: #e05d5d !important; }
+
+.bar.bar-assertive {
+  background-color: #e05d5d !important; }
+
+.tab-item {
+  font-size: 16px !important; }
+
+.name h4 {
+  margin-bottom: 5px; }
+
+.pro-sec img {
+  width: 50px; }
 
 /*!
   Ionicons, v2.0.1
