@@ -40,6 +40,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+  .state('app.change-password', {
+    url: '/change-password',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/change-password.html',
+          controller: 'ChangePasswordCtrl'
+      }
+    }
+  })
   .state('app.artist', {
     url: '/artist',
     views: {

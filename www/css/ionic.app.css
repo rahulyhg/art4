@@ -205,6 +205,11 @@ $dark:                            #444 !default;
     background: #e05d5d;
     border-color: #e05d5d; }
 
+.del-btn {
+  text-decoration: none;
+  color: #e05d5d;
+  font-size: 24px; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
