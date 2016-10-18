@@ -16,7 +16,10 @@
             <input type="password" placeholder="Password" name="password" required>
               <div class="error-msg" ng-show="formName.password.$error.required && formName.password.$dirty">Password is required</div>
           </label>
-
+          <div class=" pr15 fr-pw cd-new">
+            <a href="" class="color-dark" ng-click="openModals()">New User ?</a>
+          </div>
+          <div class="clearfix"></div>
         </div>
         <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
           <button class="button button-assertive button-block" ui-sref="app.profile">

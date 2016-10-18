@@ -250,6 +250,11 @@ $dark:                            #444 !default;
 .pro-sec img {
   width: 50px; }
 
+.cd-new {
+  float: right;
+  /* padding-right: 15px; */
+  padding: 5px 15px 0px 0px; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

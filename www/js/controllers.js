@@ -17,6 +17,22 @@ angular.module('starter.controllers', [])
   $scope.closeModal = function () {
     $scope.modal.hide();
   };
+  
+  $ionicModal.fromTemplateUrl('templates/modal/new-user.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModals = function () {
+    $scope.modal.show();
+  };
+  $scope.closeModals = function () {
+    $scope.modal.hide();
+  };
+})
+.controller('SignupCtrl', function($scope) {
+
 })
 .controller('ProfileCtrl', function($scope) {
 

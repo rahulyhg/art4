@@ -1,0 +1,50 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-assertive bar bar-header">
+    <h1 class="title">SIgn Up</h1>
+    <span class="right-badge-modal ln ln-cross ln-fit" ng-click="closeModals()">
+    </span>
+  </ion-header-bar>
+  <ion-content>
+    <div class="logo mt25">
+      <img src="img/user1.png" alt="Coach Mentor">
+    </div>
+    <div class="psw-form padding-horizontal ">
+      <h4 class="text-center">NEW USER</h4>
+      <P class="text-center color-base">Enter the field below to sign up</P>
+      <form action="" name="formName" ng-submit="submitForm(formData);">
+        <div class="list">
+          <label class="item item-input ps-relative">
+            <i class="ln-user"></i>
+            <input type="text" placeholder="Full Name" name="name" required>
+            <div class="error-msg" ng-show="formName.name.$error.required && formName.name.$dirty">Full Name required</div>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-briefcase"></i>
+            <input type="text" placeholder="Agency Name" name="agency" required>
+            <div class="error-msg" ng-show="formName.agency.$error.required && formName.agency.$dirty">Agency is required</div>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-envelope"></i>
+            <input type="email" placeholder="Email Address" name="email" required>
+            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Email Address is required</div>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-iphone"></i>
+            <input type="text" placeholder="Contact Number" name="number" required>
+            <div class="error-msg" ng-show="formName.number.$error.required && formName.number.$dirty">Contact Number is required</div>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-earth"></i>
+            <input type="text" placeholder="Website URL" name="web" required>
+            <div class="error-msg" ng-show="formName.web.$error.required && formName.web.$dirty">Website is required</div>
+          </label>
+        </div>
+        <div class="text-center mt30 padding-horizontal sb-btn">
+          <button class="button button-assertive button-block">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-modal-view>
