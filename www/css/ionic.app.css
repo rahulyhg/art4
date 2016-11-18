@@ -255,6 +255,32 @@ $dark:                            #444 !default;
   /* padding-right: 15px; */
   padding: 5px 15px 0px 0px; }
 
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #333;
+  margin-right: 0.5em;
+  font-weight: 400;
+  font-size: 16px; }
+
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: ""; }
+
+.artist .item-thumbnail-left, .artist .item-thumbnail-left {
+  padding-top: 8px;
+  padding-left: 82px;
+  min-height: 100px; }
+  .artist .item-thumbnail-left img, .artist .item-thumbnail-left img {
+    max-width: 60px !important;
+    max-height: 60px !important;
+    border-radius: 2px; }
+
+.pending-delete {
+  background-color: #eaeaea !important; }
+
+.pending-deleted {
+  background-color: #f3b0b0 !important; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

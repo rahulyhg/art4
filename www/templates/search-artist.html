@@ -1,4 +1,4 @@
-<ion-view view-title="Search Artish">
+<ion-view view-title="Search Artist">
   <ion-content>
     <div class="profile-bg">
       <div class="pro-img display-inline vertical-btm">
@@ -10,13 +10,21 @@
         <p>9002579648</p>
       </div>
     </div>
+    <div class="search">
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ln-magnifier placeholder-icon"></i>
+          <input type="text" placeholder="Search by Name, City">
+        </label>
+      </div>
+    </div>
     <div class="login-form padding-horizontal">
       <form action="" name="formName" ng-submit="submitForm(formData);">
         <div class="list">
 
           <label class="item item-input ps-relative">
             <i class="ln-calendar3"></i>
-            <input type="date" placeholder="Full name" name="date" required placeholder="Date of birth">
+            <input type="date" placeholder="Event Date" name="date" required>
             <div class="error-msg" ng-show="formName.date.$error.required && formName.date.$dirty">date is required</div>
           </label>
           <label class="item item-input ps-relative item-select sl-sft">
