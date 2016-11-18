@@ -255,17 +255,6 @@ $dark:                            #444 !default;
   /* padding-right: 15px; */
   padding: 5px 15px 0px 0px; }
 
-input[type="date"]:before {
-  content: attr(placeholder) !important;
-  color: #333;
-  margin-right: 0.5em;
-  font-weight: 400;
-  font-size: 16px; }
-
-input[type="date"]:focus:before,
-input[type="date"]:valid:before {
-  content: ""; }
-
 .artist .item-thumbnail-left, .artist .item-thumbnail-left {
   padding-top: 8px;
   padding-left: 82px;
@@ -280,6 +269,9 @@ input[type="date"]:valid:before {
 
 .pending-deleted {
   background-color: #f3b0b0 !important; }
+
+.pending-delet {
+  background-color: #b1d9ff !important; }
 
 /*!
   Ionicons, v2.0.1
