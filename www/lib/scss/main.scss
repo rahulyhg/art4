@@ -137,20 +137,44 @@ $button-border-radius: 30px;
   padding-top: 50px;
 }
 .profile-bg {
-  padding: 15px;
+padding:15px;
   background: url(../img/profile-bg.jpg)no-repeat;
   position: relative;
   background-size: cover;
   background-position: center;
   .pro-img {
+
     padding-top: 50px;
+
   }
   .edit-btn {
     font-size: 25px;
     position: absolute;
     right: 20px;
-    bottom: 20px;
+    bottom: 0px;
+text-align: center;
+p{
+  font-size: 14px;
+margin-top: 5px;
+color: #e05d5d;
+}
   }
+}
+.edt-2{
+  left: 65px;
+right: inherit !important;
+bottom: 20px !important;
+background: #ff8484;
+border-radius: 50%;
+height: 30px;
+width: 30px;
+font-size: 16px !important;
+    // padding: 4px 0px 0px 0px;
+i{
+  color: #ffffff;
+  text-align: center;
+  line-height: 2;
+}
 }
 .src-btn {
   .button-light {
@@ -285,17 +309,19 @@ $button-border-radius: 30px;
 /* padding-right: 15px; */
 padding: 5px 15px 0px 0px;
 }
-// input[type="date"]:before {
-//     content: attr(placeholder) !important;
-//     color: #333;
-//     margin-right: 0.5em;
-//     font-weight: 400;
-// font-size: 16px;
-//   }
-//   input[type="date"]:focus:before,
-//   input[type="date"]:valid:before {
-//     content: "";
-//   }
+input[type="date"]:before {
+    content: attr(placeholder) !important;
+    color: #333;
+    margin-right: 0.5em;
+    font-weight: 400;
+font-size: 16px;
+display: inline-block;
+float: left;
+  }
+  input[type="date"]:focus:before,
+  input[type="date"]:valid:before {
+    content: "";
+  }
 .artist{
   .item-thumbnail-left, .item-thumbnail-left {
 
@@ -319,4 +345,10 @@ max-height: 60px !important;
 }
 .pending-delet {
     background-color: #b1d9ff !important;
+}
+.m{
+  display: block;
+float: right;
+text-align: right;
+    padding-right: 0px;
 }

@@ -142,7 +142,26 @@ $dark:                            #444 !default;
     font-size: 25px;
     position: absolute;
     right: 20px;
-    bottom: 20px; }
+    bottom: 0px;
+    text-align: center; }
+    .profile-bg .edit-btn p {
+      font-size: 14px;
+      margin-top: 5px;
+      color: #e05d5d; }
+
+.edt-2 {
+  left: 65px;
+  right: inherit !important;
+  bottom: 20px !important;
+  background: #ff8484;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  font-size: 16px !important; }
+  .edt-2 i {
+    color: #ffffff;
+    text-align: center;
+    line-height: 2; }
 
 .src-btn .button-light {
   float: right;
@@ -255,6 +274,19 @@ $dark:                            #444 !default;
   /* padding-right: 15px; */
   padding: 5px 15px 0px 0px; }
 
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #333;
+  margin-right: 0.5em;
+  font-weight: 400;
+  font-size: 16px;
+  display: inline-block;
+  float: left; }
+
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: ""; }
+
 .artist .item-thumbnail-left, .artist .item-thumbnail-left {
   padding-top: 8px;
   padding-left: 82px;
@@ -272,6 +304,12 @@ $dark:                            #444 !default;
 
 .pending-delet {
   background-color: #b1d9ff !important; }
+
+.m {
+  display: block;
+  float: right;
+  text-align: right;
+  padding-right: 0px; }
 
 /*!
   Ionicons, v2.0.1
