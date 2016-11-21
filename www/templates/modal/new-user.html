@@ -11,31 +11,31 @@
     <div class="psw-form padding-horizontal ">
       <h4 class="text-center">NEW USER</h4>
       <P class="text-center color-base">Enter the field below to sign up</P>
-      <form action="" name="formName" ng-submit="submitForm(formData);">
+      <form name="formName" ng-submit="submitForm(formData);">
         <div class="list">
           <label class="item item-input ps-relative">
             <i class="ln-user"></i>
-            <input type="text" placeholder="Full Name" name="name" required>
+            <input type="text" placeholder="Full Name" name="name" ng-model="formData.name" required>
             <div class="error-msg" ng-show="formName.name.$error.required && formName.name.$dirty">Full Name required</div>
           </label>
           <label class="item item-input ps-relative">
             <i class="ln-briefcase"></i>
-            <input type="text" placeholder="Agency Name" name="agency" required>
+            <input type="text" placeholder="Agency Name" name="agency" ng-model="formData.agency" required>
             <div class="error-msg" ng-show="formName.agency.$error.required && formName.agency.$dirty">Agency is required</div>
           </label>
           <label class="item item-input ps-relative">
             <i class="ln-envelope"></i>
-            <input type="email" placeholder="Email Address" name="email" required>
+            <input type="email" placeholder="Email Address" name="email" ng-model="formData.email" required>
             <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Email Address is required</div>
           </label>
           <label class="item item-input ps-relative">
             <i class="ln-iphone"></i>
-            <input type="text" placeholder="Contact Number" name="number" required>
+            <input type="text" placeholder="Contact Number" name="number" ng-model="formData.mobile" required>
             <div class="error-msg" ng-show="formName.number.$error.required && formName.number.$dirty">Contact Number is required</div>
           </label>
           <label class="item item-input ps-relative">
             <i class="ln-earth"></i>
-            <input type="text" placeholder="Website URL" name="web" required>
+            <input type="text" placeholder="Website URL" name="web" ng-model="formData.website" required>
             <div class="error-msg" ng-show="formName.web.$error.required && formName.web.$dirty">Website is required</div>
           </label>
         </div>
