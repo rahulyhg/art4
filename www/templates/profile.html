@@ -2,19 +2,20 @@
   <ion-content>
   <div class="profile-bg">
     <div class="pro-img">
-      <img src="img/profile.png" alt="">
+      <img ng-src="{{imagetobeup}}" alt="">
+        <!-- <img src="img/profile.png" alt=""> -->
     </div>
     <div class="edit-btn">
       <i class="ln-edit2 color-assertive"></i>
       <p>Edit cover</p>
     </div>
-    <div class="edit-btn edt-2">
-      <i class="ln-photo color-assertive"></i>
+    <div class="edit-btn edt-2" ng-click="uploadProfilePic();">
+      <i class="ln-photo color-assertive" ></i>
       <!-- <p>Edit profile</p> -->
     </div>
   </div>
   <div class="login-form padding-horizontal">
-    <form action=""  name="formName" ng-submit="submitProfile(profileData);">
+    <form  name="formName" ng-submit="submitProfile(profileData);">
       <div class="list">
 
         <label class="item item-input ps-relative">
@@ -40,7 +41,7 @@
 
       </div>
       <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
-        <button class="button button-assertive button-block" ui-sref="app.profile">
+        <button class="button button-assertive button-block">
           Submit
         </button>
       </div>

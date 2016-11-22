@@ -16,7 +16,7 @@
 //  'angulartics.google.analytics'
 // ]);
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services','ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
     }
   })
   .state('app.change-password', {
-    url: '/change-password',
+    url: '/change-password/:id',
     views: {
       'menuContent': {
         templateUrl: 'templates/change-password.html',

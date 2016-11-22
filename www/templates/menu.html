@@ -38,7 +38,7 @@
           <i class="ln-magnifier"></i>
           Search Artist
         </ion-item>
-        <ion-item menu-close ui-sref="app.change-password" ui-sref-active="actives">
+        <ion-item ng-controller="ProfileCtrl" menu-close ui-sref="app.change-password({id:userId})" ui-sref-active="actives">
             <i class="ln-lock"></i>
           Change Password
         </ion-item>
