@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope, $ionicModal, $timeout, MyServices) {
+.controller('LoginCtrl', function($scope, $ionicModal, $timeout, MyServices,$ionicPopup) {
     $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -44,6 +44,20 @@ angular.module('starter.controllers', [])
         console.log(data);
       });
     }
+    $scope.showAlert = function() {
+   var alertPopup = $ionicPopup.alert({
+cssClass:'text-center',
+buttons: [{
+   text: 'Ok',
+  type: 'button-assertive'
+}],
+     template: 'Registration Successfull !!'
+   });
+
+   alertPopup.then(function(res) {
+     console.log('Thank you for not eating my delicious ice cream cone');
+   });
+ };
   })
   .controller('SignupCtrl', function($scope, MyServices) {
 
