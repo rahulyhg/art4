@@ -6,7 +6,7 @@ angular.module('starter.controllers', [])
 
 
 // ===============================
-.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker,MyServices) {
+.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker,MyServices,$cordovaCamera) {
 
   // =============ProfilectrlCode====================
   // $scope.profileData = {};
