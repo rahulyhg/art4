@@ -26,6 +26,49 @@ angular.module('starter.controllers', [])
   console.log('$scope.userId', $scope.userId);
   // ===================End of Profilectrl===============
 
+
+  // =================== t code ===============================
+  // Upload Profile Pic
+    $scope.selectImage = function () {
+      var options = {
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 300,
+        targetHeight: 300,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
+      };
+      $cordovaCamera.getPicture(options).then(function (imageURI) {
+        $scope.imagetobeup = imageURI;
+        $scope.uploadImage($scope.profileImage);
+      }, function (err) {
+        // error
+      });
+    };
+
+  //Upload Image
+    $scope.uploadImage = function (imageURI) {
+      $scope.showLoading('Uploading Image...', 10000);
+      $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
+        .then(function (result) {
+          // Success!
+          console.log(result.response);
+          result.response = JSON.parse(result.response);
+          $scope.formData.profilePic = result.response.data[0];
+          $scope.submitData($scope.formData);
+        }, function (err) {
+          // Error
+          $scope.hideLoading();
+          $scope.showLoading('Error!', 2000);
+        }, function (progress) {
+          // constant progress updates
+        });
+    };
+  // =================== end of t code =========================
+
   $scope.startloading = function() {
     $ionicLoading.show({
       template: '<ion-spinner class="spinner-light"></ion-spinner>'

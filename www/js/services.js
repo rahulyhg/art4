@@ -1,4 +1,4 @@
-var adminurl = "http://192.168.0.114/api/";
+var adminurl = "http://192.168.100.123/api/";
 // var adminurl = adminbase + "/index.php/json/";
 // var imgpath = adminbase + "/uploads/";
 
