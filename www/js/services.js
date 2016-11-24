@@ -1,4 +1,5 @@
-var adminurl = "http://192.168.100.123/api/";
+var adminurl = "http://192.168.100.108/api/";
+// var adminurl = "http://localhost:80/api/";
 // var adminurl = adminbase + "/index.php/json/";
 // var imgpath = adminbase + "/uploads/";
 
@@ -39,6 +40,26 @@ angular.module('starter.services', [])
       login: function(input, callback) {
         return $http({
           url: adminurl + 'AppUser/login',
+          method: "POST",
+          data: input
+        }).success(callback);
+      },
+      forgotPassword: function(input, callback) {
+        return $http({
+          url: adminurl + 'AppUser/forgotPassword',
+          method: "POST",
+          data: input
+        }).success(callback);
+      },
+      getUserDetails: function(callback) {
+        return $http({
+          url: adminurl + 'AppUser/getUserDetails',
+          method: "POST",
+        }).success(callback);
+      },
+      filterResult: function(input, callback) {
+        return $http({
+          url: adminurl + 'AppUser/filterResult',
           method: "POST",
           data: input
         }).success(callback);

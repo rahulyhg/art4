@@ -16,8 +16,8 @@
           <img src="img/profile.png" alt="">
         </div>
         <div class="name display-inline ml20">
-          <h4 class="margin0">Wohlig Technology</h4>
-          <span>wohlig@gmail.com</span>
+          <h4 class="margin0">{{getUserDetail.name}}</h4>
+          <span>{{getUserDetail.email}}</span>
           <!-- <p>9002579648</p> -->
         </div>
       </div>
@@ -32,58 +32,58 @@
       <div class="artist mt35">
         <div class="list">
           <div class="list ">
-                <div class="ps-relative ">
-                  <div class="chck">
-                  <label class="checkbox">
-                    <input type="checkbox" checked="" ng-model="item.checked">
-                  </label>
+            <div class="ps-relative " ng-repeat="data in getArtist">
+              <div class="chck">
+                <label class="checkbox">
+                  <input type="checkbox" checked="" ng-model="item.checked">
+                </label>
 
-                </div>
-                <a class="item item-thumbnail-left"  ng-class="{'pending-delete': item.checked}">
-                  <img src="img/download.jpg">
-                  <h2 class="color-dark">Venkman</h2>
-                  <div class="all-cat">
-                    <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
-                    <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
-                    <p class="color-base"><i class="ln-film-play"></i>Videos</p>
-                  </div>
-                </a>
-    </div>
-                <div class="ps-relative">
-                <div class="chck">
-                  <label class="checkbox">
-                    <input type="checkbox" checked="" ng-model="item.checke">
-                  </label>
-
-                </div>
-                <a class="item item-thumbnail-left " ng-class="{'pending-deleted': item.checke}">
-                  <img src="img/images.jpg">
-                  <h2 class="color-dark">Venkman</h2>
-                  <div class="all-cat">
-                    <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
-                    <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
-                    <p class="color-base"><i class="ln-film-play"></i>Videos</p>
-                  </div>
-                </a>
-    </div>
-                <div class="ps-relative">
-                <div class="chck">
-                  <label class="checkbox">
-                    <input type="checkbox" ng-model="item.check">
-                  </label>
-
-                </div>
-                <a class="item item-thumbnail-left " ng-class="{'pending-delet': item.check}">
-                  <img src="img/image.jpg">
-                  <h2 class="color-dark">Venkman</h2>
-                  <div class="all-cat">
-                    <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
-                    <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
-                    <p class="color-base"><i class="ln-film-play"></i>Videos</p>
-                  </div>
-                </a>
-    </div>
               </div>
+              <a class="item item-thumbnail-left" ng-class="{'pending-delete': item.checked}">
+                <img src="img/download.jpg">
+                <h2 class="color-dark">{{data.artistName}}</h2>
+                <div class="all-cat">
+                  <p class="color-base"><i class="ln-map-marker"></i>{{data.artistCity}}</p>
+                  <p class="color-base"><i class="ln-mic2"></i>{{data.talent}}</p>
+                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                </div>
+              </a>
+            </div>
+            <!-- <div class="ps-relative">
+              <div class="chck">
+                <label class="checkbox">
+                  <input type="checkbox" checked="" ng-model="item.checke">
+                </label>
+
+              </div>
+              <a class="item item-thumbnail-left " ng-class="{'pending-deleted': item.checke}">
+                <img src="img/images.jpg">
+                <h2 class="color-dark">Venkman</h2>
+                <div class="all-cat">
+                  <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
+                  <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
+                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                </div>
+              </a>
+            </div> -->
+            <!-- <div class="ps-relative">
+              <div class="chck">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="item.check">
+                </label>
+
+              </div>
+              <a class="item item-thumbnail-left " ng-class="{'pending-delet': item.check}">
+                <img src="img/image.jpg">
+                <h2 class="color-dark">Venkman</h2>
+                <div class="all-cat">
+                  <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
+                  <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
+                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                </div>
+              </a>
+            </div> -->
+          </div>
         </div>
       </div>
       <div class="text-center mt35 padding-horizontal sb-btn">
@@ -98,8 +98,8 @@
           <img src="img/profile.png" alt="">
         </div>
         <div class="name display-inline ml20">
-          <h4 class="margin0">Wohlig Technology</h4>
-          <span>wohlig@gmail.com</span>
+          <h4 class="margin0">{{getUserDetail.name}}</h4>
+          <span>{{getUserDetail.email}}</span>
         </div>
       </div>
       <!-- <div class="search">
@@ -112,49 +112,49 @@
       </div> -->
       <div class="artist mt35">
         <div class="list">
-      <div class="list ">
+          <div class="list ">
             <div class="ps-relative">
-            <div class="chck">
-              <a href="" class="del-btn"><i class="ln-trash2"></i></a>
-            </div>
-            <a class="item item-thumbnail-left " href="#">
-              <img src="img/download.jpg">
-              <h2 class="color-dark">Venkman</h2>
-              <div class="all-cat">
-                <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
-                <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
-                <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+              <div class="chck">
+                <a href="" class="del-btn"><i class="ln-trash2"></i></a>
               </div>
-            </a>
-</div>
+              <a class="item item-thumbnail-left " href="#">
+                <img src="img/download.jpg">
+                <h2 class="color-dark">Venkman</h2>
+                <div class="all-cat">
+                  <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
+                  <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
+                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                </div>
+              </a>
+            </div>
             <div class="ps-relative">
-            <div class="chck">
-              <a href="" class="del-btn"><i class="ln-trash2"></i></a>
-            </div>
-            <a class="item item-thumbnail-left " href="#">
-              <img src="img/images.jpg">
-              <h2 class="color-dark">Venkman</h2>
-              <div class="all-cat">
-                <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
-                <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
-                <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+              <div class="chck">
+                <a href="" class="del-btn"><i class="ln-trash2"></i></a>
               </div>
-            </a>
-</div>
+              <a class="item item-thumbnail-left " href="#">
+                <img src="img/images.jpg">
+                <h2 class="color-dark">Venkman</h2>
+                <div class="all-cat">
+                  <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
+                  <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
+                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                </div>
+              </a>
+            </div>
             <div class="ps-relative">
-            <div class="chck">
-              <a href="" class="del-btn"><i class="ln-trash2"></i></a>
-            </div>
-            <a class="item item-thumbnail-left " href="#">
-              <img src="img/image.jpg">
-              <h2 class="color-dark">Venkman</h2>
-              <div class="all-cat">
-                <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
-                <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
-                <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+              <div class="chck">
+                <a href="" class="del-btn"><i class="ln-trash2"></i></a>
               </div>
-            </a>
-</div>
+              <a class="item item-thumbnail-left " href="#">
+                <img src="img/image.jpg">
+                <h2 class="color-dark">Venkman</h2>
+                <div class="all-cat">
+                  <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
+                  <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
+                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>

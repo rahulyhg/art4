@@ -5,30 +5,37 @@
         <img src="img/profile.png" alt="">
       </div>
       <div class="name display-inline ml20">
+        <h4>{{getUser.name}}</h4>
+        <span>{{getUser.email}}</span>
+        <p>{{getUser.mobile}}</p>
+      </div>
+      <!-- <div class="name display-inline ml20">
         <h4>Wohlig Technology</h4>
         <span>wohlig@gmail.com</span>
         <p>9002579648</p>
-      </div>
+      </div> -->
     </div>
-    <div class="search">
-      <div class="list list-inset">
-        <label class="item item-input">
-          <i class="icon ln-magnifier placeholder-icon"></i>
-          <input type="text" placeholder="Search by Name, City">
-        </label>
-      </div>
-    </div>
-    <div class="login-form padding-horizontal">
-      <form action="" name="formName" ng-submit="submitForm(formData);">
-        <div class="list">
+    <div>
+      <form name="formName">
+        <div class="search">
+          <div class="list list-inset">
+            <label class="item item-input">
+              <i class="icon ln-magnifier placeholder-icon"></i>
+              <input type="text" placeholder="Search by Name" ng-model="searchData.artistName">
+            </label>
+          </div>
+        </div>
+        <div class="login-form padding-horizontal">
 
-          <label class="item item-input ps-relative">
-            <i class="ln-calendar3"></i>
-            <input type="date" placeholder="Event Date" name="date" required class="m">
-            <div class="error-msg" ng-show="formName.date.$error.required && formName.date.$dirty">date is required</div>
-          </label>
-          <label class="item item-input ps-relative item-select sl-sft">
-            <i class="ln-bottle"></i>
+          <div class="list">
+
+            <label class="item item-input ps-relative">
+              <i class="ln-calendar3"></i>
+              <input type="date" placeholder="Event Date" name="date" required class="m">
+              <div class="error-msg" ng-show="formName.date.$error.required && formName.date.$dirty">date is required</div>
+            </label>
+            <label class="item item-input ps-relative item-select sl-sft">
+              <i class="ln-bottle"></i>
 
               <div class="input-label">
                 Event Type
@@ -39,73 +46,83 @@
                 <option>Sport</option>
               </select>
 
-            <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
-          </label>
-          <label class="item item-input ps-relative item-select sl-sft">
-            <i class="ln-map-marker"></i>
+              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+            </label>
+            <label class="item item-input ps-relative item-select sl-sft">
+              <i class="ln-map-marker"></i>
 
               <div class="input-label">
                 Event City
               </div>
-              <select class="mt15">
-                <option>Mumbai</option>
-                <option selected>Delhi</option>
-                <option>Pune</option>
+              <select class="mt15" ng-model="searchData.artistCity">
+                <option value="" class selected>Select</option>
+                <option ng-repeat="data in getArtist10.getArtistCity">{{data._id}}</option>
+                <!-- <option selected>Delhi</option>
+                <option>Pune</option> -->
               </select>
 
-            <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
-          </label>
-          <label class="item item-input ps-relative item-select sl-sft">
-            <i class="ln-medal"></i>
+              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+            </label>
+            <label class="item item-input ps-relative item-select sl-sft" ng-hide="searchData.artistName.length>0">
+              <i class="ln-medal"></i>
 
               <div class="input-label">
                 Talent
               </div>
-              <select class="mt15">
-                <option>Sport</option>
-                <option selected>Sport</option>
-                <option>Sport</option>
+              <select class="mt15"  ng-model="searchData.talent">
+                <option value="" class selected>Select</option>
+
+                <option ng-repeat="data in getArtist10.getTalent">{{data._id}}</option>
+                <!-- <option selected>Sport</option>
+                <option>Sport</option> -->
               </select>
 
-            <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
-          </label>
-          <label class="item item-input ps-relative item-select sl-sft">
-            <i class="ln-playlist"></i>
+              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+            </label>
+            <label class="item item-input ps-relative item-select sl-sft" ng-hide="searchData.artistName.length>0">
+              <i class="ln-playlist"></i>
 
               <div class="input-label">
                 Genre
               </div>
-              <select class="mt15">
-                <option>Music</option>
-                <option selected>Music</option>
-                <option>Music</option>
+              <select class="mt15"  ng-model="searchData.artistGenre">
+                <option value="" class selected>Select</option>
+
+                <option ng-repeat="data in getArtist10.getArtistGenre">{{data._id}}</option>
+                <!-- <option>Music</option> -->
+                <!-- <option selected>Music</option>
+                <option>Music</option> -->
               </select>
 
-            <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
-          </label>
-          <label class="item item-input ps-relative item-select sl-sft">
-            <i class="ln-cash"></i>
+              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+            </label>
+            <label class="item item-input ps-relative item-select sl-sft" ng-hide="searchData.artistName.length>0">
+              <i class="ln-cash"></i>
 
               <div class="input-label">
                 Budget
               </div>
-              <select class="mt15">
-                <option>5000</option>
+              <select class="mt15" ng-model="searchData.budget">
+                <option value="" class selected>Select</option>
+
+                <option ng-repeat="data in getArtist10.getBudget">{{data._id}}</option>
+                <!-- <option>5000</option>
                 <option selected>15000</option>
-                <option>20000</option>
+                <option>20000</option> -->
               </select>
 
-            <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
-          </label>
+              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+            </label>
 
-        </div>
-        <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
-          <button class="button button-assertive button-block" ui-sref="app.artist">
-            Submit
-          </button>
-        </div>
+          </div>
+          <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
+            <button class="button button-assertive button-block" ui-sref="app.artist({search:searchData.artistName,city:searchData.artistCity,talent:searchData.talent,genre:searchData.artistGenre,budget:searchData.budget})" ui-sref="app.artist">
+              Submit
+            </button>
+          </div>
 
       </form>
+      </div>
     </div>
   </ion-content>
 </ion-view>

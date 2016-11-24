@@ -6,7 +6,7 @@ angular.module('starter.controllers', [])
 
 
 // ===============================
-.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker,MyServices,$cordovaCamera) {
+.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera) {
 
   // =============ProfilectrlCode====================
   // $scope.profileData = {};
@@ -29,45 +29,45 @@ angular.module('starter.controllers', [])
 
   // =================== t code ===============================
   // Upload Profile Pic
-    $scope.imagetobeup = "img/profile.png";
-    $scope.selectImage = function () {
-      var options = {
-        quality: 50,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        allowEdit: true,
-        encodingType: Camera.EncodingType.JPEG,
-        targetWidth: 300,
-        targetHeight: 300,
-        saveToPhotoAlbum: false,
-        correctOrientation: true
-      };
-      $cordovaCamera.getPicture(options).then(function (imageURI) {
-        $scope.imagetobeup = imageURI;
-        $scope.uploadImage($scope.profileImage);
-      }, function (err) {
-        // error
-      });
+  $scope.imagetobeup = "img/profile.png";
+  $scope.selectImage = function() {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
     };
+    $cordovaCamera.getPicture(options).then(function(imageURI) {
+      $scope.imagetobeup = imageURI;
+      $scope.uploadImage($scope.profileImage);
+    }, function(err) {
+      // error
+    });
+  };
 
   //Upload Image
-    $scope.uploadImage = function (imageURI) {
-      $scope.showLoading('Uploading Image...', 10000);
-      $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
-        .then(function (result) {
-          // Success!
-          console.log(result.response);
-          result.response = JSON.parse(result.response);
-          $scope.formData.profilePic = result.response.data[0];
-          $scope.submitData($scope.formData);
-        }, function (err) {
-          // Error
-          $scope.hideLoading();
-          $scope.showLoading('Error!', 2000);
-        }, function (progress) {
-          // constant progress updates
-        });
-    };
+  $scope.uploadImage = function(imageURI) {
+    $scope.showLoading('Uploading Image...', 10000);
+    $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
+      .then(function(result) {
+        // Success!
+        console.log(result.response);
+        result.response = JSON.parse(result.response);
+        $scope.formData.profilePic = result.response.data[0];
+        $scope.submitData($scope.formData);
+      }, function(err) {
+        // Error
+        $scope.hideLoading();
+        $scope.showLoading('Error!', 2000);
+      }, function(progress) {
+        // constant progress updates
+      });
+  };
   // =================== end of t code =========================
 
 })
@@ -88,6 +88,24 @@ angular.module('starter.controllers', [])
     $scope.closeModal = function() {
       $scope.modal.hide();
     };
+    $scope.forgotPsws = {};
+
+    $scope.forgotSubmit = function(input, formName) {
+      console.log('forrrrrrrrrrrrr');
+      MyServices.forgotPassword(input, function(data) {
+        if (data.data.comment == 'User not found') {
+          $scope.showAlertNoData();
+        } else {
+
+          console.log(data);
+          formName.email.$touched = false;
+          $scope.okForgotPassword();
+          $scope.forgotPsws = {};
+
+        }
+      });
+
+    }
 
     $ionicModal.fromTemplateUrl('templates/modal/new-user.html', {
       scope: $scope,
@@ -125,9 +143,9 @@ angular.module('starter.controllers', [])
 
     $scope.submitLoginForm = function(userdata) {
       MyServices.login(userdata, function(data) {
-        if(data.data.message == 'No Data Found'){
+        if (data.data.message == 'No Data Found') {
           $scope.showAlertNoData();
-        }else{
+        } else {
           $.jStorage.set('userProfile', data.data);
           $scope.myuserId = data.data._id;
           $state.go('app.profile', {
@@ -149,7 +167,22 @@ angular.module('starter.controllers', [])
       });
 
       alertPopup.then(function(res) {
-        console.log('Thank you for not eating my delicious ice cream cone');
+        $scope.closeModals();
+      });
+    };
+    $scope.okForgotPassword = function() {
+      var alertPopup = $ionicPopup.alert({
+        cssClass: 'text-center',
+        buttons: [{
+          text: 'Ok',
+          type: 'button-assertive'
+        }],
+        template: 'We have sent you a temporary password on your registered e-mail ID. You may use that to login for now.'
+      });
+
+      alertPopup.then(function(res) {
+        $scope.closeModal();
+        // $state.go('login');
       });
     };
     $scope.showAlertNoData = function() {
@@ -183,11 +216,11 @@ angular.module('starter.controllers', [])
       dataToSend.password = input.password;
       dataToSend.changePassword = input.changePassword;
       MyServices.getChangePassword(dataToSend, function(data) {
-        if(data.data.message == 'No Data Found'){
+        if (data.data.message == 'No Data Found') {
           $scope.correctPasswordAlert();
           formName.oldpassword.$touched = false;
-          $scope.chngPassword.password= '';
-        }else{
+          $scope.chngPassword.password = '';
+        } else {
           console.log(data);
           formName.oldpassword.$touched = false;
           formName.newpassword.$touched = false;
@@ -195,10 +228,10 @@ angular.module('starter.controllers', [])
           $scope.showChangePasswordAlert();
           $scope.chngPassword = {};
 
-        console.log(data);
-        // $scope.profileData = data.data;
-        // console.log($scope.profileData);
-      }
+          console.log(data);
+          // $scope.profileData = data.data;
+          // console.log($scope.profileData);
+        }
       });
     }
 
@@ -231,10 +264,16 @@ angular.module('starter.controllers', [])
       });
     };
   })
-  .controller('SearchArtistCtrl', function($scope) {
+  .controller('SearchArtistCtrl', function($scope, MyServices) {
+    $scope.getUser = $.jStorage.get("userProfile");
+    $scope.getSearch = function() {}
+    MyServices.getUserDetails(function(data) {
+      $scope.getArtist10 = data.data;
+      console.log('$scope.getArtist10', $scope.getArtist10);
 
+    });
   })
-  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $state) {
+  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices) {
 
     $scope.tab = 'new';
     $scope.classa = 'active';
@@ -253,6 +292,33 @@ angular.module('starter.controllers', [])
         $scope.classb = "active";
       }
     };
+    $scope.getUserDetail = $.jStorage.get("userProfile");
+    // $sccope.getArtist = [{
+    //   "name":"abc",
+    //   "city":"mumbai",
+    //   "image":"img/download.jpg"
+    // },{
+    //   "name":"xyz",
+    //   "city":"pune",
+    //   "image":"img/images.jpg"
+    // },{
+    //   "name":"jkl",
+    //   "city":"paris",
+    //   "image":"img/download.jpg"
+    // }]
+    var dataToSend = {
+      artistName: $stateParams.search,
+      artistCity: $stateParams.city,
+      talent: $stateParams.talent,
+      artistGenre: $stateParams.genre,
+      budget: $stateParams.budget,
+    };
+    MyServices.filterResult(dataToSend, function(data) {
+      $scope.getArtist = data.data;
+      console.log('$scope.getArtist', $scope.getArtist[0]);
+
+    });
+
 
   })
 

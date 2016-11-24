@@ -62,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','ng
     }
   })
   .state('app.artist', {
-    url: '/artist',
+    url: '/artist/:search/:city/:talent/:genre/:budget',
     views: {
       'menuContent': {
         templateUrl: 'templates/artist.html',
