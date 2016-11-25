@@ -113,4 +113,25 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','ng
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
+})
+.filter('uploadpath', function() {
+    return function(input, width, height, style) {
+        var other = "";
+        if (width && width != "") {
+            other += "&width=" + width;
+        }
+        if (height && height != "") {
+            other += "&height=" + height;
+        }
+        if (style && style != "") {
+            other += "&style=" + style;
+        }
+        if (input) {
+            if (input.indexOf('https://') == -1) {
+                return imgpath + "?file=" + input + other;
+            } else {
+                return input;
+            }
+        }
+    };
 });
