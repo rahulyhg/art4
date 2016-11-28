@@ -1,6 +1,6 @@
 // var adminurl = "http://192.168.100.108/api/";
-// var adminurl = "http://192.168.0.114/api/";
-var adminurl = "http://192.168.0.113/api/";
+var adminurl = "http://192.168.0.114/api/";
+// var adminurl = "http://192.168.100.109/api/";
 var imgurl = adminurl + "upload/";
 var imgpath = imgurl + "readFile";
 var uploadurl = imgurl;
@@ -72,6 +72,33 @@ angular.module('starter.services', [])
       getprofile: function(id, callback) {
         return $http({
           url: adminurl + 'AppUser/getOne',
+          method: "POST",
+          data: {
+            _id: id
+          }
+        }).success(callback);
+      },
+      removeFromList: function(id, callback) {
+        return $http({
+          url: adminurl + 'AppUser/removeFromList',
+          method: "POST",
+          data: {
+            _id: id
+          }
+        }).success(callback);
+      },
+      sendProfileToBackend: function(id, callback) {
+        return $http({
+          url: adminurl + 'AppUser/sendProfile',
+          method: "POST",
+          data: {
+            _id: id
+          }
+        }).success(callback);
+      },
+      addedList: function(id, callback) {
+        return $http({
+          url: adminurl + 'AppUser/getShortlist',
           method: "POST",
           data: {
             _id: id

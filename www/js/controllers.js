@@ -287,12 +287,14 @@ angular.module('starter.controllers', [])
         $scope.classa = "active";
         $scope.classb = '';
       } else {
+          $scope.showMyList();
         $ionicScrollDelegate.scrollTop();
         $scope.classa = '';
         $scope.classb = "active";
       }
     };
     $scope.getUserDetail = $.jStorage.get("userProfile");
+    console.log($scope.getUserDetail._id);
     // $sccope.getArtist = [{
     //   "name":"abc",
     //   "city":"mumbai",
@@ -319,6 +321,86 @@ angular.module('starter.controllers', [])
 
     });
 
+    // ==========================================================================================shortList===================
+    $scope.addToWishlist = function(id, flag) {
+      console.log(flag);
+      if (flag == true) {
+        console.log('funid', id);
+        var input = {
+          artist: id,
+          timestamp: new Date()
+        };
+        $scope.getUserDetail.shortList.push(input);
+        console.log('$scope.getUserDetail.shortList', $scope.getUserDetail.shortList);
+      } else {
+        function checkAdult(o) {
+          return o.artist == id;
+        }
+
+        var index = $scope.getUserDetail.shortList.findIndex(checkAdult);
+        if (index != -1) {
+          $scope.getUserDetail.shortList.splice(index, 1);
+            console.log('$scope.getUserDetail.shortList splice', $scope.getUserDetail.shortList);
+        }
+      }
+
+    };
+    $scope.submitOnMyList = function() {
+      MyServices.signup($scope.getUserDetail, function(data) {
+        console.log('inside save');
+        if (data.value === true) {
+          console.log(data);
+          // $scope.mesg.push({
+          //     type: 'success',
+          //     msg: 'Added To Your Shortlist'
+          // });
+          // MyServices.getUser(function(logindata) {
+          //     _.each($scope.expertdata, function(n) {
+          //         n.showbtn = $filter('showbtn')(n._id, logindata);
+          //
+          //     })
+          // })
+        }
+        // $scope.closeAlert = function(index) {
+        //     $scope.mesg.splice(index, 1);
+        // }
+      });
+    }
+    MyServices.getprofile($scope.getUserDetail._id, function(user) {
+      $scope.userdata = user.data;
+      console.log($scope.userdata);
+    });
+    $scope.showMyList = function() {
+      MyServices.addedList($scope.getUserDetail._id, function(data) {
+        $scope.getListOfArtist = data.data.shortList;
+        console.log('$scope.getListOfArtist', $scope.getListOfArtist);
+
+      });
+    }
+
+    $scope.showMyList();
+    $scope.removeWishlist = function(id) {
+      MyServices.removeFromList(id, function(data) {
+$scope.showMyList();
+      })
+      $scope.showMyList();
+    };
+    // $scope.removeWishlist = function(id) {
+    //   function checkAdult(o) {
+    //       return o.artist == id;
+    //   }
+    //   console.log('$scope.userdata.shortList',$scope.userdata.shortList);
+    //     var index = $scope.userdata.shortList.findIndex(checkAdult);
+    //     if (index != -1) {
+    //         $scope.getListOfArtist.splice(index, 1);
+    //     }
+    //     // $scope.showMyList();
+    // };
+    $scope.sendProfile = function(){
+      MyServices.sendProfileToBackend($scope.getUserDetail._id,function(data){
+        console.log(data);
+      })
+    }
 
   })
 

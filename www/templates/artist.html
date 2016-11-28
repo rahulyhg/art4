@@ -35,7 +35,7 @@
             <div class="ps-relative " ng-repeat="data in getArtist | filter:searchText">
               <div class="chck">
                 <label class="checkbox">
-                  <input type="checkbox" checked="" ng-model="item.checked">
+                  <input type="checkbox" ng-change="addToWishlist(data._id,item.checked)" ng-model="item.checked">
                 </label>
 
               </div>
@@ -87,7 +87,7 @@
         </div>
       </div>
       <div class="text-center mt35 padding-horizontal sb-btn">
-        <button class="button button-assertive button-block">
+        <button class="button button-assertive button-block" ng-click="submitOnMyList()">
           Submit
         </button>
       </div>
@@ -113,21 +113,21 @@
       <div class="artist mt35">
         <div class="list">
           <div class="list ">
-            <div class="ps-relative">
+            <div class="ps-relative" ng-repeat="data in getListOfArtist">
               <div class="chck">
-                <a href="" class="del-btn"><i class="ln-trash2"></i></a>
+                <a class="del-btn"><i class="ln-trash2" ng-click="removeWishlist(data._id)"></i></a>
               </div>
               <a class="item item-thumbnail-left " href="#">
-                <img src="img/download.jpg">
-                <h2 class="color-dark">Venkman</h2>
+                <img ng-src="{{data.artist.pic1 | uploadpath}}">
+                <h2 class="color-dark">{{data.artist.artistName}}</h2>
                 <div class="all-cat">
-                  <p class="color-base"><i class="ln-map-marker"></i>Mumbai</p>
-                  <p class="color-base"><i class="ln-mic2"></i>Anchor - English, Hindi</p>
-                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                  <p class="color-base"><i class="ln-map-marker"></i>{{data.artist.artistCity}}</p>
+                  <p class="color-base"><i class="ln-mic2"></i>{{data.artist.talent}}</p>
+                  <p class="color-base"><i class="ln-film-play"></i>{{data.artist.artistVideo}}</p>
                 </div>
               </a>
             </div>
-            <div class="ps-relative">
+            <!-- <div class="ps-relative">
               <div class="chck">
                 <a href="" class="del-btn"><i class="ln-trash2"></i></a>
               </div>
@@ -154,12 +154,12 @@
                   <p class="color-base"><i class="ln-film-play"></i>Videos</p>
                 </div>
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
       <div class="text-center mt35 padding-horizontal sb-btn">
-        <button class="button button-assertive button-block">
+        <button class="button button-assertive button-block" ng-click="sendProfile()">
           Send Profile
         </button>
       </div>
