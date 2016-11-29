@@ -43,8 +43,8 @@ angular.module('starter.controllers', [])
       correctOrientation: true
     };
     $cordovaCamera.getPicture(options).then(function(imageURI) {
-      $scope.imagetobeup = imageURI;
-      $scope.uploadImage($scope.profileImage);
+      $scope.profileImage = imageURI;
+     $scope.uploadImage($scope.profileImage);
     }, function(err) {
       // error
     });

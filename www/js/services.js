@@ -1,5 +1,6 @@
 // var adminurl = "http://192.168.100.108/api/";
-var adminurl = "http://192.168.0.114/api/";
+var adminurl = "http://192.168.100.116/api/";
+// var adminurl = "http://192.168.0.114/api/";
 // var adminurl = "http://192.168.100.109/api/";
 var imgurl = adminurl + "upload/";
 var imgpath = imgurl + "readFile";

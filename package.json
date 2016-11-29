@@ -24,7 +24,8 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
-    "cordova-plugin-image-picker"
+    "cordova-plugin-image-picker",
+    "cordova-plugin-camera"
 
   ],
   "cordovaPlatforms": [
