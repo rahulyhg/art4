@@ -1,7 +1,7 @@
 // var adminurl = "http://192.168.100.108/api/";
-var adminurl = "http://192.168.100.116/api/";
+// var adminurl = "http://192.168.100.116/api/";
 // var adminurl = "http://192.168.0.114/api/";
-// var adminurl = "http://192.168.100.106/api/";
+var adminurl = "http://192.168.100.106/api/";
 var imgurl = adminurl + "upload/";
 var imgpath = imgurl + "readFile";
 var uploadurl = imgurl;
@@ -82,6 +82,15 @@ angular.module('starter.services', [])
       removeFromList: function(id, callback) {
         return $http({
           url: adminurl + 'AppUser/removeFromList',
+          method: "POST",
+          data: {
+            _id: id
+          }
+        }).success(callback);
+      },
+      emptyList: function(id, callback) {
+        return $http({
+          url: adminurl + 'AppUser/emptyList',
           method: "POST",
           data: {
             _id: id

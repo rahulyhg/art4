@@ -398,7 +398,10 @@ $scope.showMyList();
       });
 
       alertPopup.then(function(res) {
-        console.log('Thank you for not eating my delicious ice cream cone');
+        MyServices.emptyList($scope.getUserDetail._id, function(data) {
+          console.log(data);
+  // $scope.showMyList();
+        })
       });
     };
     $scope.sendProfile = function(){
