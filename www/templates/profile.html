@@ -1,52 +1,58 @@
 <ion-view view-title="Profile">
   <ion-content>
-  <div class="profile-bg">
-    <div class="pro-img">
-      <img ng-src="{{imagetobeup}}" alt="">
-        <!-- <img src="img/profile.png" alt=""> -->
-    </div>
-    <div class="edit-btn">
+    <form name="formName" ng-submit="submitProfile(profileData);">
+      <div class="profile-bg" ng-style="background: url({{profileData.bgimage | uploadpath}});">
+        <div class="pro-img">
+          <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
+          <img ng-src="{{profileData.image | uploadpath}}" alt="">
+          <!-- <img src="img/profile.png" alt=""> -->
+        </div>
+        <div class="edit-btn">
+          <i class="ln-edit2 color-assertive" ng-click="selectImage();"></i>
+          <p>Edit cover</p>
+        </div>
+        <!-- <div class="edit-btn">
       <i class="ln-edit2 color-assertive"></i>
       <p>Edit cover</p>
-    </div>
-    <div class="edit-btn edt-2" ng-click="selectImage();">
-      <i class="ln-photo color-assertive" ></i>
-      <!-- <p>Edit profile</p> -->
-    </div>
-  </div>
-  <div class="login-form padding-horizontal">
-    <form  name="formName" ng-submit="submitProfile(profileData);">
-      <div class="list">
+    </div> -->
+        <div class="edit-btn edt-2" ng-click="selectImage();">
+          <i class="ln-photo color-assertive"></i>
+          <!-- <p>Edit profile</p> -->
+        </div>
+      </div>
+      <div class="login-form padding-horizontal">
 
-        <label class="item item-input ps-relative">
-          <i class="ln-user"></i>
-          <input type="text" placeholder="Full name" name="email" ng-model="profileData.name" required>
+        <div class="list">
+
+          <label class="item item-input ps-relative">
+            <i class="ln-user"></i>
+            <input type="text" placeholder="Full name" name="email" ng-model="profileData.name" required>
             <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Name is required</div>
-        </label>
-        <label class="item item-input ps-relative">
-          <i class="ln-envelope"></i>
-          <input type="email" placeholder="Email" name="email" ng-model="profileData.email" required>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-envelope"></i>
+            <input type="email" placeholder="Email" name="email" ng-model="profileData.email" required>
             <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Email is required</div>
-        </label>
-        <label class="item item-input ps-relative">
-          <i class="ln-iphone"></i>
-          <input type="tel" placeholder="Mobile Number" name="number" ng-model="profileData.mobile" required>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-iphone"></i>
+            <input type="tel" placeholder="Mobile Number" name="number" ng-model="profileData.mobile" required>
             <div class="error-msg" ng-show="formName.number.$error.required && formName.number.$dirty">Mobile is required</div>
-        </label>
-        <label class="item item-input ps-relative">
-          <i class="ln-earth"></i>
-          <input type="text" placeholder="Website" name="web" ng-model="profileData.website" required>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-earth"></i>
+            <input type="text" placeholder="Website" name="web" ng-model="profileData.website" required>
             <div class="error-msg" ng-show="formName.web.$error.required && formName.web.$dirty">Website is required</div>
-        </label>
+          </label>
 
-      </div>
-      <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
-        <button class="button button-assertive button-block">
-          Submit
-        </button>
-      </div>
+        </div>
+        <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
+          <button class="button button-assertive button-block">
+            Submit
+          </button>
+        </div>
 
     </form>
-  </div>
+    </div>
   </ion-content>
 </ion-view>

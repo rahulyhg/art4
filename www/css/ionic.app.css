@@ -132,7 +132,7 @@ $dark:                            #444 !default;
 
 .profile-bg {
   padding: 15px;
-  background: url(../img/profile-bg.jpg) no-repeat;
+  /*background: url(../img/profile-bg.jpg) no-repeat;*/
   position: relative;
   background-size: cover;
   background-position: center; }
