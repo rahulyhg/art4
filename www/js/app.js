@@ -116,6 +116,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','ng
 })
 .filter('uploadpath', function() {
     return function(input, width, height, style) {
+      console.log('input',input);
         var other = "";
         if (width && width != "") {
             other += "&width=" + width;

@@ -1,7 +1,8 @@
 <ion-view view-title="Profile">
   <ion-content>
     <form name="formName" ng-submit="submitProfile(profileData);">
-      <div class="profile-bg" ng-style="background: url({{profileData.bgimage | uploadpath}});">
+      <div class="profile-bg" >
+      <div class="profile-bg" ng-style="{'background':'url('+profileData.bgimage+')'}">
         <div class="pro-img">
           <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
           <img ng-src="{{profileData.image | uploadpath}}" alt="">

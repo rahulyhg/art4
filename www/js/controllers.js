@@ -13,6 +13,7 @@ angular.module('starter.controllers', [])
   MyServices.getprofile($stateParams.id, function(data) {
     console.log(data);
     $scope.profileData = data.data;
+    $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
     console.log($scope.profileData);
   });
   $scope.submitProfile = function(input) {
@@ -52,7 +53,8 @@ angular.module('starter.controllers', [])
 
   //Upload Image
   $scope.uploadImage = function(imageURI) {
-    $scope.showLoading('Uploading Image...', 10000);
+    console.log('imageURI',imageURI);
+    // $scope.showLoading('Uploading Image...', 10000);
     $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
       .then(function(result) {
         // Success!
