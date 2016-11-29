@@ -385,20 +385,26 @@ $scope.showMyList();
       })
       $scope.showMyList();
     };
-    // $scope.removeWishlist = function(id) {
-    //   function checkAdult(o) {
-    //       return o.artist == id;
-    //   }
-    //   console.log('$scope.userdata.shortList',$scope.userdata.shortList);
-    //     var index = $scope.userdata.shortList.findIndex(checkAdult);
-    //     if (index != -1) {
-    //         $scope.getListOfArtist.splice(index, 1);
-    //     }
-    //     // $scope.showMyList();
-    // };
+    $scope.showSendListAlert = function() {
+      var alertPopup = $ionicPopup.alert({
+        cssClass: 'text-center',
+        buttons: [{
+          text: 'Ok',
+          type: 'button-assertive'
+        }],
+        template: 'Thank you for enquiry.You will get quotation shortly.'
+      });
+
+      alertPopup.then(function(res) {
+        console.log('Thank you for not eating my delicious ice cream cone');
+      });
+    };
     $scope.sendProfile = function(){
       MyServices.sendProfileToBackend($scope.getUserDetail._id,function(data){
         console.log(data);
+        if(data.value == true){
+          $scope.showSendListAlert();
+        }
       })
     }
 
