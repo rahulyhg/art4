@@ -6,7 +6,7 @@ angular.module('starter.controllers', [])
 
 
 // ===============================
-.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera) {
+.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera,$filter) {
 
   // =============ProfilectrlCode====================
   // $scope.profileData = {};
@@ -46,6 +46,7 @@ angular.module('starter.controllers', [])
     $cordovaCamera.getPicture(options).then(function(imageURI) {
       $scope.profileImage = imageURI;
      $scope.uploadImage($scope.profileImage);
+     $scope.uploadImageBackground($scope.profileImage);
     }, function(err) {
       // error
     });
@@ -60,8 +61,28 @@ angular.module('starter.controllers', [])
         // Success!
         console.log(result.response);
         result.response = JSON.parse(result.response);
-        $scope.formData.profilePic = result.response.data[0];
-        $scope.submitData($scope.formData);
+        $scope.profileData.image = result.response.data[0];
+        // $scope.submitData($scope.formData);
+        $scope.submitProfile($scope.profileData);
+      }, function(err) {
+        // Error
+        $scope.hideLoading();
+        $scope.showLoading('Error!', 2000);
+      }, function(progress) {
+        // constant progress updates
+      });
+  };
+  $scope.uploadImageBackground = function(imageURI) {
+    console.log('imageURI',imageURI);
+    // $scope.showLoading('Uploading Image...', 10000);
+    $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
+      .then(function(result) {
+        // Success!
+        console.log(result.response);
+        result.response = JSON.parse(result.response);
+        $scope.profileData.bgimage = result.response.data[0];
+        $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+        $scope.submitProfile($scope.profileData);
       }, function(err) {
         // Error
         $scope.hideLoading();
