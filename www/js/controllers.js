@@ -398,6 +398,7 @@ angular.module('starter.controllers', [])
         console.log('inside save');
         if (data.value === true) {
           console.log(data);
+          $scope.getUserDetail.shortList = [];
           // $scope.mesg.push({
           //     type: 'success',
           //     msg: 'Added To Your Shortlist'
