@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
 .controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera,$filter) {
 
   // =============ProfilectrlCode====================
-  // $scope.profileData = {};
+  $scope.profileData = {};
   MyServices.getprofile($stateParams.id, function(data) {
     console.log(data);
     $scope.profileData = data.data;
@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
         result.response = JSON.parse(result.response);
         $scope.profileData.image = result.response.data[0];
         // $scope.submitData($scope.formData);
-        $scope.submitProfile($scope.profileData);
+        // $scope.submitProfile($scope.profileData);
       }, function(err) {
         // Error
         $scope.hideLoading();
@@ -82,7 +82,7 @@ angular.module('starter.controllers', [])
         result.response = JSON.parse(result.response);
         $scope.profileData.bgimage = result.response.data[0];
         $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-        $scope.submitProfile($scope.profileData);
+        // $scope.submitProfile($scope.profileData);
       }, function(err) {
         // Error
         $scope.hideLoading();
