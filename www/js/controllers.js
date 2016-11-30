@@ -46,6 +46,26 @@ angular.module('starter.controllers', [])
     $cordovaCamera.getPicture(options).then(function(imageURI) {
       $scope.profileImage = imageURI;
      $scope.uploadImage($scope.profileImage);
+    //  $scope.uploadImageBackground($scope.profileImage);
+    }, function(err) {
+      // error
+    });
+  };
+  $scope.selectImageBg = function() {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+    $cordovaCamera.getPicture(options).then(function(imageURI) {
+      $scope.profileImage = imageURI;
+    //  $scope.uploadImage($scope.profileImage);
      $scope.uploadImageBackground($scope.profileImage);
     }, function(err) {
       // error
