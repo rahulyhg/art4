@@ -285,6 +285,7 @@ angular.module('starter.controllers', [])
       //        console.log(tab);
       $scope.tab = tab;
       if (a == 1) {
+          $scope.showArtistList();
         $ionicScrollDelegate.scrollTop();
         $scope.classa = "active";
         $scope.classb = '';
@@ -317,11 +318,15 @@ angular.module('starter.controllers', [])
       artistGenre: $stateParams.genre,
       budget: $stateParams.budget,
     };
-    MyServices.filterResult(dataToSend, function(data) {
-      $scope.getArtist = data.data;
-      console.log('$scope.getArtist', $scope.getArtist[0]);
+    $scope.showArtistList = function(){
+      MyServices.filterResult(dataToSend, function(data) {
+        $scope.getArtist = data.data;
+        console.log('$scope.getArtist', $scope.getArtist[0]);
 
-    });
+      });
+    }
+      $scope.showArtistList();
+
 
     // ==========================================================================================shortList===================
     $scope.addToWishlist = function(id, flag) {
@@ -400,7 +405,7 @@ $scope.showMyList();
       alertPopup.then(function(res) {
         MyServices.emptyList($scope.getUserDetail._id, function(data) {
           console.log(data);
-  // $scope.showMyList();
+  $scope.showMyList();
         })
       });
     };
