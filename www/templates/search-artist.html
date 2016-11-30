@@ -2,7 +2,8 @@
   <ion-content>
     <div class="profile-bg">
       <div class="pro-img display-inline vertical-btm">
-        <img src="img/profile.png" alt="">
+        <img src="img/profile.png" alt="" ng-if="!getUser.image">
+        <img ng-src="{{getUser.image | uploadpath}}" ng-if="getUser.image">
       </div>
       <div class="name display-inline ml20">
         <h4>{{getUser.name}}</h4>

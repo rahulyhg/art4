@@ -1,7 +1,8 @@
 // var adminurl = "http://192.168.100.108/api/";
 // var adminurl = "http://192.168.100.104/api/";
 // var adminurl = "http://192.168.0.114/api/";
-var adminurl = "http://192.168.0.110/api/";
+// var adminurl = "http://192.168.0.110/api/";
+var adminurl = "http://exchange.wohlig.co.in/api/";
 var imgurl = adminurl + "upload/";
 var imgpath = imgurl + "readFile";
 var uploadurl = imgurl;
