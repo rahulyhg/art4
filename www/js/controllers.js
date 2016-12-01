@@ -478,7 +478,8 @@ $scope.showMyList();
       alertPopup.then(function(res) {
         MyServices.emptyList($scope.getUserDetail._id, function(data) {
           console.log(data);
-  $scope.showMyList();
+  // $scope.showMyList();
+  $state.go('app.search-artist');
         })
       });
     };
