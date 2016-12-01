@@ -6,7 +6,7 @@ angular.module('starter.controllers', [])
 
 
 // ===============================
-.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera,$filter) {
+.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera,$filter,$state) {
 
   // =============ProfilectrlCode====================
   $scope.profileData = {};
@@ -15,20 +15,25 @@ angular.module('starter.controllers', [])
       console.log(data);
       $scope.profileData = data.data;
       $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-      console.log($scope.profileData);
+      $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
+      // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
     });
   }
 $scope.getMyProfile();
   $scope.submitProfile = function(input) {
     // var res = [];
       // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-      var res = $scope.profileData.bgimage.split("=");
+      if($scope.profileData.bgimage){
+        var res = $scope.profileData.bgimage.split("=");
+
+      }
       console.log(res);
       $scope.profileData.bgimage = res[1];
       console.log('$scope.profileData.bgimage',$scope.profileData.bgimage);
     MyServices.signup($scope.profileData, function(data) {
       console.log($scope.profileData);
       $scope.getMyProfile();
+      $state.go('app.search-artist');
     });
 
   }
@@ -260,7 +265,7 @@ $scope.getMyProfile();
   //
   // })
 
-.controller('ChangePasswordCtrl', function($scope, MyServices, $stateParams, $ionicPopup) {
+.controller('ChangePasswordCtrl', function($scope, MyServices, $stateParams, $ionicPopup, $filter) {
     var dataToSend = {};
     dataToSend._id = $stateParams.id;
     $scope.chngPassword = {};
@@ -317,16 +322,22 @@ $scope.getMyProfile();
       });
     };
   })
-  .controller('SearchArtistCtrl', function($scope, MyServices) {
+  .controller('SearchArtistCtrl', function($scope, MyServices, $filter) {
     $scope.getUser = $.jStorage.get("userProfile");
-    $scope.getSearch = function() {}
+    console.log('$scope.getUser',$scope.getUser);
+    MyServices.getprofile($scope.getUser._id, function(user) {
+      $scope.userdata = user.data;
+      $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
+      console.log($scope.userdata);
+    });
+    // $scope.getSearch = function() {}
     MyServices.getUserDetails(function(data) {
       $scope.getArtist10 = data.data;
       console.log('$scope.getArtist10', $scope.getArtist10);
 
     });
   })
-  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices) {
+  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter) {
 
     $scope.tab = 'new';
     $scope.classa = 'active';
@@ -349,6 +360,7 @@ $scope.getMyProfile();
     };
     $scope.getUserDetail = $.jStorage.get("userProfile");
     console.log($scope.getUserDetail._id);
+
     // $sccope.getArtist = [{
     //   "name":"abc",
     //   "city":"mumbai",
@@ -408,6 +420,7 @@ $scope.getMyProfile();
         console.log('inside save');
         if (data.value === true) {
           console.log(data);
+          $scope.tabchange('already',2);
           $scope.getUserDetail.shortList = [];
           // $scope.mesg.push({
           //     type: 'success',
@@ -427,6 +440,7 @@ $scope.getMyProfile();
     }
     MyServices.getprofile($scope.getUserDetail._id, function(user) {
       $scope.userdata = user.data;
+      $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
       console.log($scope.userdata);
     });
     $scope.showMyList = function() {

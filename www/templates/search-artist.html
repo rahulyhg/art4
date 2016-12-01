@@ -1,14 +1,14 @@
 <ion-view view-title="Search Artist">
   <ion-content>
-    <div class="profile-bg">
+    <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
       <div class="pro-img display-inline vertical-btm">
-        <img src="img/profile.png" alt="" ng-if="!getUser.image">
-        <img ng-src="{{getUser.image | uploadpath}}" ng-if="getUser.image">
+        <img src="img/profile.png" alt="" ng-if="!userdata.image">
+        <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
       </div>
       <div class="name display-inline ml20">
-        <h4>{{getUser.name}}</h4>
-        <span>{{getUser.email}}</span>
-        <p>{{getUser.mobile}}</p>
+        <h4>{{userdata.name}}</h4>
+        <span>{{userdata.email}}</span>
+        <p>{{userdata.mobile}}</p>
       </div>
       <!-- <div class="name display-inline ml20">
         <h4>Wohlig Technology</h4>
