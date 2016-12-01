@@ -10,15 +10,25 @@ angular.module('starter.controllers', [])
 
   // =============ProfilectrlCode====================
   $scope.profileData = {};
-  MyServices.getprofile($stateParams.id, function(data) {
-    console.log(data);
-    $scope.profileData = data.data;
-    $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-    console.log($scope.profileData);
-  });
-  $scope.submitProfile = function(input) {
-    MyServices.signup(input, function(data) {
+  $scope.getMyProfile = function(){
+    MyServices.getprofile($stateParams.id, function(data) {
       console.log(data);
+      $scope.profileData = data.data;
+      $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+      console.log($scope.profileData);
+    });
+  }
+$scope.getMyProfile();
+  $scope.submitProfile = function(input) {
+    // var res = [];
+      // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+      var res = $scope.profileData.bgimage.split("=");
+      console.log(res);
+      $scope.profileData.bgimage = res[1];
+      console.log('$scope.profileData.bgimage',$scope.profileData.bgimage);
+    MyServices.signup($scope.profileData, function(data) {
+      console.log($scope.profileData);
+      $scope.getMyProfile();
     });
 
   }
