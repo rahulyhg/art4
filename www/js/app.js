@@ -52,6 +52,22 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','ng
       }
     }
   })
+  // .state('app.email', {
+  //   url: '/email',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/email.html'
+  //     }
+  //   }
+  // })
+  // .state('app.exchange-final', {
+  //   url: '/exchange-final',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/exchange-final.html'
+  //     }
+  //   }
+  // })
   .state('app.change-password', {
     url: '/change-password/:id',
     views: {

@@ -3,26 +3,29 @@
     <form name="formName" ng-submit="submitProfile(profileData);">
       <div class="profile-bg" >
       <div class="profile-bg" ng-style="{'background':'url('+profileData.bgimage+')'}">
-        <div class="pro-img">
-          <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
-          <img ng-src="{{imagetobeup}}" ng-if="!profileData.image">
-          <img ng-src="{{profileData.image | uploadpath}}" ng-if="profileData.image">
-          <!-- <img src="img/profile.png" alt=""> -->
+        <div class="bg-cover">
+          <div class="pro-img">
+            <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
+            <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
+            <img ng-src="{{profileData.image | uploadpath}}" ng-if="profileData.image"  class="full-image">
+            <!-- <img src="img/profile.png" alt=""> -->
+          </div>
+          <!-- <pre>{{profileData.image}}</pre>
+          <pre>{{profileData.bgimage}}</pre> -->
+          <div class="edit-btn">
+            <i class="ln-edit2 color-assertive" ng-click="selectImageBg();"></i>
+            <p>Edit cover</p>
+          </div>
+          <!-- <div class="edit-btn">
+        <i class="ln-edit2 color-assertive"></i>
+        <p>Edit cover</p>
+      </div> -->
+          <div class="edit-btn edt-2" ng-click="selectImage();">
+            <i class="ln-photo color-assertive"></i>
+            <!-- <p>Edit profile</p> -->
+          </div>
         </div>
-        <!-- <pre>{{profileData.image}}</pre>
-        <pre>{{profileData.bgimage}}</pre> -->
-        <div class="edit-btn">
-          <i class="ln-edit2 color-assertive" ng-click="selectImageBg();"></i>
-          <p>Edit cover</p>
-        </div>
-        <!-- <div class="edit-btn">
-      <i class="ln-edit2 color-assertive"></i>
-      <p>Edit cover</p>
-    </div> -->
-        <div class="edit-btn edt-2" ng-click="selectImage();">
-          <i class="ln-photo color-assertive"></i>
-          <!-- <p>Edit profile</p> -->
-        </div>
+
       </div>
       <div class="login-form padding-horizontal">
 

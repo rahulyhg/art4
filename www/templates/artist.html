@@ -12,14 +12,16 @@
   <ion-content class="has-tabs-top">
     <div class="video" ng-show="tab=='new'">
       <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
-        <div class="pro-sec display-inline">
-          <img src="img/profile.png" alt="" ng-if="!userdata.image">
-          <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
-        </div>
-        <div class="name display-inline ml20">
-          <h4 class="margin0">{{userdata.name}}</h4>
-          <span>{{userdata.email}}</span>
-          <!-- <p>9002579648</p> -->
+        <div class="bg-cover">
+          <div class="pro-sec display-inline">
+            <img src="img/profile.png" alt="" ng-if="!userdata.image">
+            <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
+          </div>
+          <div class="name display-inline ml20">
+            <h4 class="margin0 light">{{userdata.name}}</h4>
+            <span class="light">{{userdata.email}}</span>
+            <!-- <p>9002579648</p> -->
+          </div>
         </div>
       </div>
       <div class="search">
@@ -95,15 +97,17 @@
     </div>
     <div class="video" ng-show="tab=='already'">
       <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
+          <div class="bg-cover">
         <div class="pro-sec display-inline">
           <!-- <img src="img/profile.png" alt=""> -->
           <img src="img/profile.png" alt="" ng-if="!userdata.image">
           <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
         </div>
         <div class="name display-inline ml20">
-          <h4 class="margin0">{{userdata.name}}</h4>
-          <span>{{userdata.email}}</span>
+          <h4 class="margin0 light">{{userdata.name}}</h4>
+          <span class="light">{{userdata.email}}</span>
         </div>
+      </div>
       </div>
       <!-- <div class="search">
         <div class="list list-inset">

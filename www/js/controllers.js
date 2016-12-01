@@ -1,7 +1,14 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices) {
-
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $filter) {
+  var getUserProfile = $.jStorage.get('userProfile');
+  MyServices.getprofile(getUserProfile._id, function(data) {
+    console.log(data);
+    $scope.profileData = data.data;
+    $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+    $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
+    // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
+  });
 })
 
 
@@ -421,7 +428,7 @@ $scope.getMyProfile();
         if (data.value === true) {
           console.log(data);
           $scope.tabchange('already',2);
-          $scope.getUserDetail.shortList = [];
+          // $scope.getUserDetail.shortList = [];
           // $scope.mesg.push({
           //     type: 'success',
           //     msg: 'Added To Your Shortlist'
@@ -480,6 +487,7 @@ $scope.showMyList();
         console.log(data);
         if(data.value == true){
           $scope.showSendListAlert();
+          $scope.getUserDetail.shortList = [];
         }
       })
     }
