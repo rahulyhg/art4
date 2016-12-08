@@ -130,35 +130,48 @@ $dark:                            #444 !default;
 .pt50 {
   padding-top: 50px; }
 
-.profile-bg {
+.profile-bg, .pr-bg {
   background: url(../img/profile-bg.jpg) no-repeat;
   position: relative;
   background-size: cover !important;
   background-position: center !important; }
-  .profile-bg .bg-cover {
+  .profile-bg .bg-cover, .pr-bg .bg-cover {
     padding: 15px;
     background: rgba(0, 0, 0, 0.5); }
-  .profile-bg .pro-sec {
+  .profile-bg .pro-sec, .pr-bg .pro-sec {
     width: 50px;
     height: 50px;
     overflow: hidden;
     border-radius: 50%; }
-  .profile-bg .pro-img {
+  .profile-bg .pro-img, .pr-bg .pro-img {
     margin-top: 50px;
     width: 70px;
     height: 70px;
     overflow: hidden;
     border-radius: 50%; }
-  .profile-bg .edit-btn {
+  .profile-bg .edit-btn, .pr-bg .edit-btn {
     font-size: 25px;
     position: absolute;
     right: 20px;
     bottom: 0px;
     text-align: center; }
-    .profile-bg .edit-btn p {
+    .profile-bg .edit-btn p, .pr-bg .edit-btn p {
       font-size: 14px;
       margin-top: 5px;
       color: #e05d5d; }
+
+.pr-bg {
+  position: fixed;
+  top: 93px;
+  width: 100%;
+  z-index: 99;
+  height: 120px; }
+  .pr-bg .bg-cover {
+    padding: 45px 0px 0px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%; }
+  .pr-bg .pro-sec {
+    vertical-align: top; }
 
 .edt-2 {
   left: 65px;
@@ -185,7 +198,7 @@ $dark:                            #444 !default;
   border: none; }
 
 .margin0 {
-  margin: 0; }
+  margin: 0 !important; }
 
 .display-inline {
   display: inline-block; }
@@ -324,6 +337,27 @@ input[type="date"]:valid:before {
   float: right;
   text-align: right;
   padding-right: 0px; }
+
+.mt100 {
+  margin-top: 134px; }
+
+.f18 h2 {
+  font-size: 18px; }
+
+.f18 p {
+  font-size: 16px !important; }
+
+.ml5 {
+  margin-left: 5px; }
+
+.h2-tg h4 {
+  color: #778aa6;
+  margin-top: 17px;
+  font-size: 15px;
+  padding-left: 15px; }
+
+.mt15 {
+  margin-top: 15px; }
 
 /*!
   Ionicons, v2.0.1

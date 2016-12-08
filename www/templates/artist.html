@@ -9,21 +9,24 @@
       </a>
     </div>
   </div>
-  <ion-content class="has-tabs-top">
-    <div class="video" ng-show="tab=='new'">
-      <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
-        <div class="bg-cover">
-          <div class="pro-sec display-inline">
-            <img src="img/profile.png" alt="" ng-if="!userdata.image">
-            <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
-          </div>
-          <div class="name display-inline ml20">
-            <h4 class="margin0 light">{{userdata.name}}</h4>
-            <span class="light">{{userdata.email}}</span>
-            <!-- <p>9002579648</p> -->
-          </div>
-        </div>
+  <div class="ps-fixed">
+  <div class="pr-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
+    <div class="bg-cover">
+      <div class="pro-sec display-inline">
+        <img src="img/profile.png" alt="" ng-if="!userdata.image">
+        <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
       </div>
+      <div class="name display-inline ml20">
+        <h4 class="margin0 light">{{userdata.name}}</h4>
+        <span class="light">{{userdata.email}}</span>
+        <!-- <p>9002579648</p> -->
+      </div>
+    </div>
+  </div>
+  </div>
+  <ion-content class="has-tabs-top ">
+    <div class="video mt100" ng-show="tab=='new'">
+
       <div class="search">
         <div class="list list-inset">
           <label class="item item-input">
@@ -32,7 +35,12 @@
           </label>
         </div>
       </div>
-      <div class="artist mt35">
+      <div class="h2-tg">
+        <h4 class="">
+          *Select Upto 5 Artist From below
+        </h4>
+      </div>
+      <div class="artist mt15">
         <div class="list">
           <div class="list ">
             <div class="ps-relative " ng-repeat="data in getArtist | filter:searchText">
@@ -42,13 +50,18 @@
                 </label>
 
               </div>
-              <a class="item item-thumbnail-left" ng-class="{'pending-delete': item.checked}">
-                <img ng-src="{{data.pic1 | uploadpath}}">
-                <h2 class="color-dark">{{data.artistName}}</h2>
+              <a class="item item-thumbnail-left f18" ng-class="{'pending-delete': item.checked}">
+                <img ng-src="{{data.pic1 | uploadpath}}" ng-click="openModal()">
+                <h2 class="color-dark ">{{data.artistName}}</h2>
                 <div class="all-cat">
-                  <p class="color-base"><i class="ln-map-marker"></i>{{data.artistCity}}</p>
+                <div class="display-inline">
+                    <p class="color-base"><i class="ln-map-marker"></i>{{data.artistCity}}</p>
+                </div>
+                  <div class="display-inline ml5">
+                    <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+                  </div>
                   <p class="color-base"><i class="ln-mic2"></i>{{data.talent}}</p>
-                  <p class="color-base"><i class="ln-film-play"></i>Videos</p>
+
                 </div>
               </a>
             </div>
@@ -89,17 +102,15 @@
           </div>
         </div>
       </div>
-      <div class="text-center mt35 padding-horizontal sb-btn">
-        <button class="button button-assertive button-block" ng-click="submitOnMyList()">
-          Submit
-        </button>
-      </div>
+      <!-- <div class="text-center mt35 padding-horizontal sb-btn">
+
+      </div> -->
     </div>
-    <div class="video" ng-show="tab=='already'">
-      <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
+    <div class="video mt100" ng-show="tab=='already'">
+      <!-- <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
           <div class="bg-cover">
         <div class="pro-sec display-inline">
-          <!-- <img src="img/profile.png" alt=""> -->
+
           <img src="img/profile.png" alt="" ng-if="!userdata.image">
           <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
         </div>
@@ -108,7 +119,7 @@
           <span class="light">{{userdata.email}}</span>
         </div>
       </div>
-      </div>
+      </div> -->
       <!-- <div class="search">
         <div class="list list-inset">
           <label class="item item-input">
@@ -117,20 +128,30 @@
           </label>
         </div>
       </div> -->
-      <div class="artist mt35">
+      <div class="h2-tg">
+        <h4 class="">
+          *Any 2 are Recommended
+        </h4>
+      </div>
+      <div class="artist mt15">
         <div class="list">
           <div class="list ">
             <div class="ps-relative" ng-repeat="data in getListOfArtist">
               <div class="chck">
                 <a class="del-btn"><i class="ln-trash2" ng-click="removeWishlist(data._id)"></i></a>
               </div>
-              <a class="item item-thumbnail-left " href="#">
-                <img ng-src="{{data.artist.pic1 | uploadpath}}">
+              <a class="item item-thumbnail-left f18" href="#">
+                <img ng-src="{{data.artist.pic1 | uploadpath}}" ng-click="openModal()">
                 <h2 class="color-dark">{{data.artist.artistName}}</h2>
                 <div class="all-cat">
-                  <p class="color-base"><i class="ln-map-marker"></i>{{data.artist.artistCity}}</p>
+                <div class="display-inline">
+                    <p class="color-base"><i class="ln-map-marker"></i>{{data.artist.artistCity}}</p>
+                </div>
+                <div class="display-inline ml5">
+                    <p class="color-base"><i class="ln-film-play"></i>{{data.artist.artistVideo}}</p>
+                </div>
                   <p class="color-base"><i class="ln-mic2"></i>{{data.artist.talent}}</p>
-                  <p class="color-base"><i class="ln-film-play"></i>{{data.artist.artistVideo}}</p>
+
                 </div>
               </a>
             </div>
@@ -165,11 +186,21 @@
           </div>
         </div>
       </div>
-      <div class="text-center mt35 padding-horizontal sb-btn">
-        <button class="button button-assertive button-block" ng-click="sendProfile()">
-          Send Profile
-        </button>
-      </div>
+      <!-- <div class="text-center mt35 padding-horizontal sb-btn">
+
+      </div> -->
     </div>
   </ion-content>
+  <div class="bar bar-footer" ng-show="tab=='new'">
+    <button class="button button-assertive button-block margin0" ng-click="submitOnMyList()" >
+      Submit
+    </button>
+
+</div>
+  <div class="bar bar-footer" ng-show="tab=='already'">
+
+    <button class="button button-assertive button-block margin0" ng-click="sendProfile()" >
+      Send Profile
+    </button>
+</div>
 </ion-view>

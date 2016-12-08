@@ -80,8 +80,8 @@ $scope.getMyProfile();
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
+      targetWidth: 320,
+      targetHeight: 150,
       saveToPhotoAlbum: false,
       correctOrientation: true
     };
@@ -344,8 +344,19 @@ $scope.getMyProfile();
 
     });
   })
-  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter) {
-
+  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter,$ionicModal) {
+    $ionicModal.fromTemplateUrl('templates/modal/image.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
     $scope.tab = 'new';
     $scope.classa = 'active';
     $scope.classb = '';
