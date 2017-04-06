@@ -128,7 +128,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','ng
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/app.search-artist');
 })
 .filter('uploadpath', function() {
     return function(input, width, height, style) {

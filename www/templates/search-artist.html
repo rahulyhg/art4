@@ -1,6 +1,26 @@
 <ion-view view-title="Search Artist">
-  <ion-content>
-    <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
+  <ion-content  >
+  
+    <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}" ng-if="userdata.bgimage">
+      <div class="bg-cover">
+        <div class="pro-img display-inline vertical-btm">
+          <img src="img/profile.png" alt="" ng-if="!userdata.image" class="full-image">
+          <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image" class="full-image">
+        </div>
+        <div class="name display-inline ml20">
+          <h4 class="light">{{userdata.name}}</h4>
+          <span class="light">{{userdata.email}}</span>
+          <p class="light">{{userdata.mobile}}</p>
+        </div>
+      </div>
+
+      <!-- <div class="name display-inline ml20">
+        <h4>Wohlig Technology</h4>
+        <span>wohlig@gmail.com</span>
+        <p>9002579648</p>
+      </div> -->
+    </div>
+    <div class="profile-bg" ng-if="!userdata.bgimage">
       <div class="bg-cover">
         <div class="pro-img display-inline vertical-btm">
           <img src="img/profile.png" alt="" ng-if="!userdata.image" class="full-image">
@@ -25,7 +45,7 @@
           <div class="list list-inset">
             <label class="item item-input">
               <i class="icon ln-magnifier placeholder-icon"></i>
-              <input type="text" placeholder="Search by Name" ng-model="searchData.artistName">
+              <input type="text" placeholder="Search by Artist name" ng-model="searchData.artistName">
             </label>
           </div>
         </div>

@@ -13,11 +13,11 @@ angular.module('starter.controllers', [])
 
 
 // ===============================
-.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera,$filter,$state) {
+.controller('ProfileCtrl', function($scope, $stateParams, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera, $filter, $state) {
 
   // =============ProfilectrlCode====================
   $scope.profileData = {};
-  $scope.getMyProfile = function(){
+  $scope.getMyProfile = function() {
     MyServices.getprofile($stateParams.id, function(data) {
       console.log(data);
       $scope.profileData = data.data;
@@ -26,17 +26,17 @@ angular.module('starter.controllers', [])
       // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
     });
   }
-$scope.getMyProfile();
+  $scope.getMyProfile();
   $scope.submitProfile = function(input) {
     // var res = [];
-      // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-      if($scope.profileData.bgimage){
-        var res = $scope.profileData.bgimage.split("=");
+    // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+    if ($scope.profileData.bgimage) {
+      var res = $scope.profileData.bgimage.split("=");
 
-      }
-      console.log(res);
-      $scope.profileData.bgimage = res[1];
-      console.log('$scope.profileData.bgimage',$scope.profileData.bgimage);
+    }
+    console.log(res);
+    $scope.profileData.bgimage = res[1];
+    console.log('$scope.profileData.bgimage', $scope.profileData.bgimage);
     MyServices.signup($scope.profileData, function(data) {
       console.log($scope.profileData);
       $scope.getMyProfile();
@@ -67,8 +67,8 @@ $scope.getMyProfile();
     };
     $cordovaCamera.getPicture(options).then(function(imageURI) {
       $scope.profileImage = imageURI;
-     $scope.uploadImage($scope.profileImage);
-    //  $scope.uploadImageBackground($scope.profileImage);
+      $scope.uploadImage($scope.profileImage);
+      //  $scope.uploadImageBackground($scope.profileImage);
     }, function(err) {
       // error
     });
@@ -87,8 +87,8 @@ $scope.getMyProfile();
     };
     $cordovaCamera.getPicture(options).then(function(imageURI) {
       $scope.profileImage = imageURI;
-    //  $scope.uploadImage($scope.profileImage);
-     $scope.uploadImageBackground($scope.profileImage);
+      //  $scope.uploadImage($scope.profileImage);
+      $scope.uploadImageBackground($scope.profileImage);
     }, function(err) {
       // error
     });
@@ -96,7 +96,7 @@ $scope.getMyProfile();
 
   //Upload Image
   $scope.uploadImage = function(imageURI) {
-    console.log('imageURI',imageURI);
+    console.log('imageURI', imageURI);
     // $scope.showLoading('Uploading Image...', 10000);
     $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
       .then(function(result) {
@@ -115,7 +115,7 @@ $scope.getMyProfile();
       });
   };
   $scope.uploadImageBackground = function(imageURI) {
-    console.log('imageURI',imageURI);
+    console.log('imageURI', imageURI);
     // $scope.showLoading('Uploading Image...', 10000);
     $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
       .then(function(result) {
@@ -213,9 +213,7 @@ $scope.getMyProfile();
         } else {
           $.jStorage.set('userProfile', data.data);
           $scope.myuserId = data.data._id;
-          $state.go('app.profile', {
-            id: $scope.myuserId
-          })
+          $state.go('app.search-artist')
           console.log(data);
         }
 
@@ -329,9 +327,18 @@ $scope.getMyProfile();
       });
     };
   })
-  .controller('SearchArtistCtrl', function($scope, MyServices, $filter) {
-    $scope.getUser = $.jStorage.get("userProfile");
-    console.log('$scope.getUser',$scope.getUser);
+  .controller('SearchArtistCtrl', function($scope, MyServices, $filter,$state) {
+    if( $.jStorage.get("userProfile")=== null){
+      console.log("null");
+      $state.go('login');
+    }else{
+      $scope.getUser = $.jStorage.get("userProfile");
+    }
+
+
+
+    // $scope.getUser = $.jStorage.get("userProfile");
+    console.log('$scope.getUser', $scope.getUser);
     MyServices.getprofile($scope.getUser._id, function(user) {
       $scope.userdata = user.data;
       $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
@@ -344,7 +351,7 @@ $scope.getMyProfile();
 
     });
   })
-  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter,$ionicModal) {
+  .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
     $ionicModal.fromTemplateUrl('templates/modal/image.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -365,12 +372,12 @@ $scope.getMyProfile();
       //        console.log(tab);
       $scope.tab = tab;
       if (a == 1) {
-          $scope.showArtistList();
+        $scope.showArtistList();
         $ionicScrollDelegate.scrollTop();
         $scope.classa = "active";
         $scope.classb = '';
       } else {
-          $scope.showMyList();
+        $scope.showMyList();
         $ionicScrollDelegate.scrollTop();
         $scope.classa = '';
         $scope.classb = "active";
@@ -399,14 +406,14 @@ $scope.getMyProfile();
       artistGenre: $stateParams.genre,
       budget: $stateParams.budget,
     };
-    $scope.showArtistList = function(){
+    $scope.showArtistList = function() {
       MyServices.filterResult(dataToSend, function(data) {
         $scope.getArtist = data.data;
         console.log('$scope.getArtist', $scope.getArtist[0]);
 
       });
     }
-      $scope.showArtistList();
+    $scope.showArtistList();
 
 
     // ==========================================================================================shortList===================
@@ -428,7 +435,7 @@ $scope.getMyProfile();
         var index = $scope.getUserDetail.shortList.findIndex(checkAdult);
         if (index != -1) {
           $scope.getUserDetail.shortList.splice(index, 1);
-            console.log('$scope.getUserDetail.shortList splice', $scope.getUserDetail.shortList);
+          console.log('$scope.getUserDetail.shortList splice', $scope.getUserDetail.shortList);
         }
       }
 
@@ -438,7 +445,7 @@ $scope.getMyProfile();
         console.log('inside save');
         if (data.value === true) {
           console.log(data);
-          $scope.tabchange('already',2);
+          $scope.tabchange('already', 2);
           // $scope.getUserDetail.shortList = [];
           // $scope.mesg.push({
           //     type: 'success',
@@ -472,7 +479,7 @@ $scope.getMyProfile();
     $scope.showMyList();
     $scope.removeWishlist = function(id) {
       MyServices.removeFromList(id, function(data) {
-$scope.showMyList();
+        $scope.showMyList();
       })
       $scope.showMyList();
     };
@@ -489,15 +496,15 @@ $scope.showMyList();
       alertPopup.then(function(res) {
         MyServices.emptyList($scope.getUserDetail._id, function(data) {
           console.log(data);
-  // $scope.showMyList();
-  $state.go('app.search-artist');
+          // $scope.showMyList();
+          $state.go('app.search-artist');
         })
       });
     };
-    $scope.sendProfile = function(){
-      MyServices.sendProfileToBackend($scope.getUserDetail._id,function(data){
+    $scope.sendProfile = function() {
+      MyServices.sendProfileToBackend($scope.getUserDetail._id, function(data) {
         console.log(data);
-        if(data.value == true){
+        if (data.value == true) {
           $scope.showSendListAlert();
           $scope.getUserDetail.shortList = [];
         }
