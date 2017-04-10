@@ -1,7 +1,7 @@
 <ion-view view-title="Search Artist">
-  <ion-content  >
-  
-    <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}" ng-if="userdata.bgimage">
+  <ion-content  class="profile-bg">
+    <!-- <div class="banner" ng-style="{'background':'url('+userdata.bgimage+')'}" ng-if="userdata.bgimage"> -->
+    <div class="banner" ng-style="{'background-image':'url({{userdata.bgimage| uploadpath}})'}" ng-if="userdata.bgimage">
       <div class="bg-cover">
         <div class="pro-img display-inline vertical-btm">
           <img src="img/profile.png" alt="" ng-if="!userdata.image" class="full-image">
@@ -20,7 +20,7 @@
         <p>9002579648</p>
       </div> -->
     </div>
-    <div class="profile-bg" ng-if="!userdata.bgimage">
+    <div  ng-if="!userdata.bgimage">
       <div class="bg-cover">
         <div class="pro-img display-inline vertical-btm">
           <img src="img/profile.png" alt="" ng-if="!userdata.image" class="full-image">
@@ -49,7 +49,7 @@
             </label>
           </div>
         </div>
-        <div class="login-form padding-horizontal">
+        <div class="login-form padding-horizontal" ng-init="searchData={}">
 
           <div class="list">
 
@@ -59,15 +59,14 @@
               <div class="error-msg" ng-show="formName.date.$error.required && formName.date.$dirty">date is required</div>
             </label>
             <label class="item item-input ps-relative item-select sl-sft">
-              <i class="ln-bottle"></i>
+              <i class="ln-calendar3"></i>
 
               <div class="input-label">
                 Event Type
               </div>
               <select class="mt15">
-                <option>Sport</option>
-                <option selected>Sport</option>
-                <option>Sport</option>
+                <option value="" class selected>Select</option>
+                <option ng-repeat="data in getArtist10.getArtistCity">{{data._id}}</option>
               </select>
 
               <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->

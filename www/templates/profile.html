@@ -8,13 +8,14 @@
             <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
             <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
             <img ng-src="{{profileData.image | uploadpath}}" ng-if="profileData.image"  class="full-image">
+            <div class="elogo" ng-if="!profileData.image">Edit Logo</div>
             <!-- <img src="img/profile.png" alt=""> -->
           </div>
           <!-- <pre>{{profileData.image}}</pre>
           <pre>{{profileData.bgimage}}</pre> -->
           <div class="edit-btn">
-            <i class="ln-edit2 color-assertive" ng-click="selectImageBg();"></i>
-            <p>Edit Company Logo</p>
+            <i class="ln-edit2 edit-i color-assertive" ng-click="selectImageBg();"></i>
+            <p class="" ng-hide="profileData.bgimage">Edit Company Logo</p>
           </div>
           <!-- <div class="edit-btn">
         <i class="ln-edit2 color-assertive"></i>

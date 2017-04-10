@@ -130,8 +130,20 @@ $dark:                            #444 !default;
 .pt50 {
   padding-top: 50px; }
 
+.banner {
+  background-size: cover;
+  background-position: center center; }
+
+.elogo {
+  bottom: 30px;
+  position: absolute;
+  color: white;
+  left: 20px;
+  width: 17%;
+  text-align: center;
+  display: block; }
+
 .profile-bg, .pr-bg {
-  background: url(../img/profile-bg.jpg) no-repeat;
   position: relative;
   background-size: cover !important;
   background-position: center !important; }
@@ -153,21 +165,26 @@ $dark:                            #444 !default;
     font-size: 25px;
     position: absolute;
     right: 20px;
-    bottom: 0px;
+    bottom: 0;
     text-align: center; }
     .profile-bg .edit-btn p, .pr-bg .edit-btn p {
       font-size: 14px;
       margin-top: 5px;
       color: #e05d5d; }
 
+.edit-i {
+  bottom: 40px;
+  position: absolute;
+  right: 15px; }
+
 .pr-bg {
   position: fixed;
-  top: 93px;
+  top: 49px;
   width: 100%;
   z-index: 99;
   height: 120px; }
   .pr-bg .bg-cover {
-    padding: 45px 0px 0px 15px;
+    padding: 45px 0 0 15px;
     background: rgba(0, 0, 0, 0.5);
     height: 100%; }
   .pr-bg .pro-sec {
@@ -235,8 +252,8 @@ $dark:                            #444 !default;
     .all-cat p i {
       padding-right: 8px;
       color: #303e54;
-      font-size: 16px;
-      vertical-align: text-top; }
+      font-size: 26px;
+      vertical-align: middle; }
 
 .chck {
   position: absolute;
@@ -299,7 +316,7 @@ $dark:                            #444 !default;
 .cd-new {
   float: right;
   /* padding-right: 15px; */
-  padding: 5px 15px 0px 0px; }
+  padding: 5px 15px 0 0; }
 
 input[type="date"]:before {
   content: attr(placeholder) !important;
@@ -314,11 +331,13 @@ input[type="date"]:focus:before,
 input[type="date"]:valid:before {
   content: ""; }
 
-.artist .item-thumbnail-left, .artist .item-thumbnail-left {
+.artist .item-thumbnail-left,
+.artist .item-thumbnail-left {
   padding-top: 8px;
   padding-left: 82px;
   min-height: 100px; }
-  .artist .item-thumbnail-left img, .artist .item-thumbnail-left img {
+  .artist .item-thumbnail-left img,
+  .artist .item-thumbnail-left img {
     max-width: 60px !important;
     max-height: 60px !important;
     border-radius: 2px; }
@@ -336,7 +355,7 @@ input[type="date"]:valid:before {
   display: block;
   float: right;
   text-align: right;
-  padding-right: 0px; }
+  padding-right: 0; }
 
 .mt100 {
   margin-top: 134px; }
@@ -358,6 +377,17 @@ input[type="date"]:valid:before {
 
 .mt15 {
   margin-top: 15px; }
+
+.top0 {
+  top: 0 !important; }
+
+.backarrow {
+  padding: 0 15px;
+  color: white;
+  font-size: 26px; }
+
+.mid-align {
+  vertical-align: middle; }
 
 /*!
   Ionicons, v2.0.1

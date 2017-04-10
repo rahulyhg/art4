@@ -16,7 +16,7 @@
 //  'angulartics.google.analytics'
 // ]);
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -35,120 +35,129 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','ng
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+    $stateProvider
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
-  // .state('app.email', {
-  //   url: '/email',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/email.html'
-  //     }
-  //   }
-  // })
-  // .state('app.exchange-final', {
-  //   url: '/exchange-final',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/exchange-final.html'
-  //     }
-  //   }
-  // })
-  .state('app.change-password', {
-    url: '/change-password/:id',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/change-password.html',
-          controller: 'ChangePasswordCtrl'
-      }
-    }
-  })
-  .state('app.artist', {
-    url: '/artist/:search/:city/:talent/:genre/:budget',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/artist.html',
-          controller: 'ArtishCtrl'
-      }
-    }
-  })
-
-  .state('login', {
-      url: '/login',
-      templateUrl: 'templates/login.html',
-      controller: 'LoginCtrl'
-
+      .state('app', {
+      cache: false,
+      url: '/app',
+      abstract: true,
+      templateUrl: 'templates/menu.html',
+      controller: 'AppCtrl'
     })
-  .state('signup', {
-      url: '/signup',
-      templateUrl: 'templates/signup.html',
-      controller: 'SignupCtrl'
 
-    })
-    .state('app.profile', {
-      url: '/profile/:id',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/profile.html',
-          controller: 'ProfileCtrl'
+    .state('app.search', {
+        cache: false,
+
+        url: '/search',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/search.html'
+          }
         }
-      }
-    })
-    .state('app.search-artist', {
-      url: '/search-artist',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/search-artist.html',
-          controller: 'SearchArtistCtrl'
+      })
+      // .state('app.email', {
+      //   url: '/email',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: 'templates/email.html'
+      //     }
+      //   }
+      // })
+      // .state('app.exchange-final', {
+      //   url: '/exchange-final',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: 'templates/exchange-final.html'
+      //     }
+      //   }
+      // })
+      .state('app.change-password', {
+        cache: false,
+        url: '/change-password/:id',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/change-password.html',
+            controller: 'ChangePasswordCtrl'
+          }
         }
-      }
-    })
+      })
+      .state('app.artist', {
+        cache: false,
+        url: '/artist/:search/:city/:talent/:genre/:budget',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/artist.html',
+            controller: 'ArtishCtrl'
+          }
+        }
+      })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app.search-artist');
-})
-.filter('uploadpath', function() {
+    .state('login', {
+        cache: false,
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+
+      })
+      .state('signup', {
+        cache: false,
+        url: '/signup',
+        templateUrl: 'templates/signup.html',
+        controller: 'SignupCtrl'
+
+      })
+      .state('app.profile', {
+        cache: false,
+        url: '/profile/:id',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/profile.html',
+            controller: 'ProfileCtrl'
+          }
+        }
+      })
+      .state('app.search-artist', {
+        cache: false,
+        url: '/search-artist',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/search-artist.html',
+            controller: 'SearchArtistCtrl'
+          }
+        }
+      })
+
+    // .state('app.single', {
+    //   url: '/playlists/:playlistId',
+    //   views: {
+    //     'menuContent': {
+    //       templateUrl: 'templates/playlist.html',
+    //       controller: 'PlaylistCtrl'
+    //     }
+    //   }
+    // });
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/login');
+  })
+  .filter('uploadpath', function() {
     return function(input, width, height, style) {
-      console.log('input',input);
-        var other = "";
-        if (width && width != "") {
-            other += "&width=" + width;
+      // console.log('input', input);
+      var other = "";
+      if (width && width != "") {
+        other += "&width=" + width;
+      }
+      if (height && height != "") {
+        other += "&height=" + height;
+      }
+      if (style && style != "") {
+        other += "&style=" + style;
+      }
+      if (input) {
+        if (input.indexOf('https://') == -1) {
+          return imgpath + "?file=" + input + other;
+        } else {
+          return input;
         }
-        if (height && height != "") {
-            other += "&height=" + height;
-        }
-        if (style && style != "") {
-            other += "&style=" + style;
-        }
-        if (input) {
-            if (input.indexOf('https://') == -1) {
-                return imgpath + "?file=" + input + other;
-            } else {
-                return input;
-            }
-        }
+      }
     };
-});
+  });

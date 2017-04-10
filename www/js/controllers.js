@@ -1,14 +1,27 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $filter) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $filter, $state) {
   var getUserProfile = $.jStorage.get('userProfile');
-  MyServices.getprofile(getUserProfile._id, function(data) {
-    console.log(data);
-    $scope.profileData = data.data;
-    $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-    $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
-    // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
-  });
+  if ($.jStorage.get('userProfile')) {
+    MyServices.getprofile(getUserProfile._id, function(data) {
+      console.log(data);
+      $scope.profileData = data.data;
+      $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+      $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
+      // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
+    });
+  }
+
+  $scope.logout = function() {
+    $.jStorage.set('userProfile', null);
+    $.jStorage.deleteKey('userProfile');
+    $.jStorage.flush();
+
+    if ($.jStorage.get('userProfile') === null) {
+      $state.go('login');
+
+    }
+  };
 })
 
 
@@ -45,7 +58,9 @@ angular.module('starter.controllers', [])
 
   }
   var getUserProfile = $.jStorage.get('userProfile');
-  $scope.userId = getUserProfile._id;
+  if ($.jStorage.get('userProfile')) {
+    $scope.userId = getUserProfile._id;
+  }
   console.log('$scope.userId', $scope.userId);
   // ===================End of Profilectrl===============
 
@@ -60,8 +75,8 @@ angular.module('starter.controllers', [])
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
+      targetWidth: 100,
+      targetHeight: 100,
       saveToPhotoAlbum: false,
       correctOrientation: true
     };
@@ -140,6 +155,12 @@ angular.module('starter.controllers', [])
 // ====================================
 
 .controller('LoginCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicPopup, $state, $timeout) {
+    console.log($.jStorage.get("userProfile"));
+    if ($.jStorage.get("userProfile") === null) {
+      console.log("null");
+    } else {
+      $state.go('app.search-artist');
+    }
     $.jStorage.flush();
     $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
       scope: $scope,
@@ -188,21 +209,23 @@ angular.module('starter.controllers', [])
 
     $scope.submitForm = function(userdata, formName) {
       // console.log(formName.email.$touched);
-      MyServices.signup(userdata, function(data) {
-
-        if (data.value === true) {
-
-          console.log(data);
-          formName.name.$touched = false;
-          formName.agency.$touched = false;
-          formName.number.$touched = false;
-          formName.web.$touched = false;
-          formName.email.$touched = false;
-          $scope.showAlert();
-          $scope.formData = {};
-
-        }
-      });
+      // MyServices.signup(userdata, function(data) {
+      //
+      //   if (data.value === true) {
+      //
+      //     console.log(data);
+      //     formName.name.$touched = false;
+      //     formName.agency.$touched = false;
+      //     formName.number.$touched = false;
+      //     formName.web.$touched = false;
+      //     formName.email.$touched = false;
+      //     $scope.showAlert();
+      //     $scope.formData = {};
+      //
+      //   }
+      // });
+      $scope.closeModals();
+      $state.go('app.profile');
     }
 
 
@@ -327,29 +350,29 @@ angular.module('starter.controllers', [])
       });
     };
   })
-  .controller('SearchArtistCtrl', function($scope, MyServices, $filter,$state) {
-    if( $.jStorage.get("userProfile")=== null){
-      console.log("null");
-      $state.go('login');
-    }else{
+  .controller('SearchArtistCtrl', function($scope, MyServices, $filter, $state) {
+
+
+
+    if ($.jStorage.get('userProfile')) {
+
       $scope.getUser = $.jStorage.get("userProfile");
+      console.log('$scope.getUser', $scope.getUser);
+
+      MyServices.getprofile($scope.getUser._id, function(user) {
+        $scope.userdata = user.data;
+        // $scope.userdata.bgimage = 'img/artistPage.jpeg';
+        // $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
+        console.log($scope.userdata);
+      });
+      // $scope.getSearch = function() {}
+      MyServices.getUserDetails(function(data) {
+        $scope.getArtist10 = data.data;
+        console.log('$scope.getArtist10', $scope.getArtist10);
+
+      });
+
     }
-
-
-
-    // $scope.getUser = $.jStorage.get("userProfile");
-    console.log('$scope.getUser', $scope.getUser);
-    MyServices.getprofile($scope.getUser._id, function(user) {
-      $scope.userdata = user.data;
-      $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
-      console.log($scope.userdata);
-    });
-    // $scope.getSearch = function() {}
-    MyServices.getUserDetails(function(data) {
-      $scope.getArtist10 = data.data;
-      console.log('$scope.getArtist10', $scope.getArtist10);
-
-    });
   })
   .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
     $ionicModal.fromTemplateUrl('templates/modal/image.html', {
@@ -358,6 +381,8 @@ angular.module('starter.controllers', [])
     }).then(function(modal) {
       $scope.modal = modal;
     });
+    $scope.searchText="";
+
     $scope.openModal = function() {
       $scope.modal.show();
     };
@@ -367,7 +392,14 @@ angular.module('starter.controllers', [])
     $scope.tab = 'new';
     $scope.classa = 'active';
     $scope.classb = '';
+    $scope.goBackHandler = function() {
+      console.log("hi");
+      window.history.back(); //This works
+    }
     $scope.tabchange = function(tab, a) {
+      console.log($scope.searchText);
+      $scope.searchText = "";
+      console.log($scope.searchText);
 
       //        console.log(tab);
       $scope.tab = tab;
@@ -444,6 +476,7 @@ angular.module('starter.controllers', [])
       MyServices.signup($scope.getUserDetail, function(data) {
         console.log('inside save');
         if (data.value === true) {
+          $scope.searchText="";
           console.log(data);
           $scope.tabchange('already', 2);
           // $scope.getUserDetail.shortList = [];
