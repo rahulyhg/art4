@@ -187,7 +187,8 @@ $button-border-radius: 30px;
   .bg-cover {
     padding: 15px;
     // background: rgba(0, 0, 0, 0.5);
-    background: rgba(0, 0, 0, 0.06);
+    // background: rgba(0, 0, 0, 0.06);
+    background-color: pink;
     height: 200px;
   }
 
@@ -205,7 +206,8 @@ $button-border-radius: 30px;
     overflow: hidden;
     border-radius: 50%;
     position: absolute;
-    bottom: -30px;
+    bottom: 80px;
+    right: 50px;
   }
 
   .edit-btn {
@@ -533,4 +535,28 @@ input[type="date"]:valid:before {
 
 .mid-align {
   vertical-align: middle;
+}
+
+.bgs{
+  height: 110px;
+      width: 110px;
+      display: block;
+      position: absolute;
+      top: 40px;
+      left: 10px;
+      z-index: 99;
+      img{
+        height: 100%;
+      }
+}
+
+.bg-cover{
+  position: relative;
+  .name{
+    position: absolute;
+    right: 35px;
+    top: 115px;
+    text-align: center;
+  }
+
 }

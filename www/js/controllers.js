@@ -166,6 +166,33 @@ angular.module('starter.controllers', [])
   };
   // =================== end of t code =========================
 
+//=========profile like search=============
+
+$scope.getUser = $.jStorage.get('userProfile');
+console.log('$scope.getUser', $scope.getUser);
+
+if ($scope.getUser) {
+
+
+
+  MyServices.getprofile($scope.getUser._id, function(user) {
+    $scope.userdata = user.data;
+    // $scope.userdata.bgimage = 'img/artistPage.jpeg';
+    $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
+    console.log($scope.userdata);
+  });
+  // $scope.getSearch = function() {}
+  MyServices.getUserDetails(function(data) {
+    $scope.getArtist10 = data.data;
+    console.log('$scope.getArtist10', $scope.getArtist10);
+
+  });
+
+}
+
+//=========profile like search=============
+
+
 })
 
 // ====================================
@@ -381,6 +408,8 @@ angular.module('starter.controllers', [])
       });
 
     }
+
+    
   })
   .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
     $ionicModal.fromTemplateUrl('templates/modal/image.html', {
