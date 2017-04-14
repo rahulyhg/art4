@@ -159,29 +159,36 @@ $button-border-radius: 30px;
 }
 
 .banner {
-  background-size: cover;
-  background-position: center center;
+  background-size: cover!important;
+  background-position: center center!important;
+  background-repeat: no-repeat!important;
 }
 
 .elogo {
   bottom: 30px;
   position: absolute;
   color: white;
-  left: 20px;
+  left: 6%;
   width: 17%;
   text-align: center;
   display: block;
 }
+.po-rel{
+  position: relative;
+}
 
 .profile-bg {
   // background: url(../img/artistPage.jpeg)no-repeat;
-  position: relative;
   background-size: cover!important;
   background-position: center!important;
+  position: relative;
+
 
   .bg-cover {
     padding: 15px;
-    background: rgba(0, 0, 0, 0.5);
+    // background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.06);
+    height: 200px;
   }
 
   .pro-sec {
@@ -192,11 +199,13 @@ $button-border-radius: 30px;
   }
 
   .pro-img {
-    margin-top: 50px;
+    // margin-top: 50px;
     width: 70px;
     height: 70px;
     overflow: hidden;
     border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
   }
 
   .edit-btn {
@@ -240,11 +249,13 @@ $button-border-radius: 30px;
     vertical-align: top;
   }
 }
-
+.mt60{
+      margin-top: 60px;
+}
 .edt-2 {
   left: 65px;
   right: inherit !important;
-  bottom: 20px !important;
+  bottom: -30px !important;
   background: #ff8484;
   border-radius: 50%;
   height: 30px;
@@ -366,7 +377,15 @@ $button-border-radius: 30px;
   border-radius: 50%;
   overflow: hidden;
 }
-
+.ml-5{
+  margin-left: -5px;
+}
+.l5{
+  left: 5px;
+}
+.redcol{
+  color: #ec3939;
+}
 .main-menu {
   .item {
     border-width: 0;

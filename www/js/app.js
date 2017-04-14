@@ -38,7 +38,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $stateProvider
 
       .state('app', {
-      cache: false,
+        cache:false,
       url: '/app',
       abstract: true,
       templateUrl: 'templates/menu.html',
@@ -46,7 +46,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
     .state('app.search', {
-        cache: false,
+      cache:false,
 
         url: '/search',
         views: {
@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       //   }
       // })
       .state('app.change-password', {
-        cache: false,
+        cache:false,
         url: '/change-password/:id',
         views: {
           'menuContent': {
@@ -82,8 +82,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('app.artist', {
-        cache: false,
-        url: '/artist/:search/:city/:talent/:genre/:budget',
+        cache:false,
+        url: '/:artist/:search/:city/:talent/:genre/:budget',
         views: {
           'menuContent': {
             templateUrl: 'templates/artist.html',
@@ -93,22 +93,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
 
     .state('login', {
-        cache: false,
+      cache:false,
         url: '/login',
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
 
       })
       .state('signup', {
-        cache: false,
+        cache:false,
         url: '/signup',
         templateUrl: 'templates/signup.html',
         controller: 'SignupCtrl'
 
       })
       .state('app.profile', {
-        cache: false,
-        url: '/profile/:id',
+        cache:false,
+        url: '/profile',
         views: {
           'menuContent': {
             templateUrl: 'templates/profile.html',
@@ -117,7 +117,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('app.search-artist', {
-        cache: false,
+        cache:false,
         url: '/search-artist',
         views: {
           'menuContent': {

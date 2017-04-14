@@ -1,7 +1,29 @@
 <ion-view view-title="Search Artist">
   <ion-content  class="profile-bg">
-    <!-- <div class="banner" ng-style="{'background':'url('+userdata.bgimage+')'}" ng-if="userdata.bgimage"> -->
-    <div class="banner" ng-style="{'background-image':'url({{userdata.bgimage| uploadpath}})'}" ng-if="userdata.bgimage">
+    <div class="banner" ng-style="{'background':'url('+userdata.bgimage+')'}" ng-if="userdata.bgimage">
+      <div class="po-rel">
+
+    <!-- <div class="banner" ng-style="{'background-image':'url({{userdata.bgimage| uploadpath}})'}" ng-if="userdata.bgimage"> -->
+      <div class="bg-cover">
+        <div class="pro-img display-inline vertical-btm l5" ng-if="userdata.image">
+          <img src="img/profile.png" alt="" ng-if="!userdata.image" class="full-image">
+          <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image" class="full-image">
+        </div>
+        <div class="name display-inline ml-5">
+          <h4 class="redcol">{{userdata.name}}</h4>
+          <span class="redcol">{{userdata.email}}</span>
+          <p class="redcol">{{userdata.mobile}}</p>
+        </div>
+        </div>
+      </div>
+
+      <!-- <div class="name display-inline ml20">
+        <h4>Wohlig Technology</h4>
+        <span>wohlig@gmail.com</span>
+        <p>9002579648</p>
+      </div> -->
+    </div>
+    <!-- <div  ng-if="!userdata.bgimage">
       <div class="bg-cover">
         <div class="pro-img display-inline vertical-btm">
           <img src="img/profile.png" alt="" ng-if="!userdata.image" class="full-image">
@@ -13,35 +35,10 @@
           <p class="light">{{userdata.mobile}}</p>
         </div>
       </div>
-
-      <!-- <div class="name display-inline ml20">
-        <h4>Wohlig Technology</h4>
-        <span>wohlig@gmail.com</span>
-        <p>9002579648</p>
-      </div> -->
-    </div>
-    <div  ng-if="!userdata.bgimage">
-      <div class="bg-cover">
-        <div class="pro-img display-inline vertical-btm">
-          <img src="img/profile.png" alt="" ng-if="!userdata.image" class="full-image">
-          <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image" class="full-image">
-        </div>
-        <div class="name display-inline ml20">
-          <h4 class="light">{{userdata.name}}</h4>
-          <span class="light">{{userdata.email}}</span>
-          <p class="light">{{userdata.mobile}}</p>
-        </div>
-      </div>
-
-      <!-- <div class="name display-inline ml20">
-        <h4>Wohlig Technology</h4>
-        <span>wohlig@gmail.com</span>
-        <p>9002579648</p>
-      </div> -->
-    </div>
+    </div> -->
     <div>
       <form name="formName">
-        <div class="search">
+        <div class="search mt60">
           <div class="list list-inset">
             <label class="item item-input">
               <i class="icon ln-magnifier placeholder-icon"></i>
@@ -58,7 +55,7 @@
               <input type="date" placeholder="Event Date" name="date" required class="m">
               <div class="error-msg" ng-show="formName.date.$error.required && formName.date.$dirty">date is required</div>
             </label>
-            <label class="item item-input ps-relative item-select sl-sft">
+            <!-- <label class="item item-input ps-relative item-select sl-sft">
               <i class="ln-calendar3"></i>
 
               <div class="input-label">
@@ -69,8 +66,7 @@
                 <option ng-repeat="data in getArtist10.getArtistCity">{{data._id}}</option>
               </select>
 
-              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
-            </label>
+            </label> -->
             <label class="item item-input ps-relative item-select sl-sft">
               <i class="ln-map-marker"></i>
 

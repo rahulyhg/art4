@@ -131,36 +131,42 @@ $dark:                            #444 !default;
   padding-top: 50px; }
 
 .banner {
-  background-size: cover;
-  background-position: center center; }
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important; }
 
 .elogo {
   bottom: 30px;
   position: absolute;
   color: white;
-  left: 20px;
+  left: 6%;
   width: 17%;
   text-align: center;
   display: block; }
 
+.po-rel {
+  position: relative; }
+
 .profile-bg, .pr-bg {
-  position: relative;
   background-size: cover !important;
-  background-position: center !important; }
+  background-position: center !important;
+  position: relative; }
   .profile-bg .bg-cover, .pr-bg .bg-cover {
     padding: 15px;
-    background: rgba(0, 0, 0, 0.5); }
+    background: rgba(0, 0, 0, 0.06);
+    height: 200px; }
   .profile-bg .pro-sec, .pr-bg .pro-sec {
     width: 50px;
     height: 50px;
     overflow: hidden;
     border-radius: 50%; }
   .profile-bg .pro-img, .pr-bg .pro-img {
-    margin-top: 50px;
     width: 70px;
     height: 70px;
     overflow: hidden;
-    border-radius: 50%; }
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px; }
   .profile-bg .edit-btn, .pr-bg .edit-btn {
     font-size: 25px;
     position: absolute;
@@ -190,10 +196,13 @@ $dark:                            #444 !default;
   .pr-bg .pro-sec {
     vertical-align: top; }
 
+.mt60 {
+  margin-top: 60px; }
+
 .edt-2 {
   left: 65px;
   right: inherit !important;
-  bottom: 20px !important;
+  bottom: -30px !important;
   background: #ff8484;
   border-radius: 50%;
   height: 30px;
@@ -283,6 +292,15 @@ $dark:                            #444 !default;
   background-position: center;
   border-radius: 50%;
   overflow: hidden; }
+
+.ml-5 {
+  margin-left: -5px; }
+
+.l5 {
+  left: 5px; }
+
+.redcol {
+  color: #ec3939; }
 
 .main-menu .item {
   border-width: 0; }
