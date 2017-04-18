@@ -65,9 +65,13 @@ $button-border-radius: 30px;
 .logo {
   text-align: center;
 }
-
+.fixed-div{
+  height: 179px;
+background: white;
+z-index: 999;
+}
 .login-form {
-  margin-top: 15%;
+  margin-top: 0;
 
   i {
     font-size: 24px;
@@ -173,23 +177,31 @@ $button-border-radius: 30px;
   text-align: center;
   display: block;
 }
-.po-rel{
+
+.po-rel {
   position: relative;
 }
-
+.scroll-height{
+  top: 121px!important;
+}
 .profile-bg {
   // background: url(../img/artistPage.jpeg)no-repeat;
   background-size: cover!important;
   background-position: center!important;
   position: relative;
-
-
+  position: relative;
+  top: 44px;
+  background: white;
+  z-index: 999;
   .bg-cover {
+    // padding: 15px;
+    // // background: rgba(0, 0, 0, 0.5);
+    // // background: rgba(0, 0, 0, 0.06);
+    // background-color: pink;
+    // height: 200px;
     padding: 15px;
-    // background: rgba(0, 0, 0, 0.5);
-    // background: rgba(0, 0, 0, 0.06);
-    background-color: pink;
-    height: 200px;
+    background-color: rgba(199, 32, 61, 0.22);
+    height: 75px;
   }
 
   .pro-sec {
@@ -206,8 +218,8 @@ $button-border-radius: 30px;
     overflow: hidden;
     border-radius: 50%;
     position: absolute;
-    bottom: 80px;
-    right: 50px;
+    top: 3px;
+    left: 15px;
   }
 
   .edit-btn {
@@ -221,17 +233,16 @@ $button-border-radius: 30px;
       font-size: 14px;
       margin-top: 5px;
       color: #e05d5d;
-
     }
-
-
   }
 }
-.edit-i{
+
+.edit-i {
   bottom: 40px;
   position: absolute;
   right: 15px;
 }
+
 .pr-bg {
   @extend .profile-bg;
   position: fixed;
@@ -251,9 +262,11 @@ $button-border-radius: 30px;
     vertical-align: top;
   }
 }
-.mt60{
-      margin-top: 60px;
+
+.mt60 {
+  margin-top: 60px;
 }
+
 .edt-2 {
   left: 65px;
   right: inherit !important;
@@ -379,15 +392,19 @@ $button-border-radius: 30px;
   border-radius: 50%;
   overflow: hidden;
 }
-.ml-5{
+
+.ml-5 {
   margin-left: -5px;
 }
-.l5{
+
+.l5 {
   left: 5px;
 }
-.redcol{
+
+.redcol {
   color: #ec3939;
 }
+
 .main-menu {
   .item {
     border-width: 0;
@@ -427,7 +444,7 @@ $button-border-radius: 30px;
 
 .name {
   h4 {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
   }
 }
 
@@ -493,7 +510,7 @@ input[type="date"]:valid:before {
 }
 
 .mt100 {
-  margin-top: 134px;
+  margin-top: 234px;
 }
 
 .f18 {
@@ -536,27 +553,44 @@ input[type="date"]:valid:before {
 .mid-align {
   vertical-align: middle;
 }
-
-.bgs{
+.pro-srl{
+  top: 160px!important;
+}
+.fixed-search{
+  top: -20px;
+  position: relative;
+  background: white;
+  z-index: 999;
+}
+.mt-160{
+  margin-top: 160px;
+}
+.bgs {
   height: 110px;
-      width: 110px;
-      display: block;
-      position: absolute;
-      top: 40px;
-      left: 10px;
-      z-index: 99;
-      img{
-        height: 100%;
-      }
+  width: 110px;
+  display: block;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 999;
+
+  img {
+    height: 100%;
+  }
 }
 
-.bg-cover{
+.bg-cover {
   position: relative;
-  .name{
-    position: absolute;
-    right: 35px;
-    top: 115px;
-    text-align: center;
-  }
 
+  .name {
+    position: absolute;
+  left: 0px;
+  bottom: -61px;
+  text-align: left;
+  text-transform: capitalize;
+  background: white;
+  width: 100%;
+  z-index: 99;
+  padding-left: 10px;
+  }
 }

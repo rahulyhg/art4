@@ -52,8 +52,13 @@ $dark:                            #444 !default;
 .logo {
   text-align: center; }
 
+.fixed-div {
+  height: 179px;
+  background: white;
+  z-index: 999; }
+
 .login-form, .psw-form {
-  margin-top: 15%; }
+  margin-top: 0; }
   .login-form i, .psw-form i {
     font-size: 24px;
     color: #778aa6;
@@ -147,14 +152,21 @@ $dark:                            #444 !default;
 .po-rel {
   position: relative; }
 
+.scroll-height {
+  top: 121px !important; }
+
 .profile-bg, .pr-bg {
   background-size: cover !important;
   background-position: center !important;
-  position: relative; }
+  position: relative;
+  position: relative;
+  top: 44px;
+  background: white;
+  z-index: 999; }
   .profile-bg .bg-cover, .pr-bg .bg-cover {
     padding: 15px;
-    background-color: pink;
-    height: 200px; }
+    background-color: rgba(199, 32, 61, 0.22);
+    height: 75px; }
   .profile-bg .pro-sec, .pr-bg .pro-sec {
     width: 50px;
     height: 50px;
@@ -166,8 +178,8 @@ $dark:                            #444 !default;
     overflow: hidden;
     border-radius: 50%;
     position: absolute;
-    bottom: 80px;
-    right: 50px; }
+    top: 3px;
+    left: 15px; }
   .profile-bg .edit-btn, .pr-bg .edit-btn {
     font-size: 25px;
     position: absolute;
@@ -327,7 +339,7 @@ $dark:                            #444 !default;
   font-size: 16px !important; }
 
 .name h4 {
-  margin-bottom: 5px; }
+  margin-bottom: 0px; }
 
 .pro-sec img {
   width: 50px; }
@@ -377,7 +389,7 @@ input[type="date"]:valid:before {
   padding-right: 0; }
 
 .mt100 {
-  margin-top: 134px; }
+  margin-top: 234px; }
 
 .f18 h2 {
   font-size: 18px; }
@@ -408,14 +420,26 @@ input[type="date"]:valid:before {
 .mid-align {
   vertical-align: middle; }
 
+.pro-srl {
+  top: 160px !important; }
+
+.fixed-search {
+  top: -20px;
+  position: relative;
+  background: white;
+  z-index: 999; }
+
+.mt-160 {
+  margin-top: 160px; }
+
 .bgs {
   height: 110px;
   width: 110px;
   display: block;
   position: absolute;
-  top: 40px;
-  left: 10px;
-  z-index: 99; }
+  top: 15px;
+  right: 15px;
+  z-index: 999; }
   .bgs img {
     height: 100%; }
 
@@ -423,9 +447,14 @@ input[type="date"]:valid:before {
   position: relative; }
   .bg-cover .name {
     position: absolute;
-    right: 35px;
-    top: 115px;
-    text-align: center; }
+    left: 0px;
+    bottom: -61px;
+    text-align: left;
+    text-transform: capitalize;
+    background: white;
+    width: 100%;
+    z-index: 99;
+    padding-left: 10px; }
 
 /*!
   Ionicons, v2.0.1

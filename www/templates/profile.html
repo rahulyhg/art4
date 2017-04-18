@@ -1,42 +1,43 @@
 <ion-view view-title="Profile">
-  <ion-content>
+  <div class="profile-bg" >
+
+
+  <!--
+  ng-style="{'background':'url('+profileData.bgimage+')'}"
+  <div class="profile-bg" ng-style="{'background-image':'url({{profileData.bgimage|uploadpath}})'}"> -->
+
+    <div class="bg-cover"  >
+      <div class="bgs">
+        <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
+        <img ng-src="{{profileData.bgimage}}" ng-if="profileData.image"  class="full-image">
+      </div>
+      <div class="pro-img" ng-click="selectImage();" >
+        <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
+        <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
+        <img ng-src="{{profileData.image | uploadpath}}" ng-if="profileData.image"  class="full-image">
+        <!-- <div class="elogo" ng-if="!profileData.image">Edit Logo</div> -->
+        <!-- <img src="img/profile.png" alt=""> -->
+      </div>
+      <div class="name display-inline ml-5">
+        <h4 class="redcol">{{profileData.name}}</h4>
+        <!-- <span class="redcol">ganesh@gmail.com</span> -->
+        <p class="redcol">{{profileData.mobile}}</p>
+      </div>
+      <!-- <div class="edit-btn">
+        <i class="ln-edit2 edit-i color-assertive" ng-click="selectImageBg();"></i>
+        <p class="" >Edit Company Logo</p>
+      </div>
+
+      <div class="edit-btn edt-2" ng-click="selectImage();" ng-if="!profileData.image">
+        <i class="ln-photo color-assertive"></i>
+      </div> -->
+  </div>
+
+  </div>
+  <ion-content class="pro-srl">
     <form name="formName" ng-submit="submitProfile(profileData);">
-      <div class="profile-bg" >
-      <div class="profile-bg" >
+      <!-- <div class="profile-bg" > -->
 
-
-      <!--
-      ng-style="{'background':'url('+profileData.bgimage+')'}"
-      <div class="profile-bg" ng-style="{'background-image':'url({{profileData.bgimage|uploadpath}})'}"> -->
-
-        <div class="bg-cover"  >
-          <div class="bgs">
-            <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
-            <img ng-src="{{profileData.image | uploadpath}}" ng-if="profileData.image"  class="full-image">
-          </div>
-          <div class="pro-img" ng-click="selectImage();" >
-            <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
-            <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
-            <img ng-src="{{profileData.image | uploadpath}}" ng-if="profileData.image"  class="full-image">
-            <!-- <div class="elogo" ng-if="!profileData.image">Edit Logo</div> -->
-            <!-- <img src="img/profile.png" alt=""> -->
-          </div>
-          <div class="name display-inline ml-5">
-            <h4 class="redcol">ganesh</h4>
-            <span class="redcol">ganesh@gmail.com</span>
-            <p class="redcol">7208359754</p>
-          </div>
-          <!-- <div class="edit-btn">
-            <i class="ln-edit2 edit-i color-assertive" ng-click="selectImageBg();"></i>
-            <p class="" >Edit Company Logo</p>
-          </div>
-
-          <div class="edit-btn edt-2" ng-click="selectImage();" ng-if="!profileData.image">
-            <i class="ln-photo color-assertive"></i>
-          </div> -->
-      </div>
-
-      </div>
       <div class="login-form padding-horizontal">
 
         <div class="list">

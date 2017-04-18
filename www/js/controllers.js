@@ -62,7 +62,7 @@ angular.module('starter.controllers', [])
     // $scope.profileData.bgimage = "58ece7f1fe67247ce2ad7b0d.jpg";
     console.log('$scope.profileData.bgimage', $scope.profileData.bgimage);
     MyServices.signup($scope.profileData, function(data) {
-      console.log($scope.profileData,data);
+      console.log($scope.profileData, data);
       // $scope.getMyProfile();
       MyServices.getprofile($.jStorage.get('userProfile')._id, function(data) {
         console.log(data);
@@ -166,31 +166,31 @@ angular.module('starter.controllers', [])
   };
   // =================== end of t code =========================
 
-//=========profile like search=============
+  //=========profile like search=============
 
-$scope.getUser = $.jStorage.get('userProfile');
-console.log('$scope.getUser', $scope.getUser);
+  $scope.getUser = $.jStorage.get('userProfile');
+  console.log('$scope.getUser', $scope.getUser);
 
-if ($scope.getUser) {
+  if ($scope.getUser) {
 
 
 
-  MyServices.getprofile($scope.getUser._id, function(user) {
-    $scope.userdata = user.data;
-    // $scope.userdata.bgimage = 'img/artistPage.jpeg';
-    $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
-    console.log($scope.userdata);
-  });
-  // $scope.getSearch = function() {}
-  MyServices.getUserDetails(function(data) {
-    $scope.getArtist10 = data.data;
-    console.log('$scope.getArtist10', $scope.getArtist10);
+    MyServices.getprofile($scope.getUser._id, function(user) {
+      $scope.userdata = user.data;
+      // $scope.userdata.bgimage = 'img/artistPage.jpeg';
+      $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
+      console.log($scope.userdata);
+    });
+    // $scope.getSearch = function() {}
+    MyServices.getUserDetails(function(data) {
+      $scope.getArtist10 = data.data;
+      console.log('$scope.getArtist10', $scope.getArtist10);
 
-  });
+    });
 
-}
+  }
 
-//=========profile like search=============
+  //=========profile like search=============
 
 
 })
@@ -409,7 +409,7 @@ if ($scope.getUser) {
 
     }
 
-    
+
   })
   .controller('ArtishCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
     $ionicModal.fromTemplateUrl('templates/modal/image.html', {
@@ -484,35 +484,43 @@ if ($scope.getUser) {
     }
     $scope.showArtistList();
 
-
+    $scope.limit = 5;
+    $scope.checked = 0;
     // ==========================================================================================shortList===================
     $scope.addToWishlist = function(id, flag) {
-      console.log(flag);
-      if (flag == true) {
-        console.log('funid', id);
-        var input = {
-          artist: id,
-          timestamp: new Date()
-        };
-        $scope.getUserDetail.shortList.push(input);
-        console.log('$scope.getUserDetail.shortList', $scope.getUserDetail.shortList);
-      } else {
-        function checkAdult(o) {
-          return o.artist == id;
+        if (flag == true) {
+          $scope.checked++;
+          console.log('funid', id);
+          var input = {
+            artist: id,
+            timestamp: new Date()
+          };
+          $scope.getUserDetail.shortList.push(input);
+          console.log('$scope.getUserDetail.shortList', $scope.getUserDetail.shortList);
+        } else {
+          $scope.checked--;
+          function checkAdult(o) {
+            return o.artist == id;
+          }
+
+          var index = $scope.getUserDetail.shortList.findIndex(checkAdult);
+          if (index != -1) {
+            $scope.getUserDetail.shortList.splice(index, 1);
+            console.log('$scope.getUserDetail.shortList splice', $scope.getUserDetail.shortList);
+          }
         }
 
-        var index = $scope.getUserDetail.shortList.findIndex(checkAdult);
-        if (index != -1) {
-          $scope.getUserDetail.shortList.splice(index, 1);
-          console.log('$scope.getUserDetail.shortList splice', $scope.getUserDetail.shortList);
-        }
-      }
+
+      console.log(flag);
+
 
     };
     $scope.submitOnMyList = function() {
       MyServices.signup($scope.getUserDetail, function(data) {
         console.log('inside save');
         if (data.value === true) {
+          $scope.checked=0;
+          console.log($scope.checked);
           $scope.searchText = "";
           console.log(data);
           $scope.tabchange('already', 2);

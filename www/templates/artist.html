@@ -1,11 +1,13 @@
 <ion-view hide-nav-bar="true" view-title="Artist">
+
+
   <div class="">
     <div class="tabs-striped tabs-background-assertive tabs-color-light tabs-top ">
       <div class="tabs c-tab top0">
         <a class="backarrow" ng-click="goBackHandler();">
           <i class="ion ion-chevron-left"></i>
          </a>
-        <a class="tab-item {{classa}}" ng-click="tabchange('new',1)" >
+        <a class="tab-item {{classa}}" ng-click="tabchange('new',1);checked=0" ng-init="checked=0" >
           <span>Artist</span>
         </a>
         <a class="tab-item {{classb}}" ng-click="tabchange('already',2)">
@@ -13,46 +15,78 @@
         </a>
       </div>
     </div>
-    <div class="ps-fixed ">
-      <div class="pr-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
-        <div class="bg-cover">
-          <div class="pro-sec display-inline">
-            <img src="img/profile.png" alt="" ng-if="!userdata.image">
-            <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
-          </div>
-          <div class="name display-inline ml20">
-            <h4 class="margin0 light">{{userdata.name}}</h4>
-            <span class="light">{{userdata.email}}</span>
-            <!-- <p>9002579648</p> -->
-          </div>
+    <div class="fixed-div">
+    <div class="profile-bg" >
+
+
+    <!--
+    ng-style="{'background':'url('+profileData.bgimage+')'}"
+    <div class="profile-bg" ng-style="{'background-image':'url({{profileData.bgimage|uploadpath}})'}"> -->
+
+      <div class="bg-cover"  >
+        <div class="bgs">
+          <img ng-src="{{imagetobeup}}" ng-show="!profileData.image" class="full-image">
+          <img ng-src="{{profileData.bgimage}}" ng-show="profileData.image"  class="full-image">
         </div>
-      </div>
+        <div class="pro-img" ng-click="selectImage();" >
+          <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
+          <img ng-src="{{imagetobeup}}" ng-show="!profileData.image" class="full-image">
+          <img ng-src="{{profileData.image | uploadpath}}" ng-show="profileData.image"  class="full-image">
+          <!-- <div class="elogo" ng-show="!profileData.image">Edit Logo</div> -->
+          <!-- <img src="img/profile.png" alt=""> -->
+        </div>
+        <div class="name display-inline ml-5">
+          <h4 class="redcol">ganesh</h4>
+          <!-- <span class="redcol">ganesh@gmail.com</span> -->
+          <p class="redcol">7208359754</p>
+        </div>
+        <!-- <div class="edit-btn">
+          <i class="ln-edit2 edit-i color-assertive" ng-click="selectImageBg();"></i>
+          <p class="" >Edit Company Logo</p>
+        </div>
+
+        <div class="edit-btn edt-2" ng-click="selectImage();" ng-show="!profileData.image">
+          <i class="ln-photo color-assertive"></i>
+        </div> -->
     </div>
+
+    </div>
+    </div>
+          <div class="fixed-search">
+            <div class="search" ng-show="tab=='new'">
+              <div class="list list-inset">
+                <label class="item item-input">
+                  <i class="icon ln-magnifier placeholder-icon"></i>
+
+                  <input type="text" placeholder="Search by Name, City" ng-model="searchText" value="searchText">
+                </label>
+              </div>
+            </div>
+            <div class="h2-tg" ng-show="tab=='new'">
+              <h4 class="">
+                Select only 5 Artists from below*
+              </h4>
+            </div>
+          </div>
+          <div class="h2-tg fixed-search" ng-show="tab=='already'">
+            <h4 class="">
+              We recommend selecting 2 Artists*
+            </h4>
+          </div>
+
   </div>
 
   <ion-content class="has-header ">
-    <div class="video mt100" ng-show="tab=='new'" ng-init="searchText=''">
+    <div class="video mt100" ng-show="tab=='new'" >
 
-      <div class="search">
-        <div class="list list-inset">
-          <label class="item item-input">
-            <i class="icon ln-magnifier placeholder-icon"></i>
-            <input type="text" placeholder="Search by Name, City" ng-model="searchText" value="searchText">
-          </label>
-        </div>
-      </div>
-      <div class="h2-tg">
-        <h4 class="">
-          *Select Upto 5 Artist From below
-        </h4>
-      </div>
       <div class="artist mt15">
         <div class="list">
-          <div class="list ">
-            <div class="ps-relative " ng-repeat="data in getArtist | filter:searchText">
+          <div class="list " >
+            <div class="ps-relative " ng-repeat="data in getArtist | filter:searchText" >
+
               <div class="chck">
                 <label class="checkbox">
-                  <input type="checkbox" ng-change="addToWishlist(data._id,item.checked)" ng-model="item.checked">
+                  <input type="checkbox" ng-change="addToWishlist(data._id,item.checked)"  ng-disabled="checked==limit && !item.checked" ng-model="item.checked">
                 </label>
 
               </div>
@@ -67,7 +101,7 @@
                   <div class="display-inline ml5">
                     <p class="color-base">
                       <i class="ln-film-play"></i>
-                      <span class="mid-align">Videos</span>
+                      <span class="mid-align">Video</span>
                     </p>
                   </div>
                   <p class="color-base">
@@ -119,13 +153,13 @@
 
       </div> -->
     </div>
-    <div class="video mt100" ng-show="tab=='already'">
+    <div class="video mt-160" ng-show="tab=='already'">
       <!-- <div class="profile-bg" ng-style="{'background':'url('+userdata.bgimage+')'}">
           <div class="bg-cover">
         <div class="pro-sec display-inline">
 
-          <img src="img/profile.png" alt="" ng-if="!userdata.image">
-          <img ng-src="{{userdata.image | uploadpath}}" ng-if="userdata.image">
+          <img src="img/profile.png" alt="" ng-show="!userdata.image">
+          <img ng-src="{{userdata.image | uploadpath}}" ng-show="userdata.image">
         </div>
         <div class="name display-inline ml20">
           <h4 class="margin0 light">{{userdata.name}}</h4>
@@ -141,11 +175,7 @@
           </label>
         </div>
       </div> -->
-      <div class="h2-tg">
-        <h4 class="">
-          *Any 2 are Recommended
-        </h4>
-      </div>
+
       <div class="artist mt15">
         <div class="list">
           <div class="list ">
@@ -205,8 +235,11 @@
     </div>
   </ion-content>
   <div class="bar bar-footer" ng-show="tab=='new'">
-    <button class="button button-assertive button-block margin0" ng-click="submitOnMyList()">
+    <!-- <button class="button button-assertive button-block margin0" ng-click="submitOnMyList()">
       Submit
+    </button> -->
+    <button class="button button-assertive button-block margin0" ng-click="submitOnMyList()">
+      My Selected List
     </button>
   </div>
   <div class="bar bar-footer" ng-show="tab=='already'">
