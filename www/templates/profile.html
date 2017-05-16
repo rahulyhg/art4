@@ -7,9 +7,9 @@
   <div class="profile-bg" ng-style="{'background-image':'url({{profileData.bgimage|uploadpath}})'}"> -->
 
     <div class="bg-cover"  >
-      <div class="bgs">
+      <div class="bgs"  ng-click="selectImageBg();">
         <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
-        <img ng-src="{{profileData.bgimage}}" ng-if="profileData.image"  class="full-image">
+        <img ng-src="{{profileData.bgimage| uploadpath}}" ng-if="profileData.image"  class="full-image">
       </div>
       <div class="pro-img" ng-click="selectImage();" >
         <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
@@ -20,7 +20,7 @@
       </div>
       <div class="name display-inline ml-5">
         <h4 class="redcol">{{profileData.name}}</h4>
-        <!-- <span class="redcol">ganesh@gmail.com</span> -->
+        <!-- <span class="redcol">{{profileData.email}}</span> -->
         <p class="redcol">{{profileData.mobile}}</p>
       </div>
       <!-- <div class="edit-btn">
