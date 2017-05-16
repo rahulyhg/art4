@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         views: {
           'menuContent': {
             templateUrl: 'templates/artist.html',
-            controller: 'ArtishCtrl'
+            controller: 'ArtistCtrl'
           }
         }
       })
