@@ -750,7 +750,10 @@ angular.module('starter.controllers', [])
     //to go to my list tab
     $scope.submitOnMyList = function () {
       // console.log("$scope.getListOfArtist", $scope.getListOfArtist);
+      $ionicScrollDelegate.scrollTop();
       $scope.tab = "already";
+      $scope.classa = '';
+      $scope.classb = "active";
     };
 
     //To remove article from list
