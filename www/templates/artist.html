@@ -6,8 +6,8 @@
       <div class="tabs c-tab top0">
         <a class="backarrow" ng-click="goBackHandler();">
           <i class="ion ion-chevron-left"></i>
-         </a>
-        <a class="tab-item {{classa}}" ng-click="tabchange('new',1);checked=0;selectArtist()"  >
+        </a>
+        <a class="tab-item {{classa}}" ng-click="tabchange('new',1);checked=0;selectArtist()">
           <span>Artist</span>
         </a>
         <a class="tab-item {{classb}}" ng-click="tabchange('already',2)">
@@ -16,31 +16,31 @@
       </div>
     </div>
     <div class="fixed-div">
-    <div class="profile-bg" >
+      <div class="profile-bg">
 
 
-    <!--
+        <!--
     ng-style="{'background':'url('+userdata.bgimage+')'}"
     <div class="profile-bg" ng-style="{'background-image':'url({{userdata.bgimage|uploadpath}})'}"> -->
 
-      <div class="bg-cover"  >
-        <div class="bgs">
-          <img ng-src="{{imagetobeup}}" ng-show="!userdata.image" class="full-image">
-          <img ng-src="{{userdata.bgimage | uploadpath}}" ng-show="userdata.image"  class="full-image">
-        </div>
-        <div class="pro-img"  >
-          <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
-          <img ng-src="{{imagetobeup}}" ng-show="!userdata.image" class="full-image">
-          <img ng-src="{{userdata.image | uploadpath}}" ng-show="userdata.image"  class="full-image">
-          <!-- <div class="elogo" ng-show="!userdata.image">Edit Logo</div> -->
-          <!-- <img src="img/profile.png" alt=""> -->
-        </div>
-        <div class="name display-inline ml-5">
-          <h4 class="redcol">{{userdata.name}}</h4>
-          <!-- <span class="redcol">{{userdata.email}}</span> -->
-          <p class="redcol">{{userdata.mobile}}</p>
-        </div>
-        <!-- <div class="edit-btn">
+        <div class="bg-cover">
+          <div class="bgs">
+            <img ng-src="{{imagetobeup}}" ng-show="!getUserDetail.image" class="full-image">
+            <img ng-src="{{getUserDetail.bgimage | uploadpath}}" ng-show="getUserDetail.image" class="full-image">
+          </div>
+          <div class="pro-img">
+            <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
+            <img ng-src="{{imagetobeup}}" ng-show="!getUserDetail.image" class="full-image">
+            <img ng-src="{{getUserDetail.image | uploadpath}}" ng-show="getUserDetail.image" class="full-image">
+            <!-- <div class="elogo" ng-show="!userdata.image">Edit Logo</div> -->
+            <!-- <img src="img/profile.png" alt=""> -->
+          </div>
+          <div class="name display-inline ml-5">
+            <h4 class="redcol">{{getUserDetail.name}}</h4>
+            <!-- <span class="redcol">{{userdata.email}}</span> -->
+            <p class="redcol">{{getUserDetail.mobile}}</p>
+          </div>
+          <!-- <div class="edit-btn">
           <i class="ln-edit2 edit-i color-assertive" ng-click="selectImageBg();"></i>
           <p class="" >Edit Company Logo</p>
         </div>
@@ -48,45 +48,45 @@
         <div class="edit-btn edt-2" ng-click="selectImage();" ng-show="!userdata.image">
           <i class="ln-photo color-assertive"></i>
         </div> -->
-    </div>
+        </div>
 
+      </div>
     </div>
-    </div>
-          <div class="fixed-search">
-            <div class="search" ng-show="tab=='new'">
-              <div class="list list-inset">
-                <label class="item item-input">
+    <div class="fixed-search">
+      <div class="search" ng-show="tab=='new'">
+        <div class="list list-inset">
+          <label class="item item-input">
                   <i class="icon ln-magnifier placeholder-icon"></i>
 
                   <input type="text" placeholder="Search by Name, City" ng-model="searchText" value="searchText">
                 </label>
-              </div>
-            </div>
-            <div class="h2-tg" ng-show="tab=='new'">
-              <h4 class="">
-                Select only 5 Artists from below*
-              </h4>
-            </div>
-          </div>
-          <div class="h2-tg fixed-search" ng-show="tab=='already'">
-            <h4 class="">
-              We recommend selecting 2 Artists*
-            </h4>
-          </div>
+        </div>
+      </div>
+      <div class="h2-tg" ng-show="tab=='new'">
+        <h4 class="">
+          Select only 5 Artists from below*
+        </h4>
+      </div>
+    </div>
+    <div class="h2-tg fixed-search" ng-show="tab=='already'">
+      <h4 class="">
+        We recommend selecting 2 Artists*
+      </h4>
+    </div>
 
   </div>
 
   <ion-content class="has-header ">
-    <div class="video mt100" ng-show="tab=='new'" >
+    <div class="video mt100" ng-show="tab=='new'">
 
       <div class="artist mt15">
         <div class="list">
-          <div class="list " >
-            <div class="ps-relative " ng-repeat="data in getArtist | filter:searchText" >
+          <div class="list ">
+            <div class="ps-relative " ng-repeat="data in getArtist | filter:searchText">
 
               <div class="chck">
                 <label class="checkbox">
-                  <input type="checkbox" ng-change="addToWishlist(data._id,item.checked)"  ng-disabled="checked==limit && !item.checked" ng-model="item.checked">
+                  <input type="checkbox" ng-change="addToWishlist(data,item.checked)"  ng-disabled="checked==limit && !item.checked" ng-model="item.checked">
                 </label>
 
               </div>
@@ -184,16 +184,18 @@
                 <a class="del-btn"><i class="ln-trash2" ng-click="removeWishlist(data._id)"></i></a>
               </div>
               <a class="item item-thumbnail-left f18">
-                <img ng-src="{{data.artist.pic1 | uploadpath}}" ng-click="openModal()">
-                <h2 class="color-dark">{{data.artist.artistName}}</h2>
+                <img ng-src="{{data.pic1 | uploadpath}}" ng-click="openModal()">
+                <h2 class="color-dark">{{data.artistName}}</h2>
                 <div class="all-cat">
                   <div class="display-inline">
-                    <p class="color-base"><i class="ln-map-marker"></i>{{data.artist.artistCity}}</p>
+                    <p class="color-base"><i class="ln-map-marker"></i>{{data.artistCity}}</p>
                   </div>
                   <div class="display-inline ml5">
-                    <p class="color-base"><i class="ln-film-play"></i>{{data.artist.artistVideo}}</p>
+                    <p class="color-base"><i class="ln-film-play"></i></p>
+                    <!--<p class="color-base"><i class="ln-film-play"></i>{{data.artistVideo}}</p>-->
+                    <!--<p class="color-base" ng-bind="data.artistVideo"><i class="ln-film-play"></i></p>-->
                   </div>
-                  <p class="color-base"><i class="ln-mic2"></i>{{data.artist.talent}}</p>
+                  <p class="color-base"><i class="ln-mic2"></i>{{data.talent}}</p>
 
                 </div>
               </a>

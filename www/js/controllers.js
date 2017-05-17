@@ -1,219 +1,219 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $filter, $state) {
-  var getUserProfile = $.jStorage.get('userProfile');
-  if ($.jStorage.get('userProfile')) {
-    MyServices.getprofile(getUserProfile._id, function(data) {
-      console.log(data);
-      $scope.appdata = data.data;
-      $scope.appdata.bgimage = $filter('uploadpath')($scope.appdata.bgimage);
-      $scope.ProfileImgForMenu = $filter('uploadpath')($scope.appdata.image);
-      // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
-    });
-  }
-  $scope.getprofile = function() {
-    console.log("hi");
-    MyServices.getprofile(getUserProfile._id, function(data) {
-      console.log(data);
-      $scope.appdata = data.data;
-      $scope.appdata.bgimage = $filter('uploadpath')($scope.appdata.bgimage);
-      $scope.ProfileImgForMenu = $filter('uploadpath')($scope.appdata.image);
-      // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
-    });
-  };
-  $scope.logout = function() {
-    $.jStorage.set('userProfile', null);
-    $.jStorage.deleteKey('userProfile');
-    $.jStorage.flush();
-
-    if ($.jStorage.get('userProfile') === null) {
-      $state.go('login');
-
-    }
-  };
-})
-
-
-// ===============================
-.controller('ProfileCtrl', function($scope, $stateParams,$ionicPopup, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera, $filter, $state) {
-  // =============ProfilectrlCode====================
-  var getUserProfile = $.jStorage.get('userProfile');
-  if ($.jStorage.get('userProfile')) {
-    $scope.userId = getUserProfile._id;
-  }
-  $scope.profileData = {};
-  MyServices.getprofile($.jStorage.get('userProfile')._id, function(data) {
-    console.log(data);
-    $scope.profileData = data.data;
-    // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-    // $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
-    // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
-  });
-
-  $scope.submitProfile = function(input) {
-    var res = [];
-    console.log(input);
-    // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-    // if ($scope.profileData.bgimage) {
-    //   var res = $scope.profileData.bgimage.split("=");
-    // }
-    // console.log(res);
-    // $scope.profileData.bgimage = res[1];
-    // $scope.profileData.bgimage = "58ece7f1fe67247ce2ad7b0d.jpg";
-    console.log('$scope.profileData.bgimage', $scope.profileData.bgimage);
-    MyServices.signup($scope.profileData, function(data) {
-      console.log($scope.profileData, data);
-      // $scope.getMyProfile();
-      MyServices.getprofile($.jStorage.get('userProfile')._id, function(data) {
+  .controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $filter, $state) {
+    var getUserProfile = $.jStorage.get('userProfile');
+    if ($.jStorage.get('userProfile')) {
+      MyServices.getprofile(getUserProfile._id, function (data) {
         console.log(data);
-        if(data.value){
-        $scope.profileData = data.data;
-        $.jStorage.set('userProfile', data.data);
-        var alertPopup = $ionicPopup.alert({
-          cssClass: 'text-center',
-          buttons: [{
-            text: 'Ok',
-            type: 'button-assertive'
-          }],
-          template: 'Your profile has been successfully updated.'
-        });
-
-        alertPopup.then(function(res) {
-
-        });
-
-}
-        // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-        // $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
+        $scope.appdata = data.data;
+        $scope.appdata.bgimage = $filter('uploadpath')($scope.appdata.bgimage);
+        $scope.ProfileImgForMenu = $filter('uploadpath')($scope.appdata.image);
         // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
       });
-      // $state.go('app.search-artist');
-    });
-
-  }
-
-  console.log('$scope.userId', $scope.userId);
-  // ===================End of Profilectrl===============
-
-
-  // =================== t code ===============================
-  // Upload Profile Pic
-  $scope.imagetobeup = "img/profile.png";
-  $scope.selectImage = function() {
-    var options = {
-      quality: 50,
-      destinationType: Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit: true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
-      saveToPhotoAlbum: false,
-      correctOrientation: true
-    };
-    $cordovaCamera.getPicture(options).then(function(imageURI) {
-      $scope.profileImage = imageURI;
-      $scope.uploadImage($scope.profileImage);
-      //  $scope.uploadImageBackground($scope.profileImage);
-    }, function(err) {
-      // error
-    });
-  };
-  $scope.selectImageBg = function() {
-    var options = {
-      quality: 50,
-      destinationType: Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit: true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 320,
-      targetHeight: 150,
-      saveToPhotoAlbum: false,
-      correctOrientation: true
-    };
-    $cordovaCamera.getPicture(options).then(function(imageURI) {
-      $scope.profileImage = imageURI;
-      //  $scope.uploadImage($scope.profileImage);
-      $scope.uploadImageBackground($scope.profileImage);
-    }, function(err) {
-      // error
-    });
-  };
-
-  //Upload Image
-  $scope.uploadImage = function(imageURI) {
-    console.log('imageURI', imageURI);
-    // $scope.showLoading('Uploading Image...', 10000);
-    $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
-      .then(function(result) {
-        // Success!
-        console.log(result.response);
-        result.response = JSON.parse(result.response);
-        $scope.profileData.image = result.response.data[0];
-        // $scope.submitData($scope.formData);
-        // $scope.submitProfile($scope.profileData);
-      }, function(err) {
-        // Error
-        // $scope.hideLoading();
-        $scope.showLoading('Error!', 2000);
-      }, function(progress) {
-        // constant progress updates
+    }
+    $scope.getprofile = function () {
+      console.log("hi");
+      MyServices.getprofile(getUserProfile._id, function (data) {
+        console.log(data);
+        $scope.appdata = data.data;
+        $scope.appdata.bgimage = $filter('uploadpath')($scope.appdata.bgimage);
+        $scope.ProfileImgForMenu = $filter('uploadpath')($scope.appdata.image);
+        // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
       });
-  };
-  $scope.uploadImageBackground = function(imageURI) {
+    };
+    $scope.logout = function () {
+      $.jStorage.set('userProfile', null);
+      $.jStorage.deleteKey('userProfile');
+      $.jStorage.flush();
 
-    console.log('imageURI', imageURI);
-    // $scope.showLoading('Uploading Image...', 10000);
-    $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
-      .then(function(result) {
-        // Success!
-        console.log(result.response);
-        result.response = JSON.parse(result.response);
-        $scope.profileData.bgimage = result.response.data[0];
-        // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
-        // $scope.submitProfile($scope.profileData);
-      }, function(err) {
-        // Error
-        // $scope.hideLoading();
-        $scope.showLoading('Error!', 2000);
-      }, function(progress) {
-        // constant progress updates
+      if ($.jStorage.get('userProfile') === null) {
+        $state.go('login');
+
+      }
+    };
+  })
+
+
+  // ===============================
+  .controller('ProfileCtrl', function ($scope, $stateParams, $ionicPopup, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera, $filter, $state) {
+    // =============ProfilectrlCode====================
+    var getUserProfile = $.jStorage.get('userProfile');
+    if ($.jStorage.get('userProfile')) {
+      $scope.userId = getUserProfile._id;
+    }
+    $scope.profileData = {};
+    MyServices.getprofile($.jStorage.get('userProfile')._id, function (data) {
+      console.log(data);
+      $scope.profileData = data.data;
+      // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+      // $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
+      // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
+    });
+
+    $scope.submitProfile = function (input) {
+      var res = [];
+      console.log(input);
+      // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+      // if ($scope.profileData.bgimage) {
+      //   var res = $scope.profileData.bgimage.split("=");
+      // }
+      // console.log(res);
+      // $scope.profileData.bgimage = res[1];
+      // $scope.profileData.bgimage = "58ece7f1fe67247ce2ad7b0d.jpg";
+      console.log('$scope.profileData.bgimage', $scope.profileData.bgimage);
+      MyServices.signup($scope.profileData, function (data) {
+        console.log($scope.profileData, data);
+        // $scope.getMyProfile();
+        MyServices.getprofile($.jStorage.get('userProfile')._id, function (data) {
+          console.log(data);
+          if (data.value) {
+            $scope.profileData = data.data;
+            $.jStorage.set('userProfile', data.data);
+            var alertPopup = $ionicPopup.alert({
+              cssClass: 'text-center',
+              buttons: [{
+                text: 'Ok',
+                type: 'button-assertive'
+              }],
+              template: 'Your profile has been successfully updated.'
+            });
+
+            alertPopup.then(function (res) {
+
+            });
+
+          }
+          // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+          // $scope.ProfileImgForMenu = $filter('uploadpath')($scope.profileData.image);
+          // console.log('$scope.ProfileImgForMenu',$scope.ProfileImgForMenu);
+        });
+        // $state.go('app.search-artist');
       });
-  };
-  // =================== end of t code =========================
 
-  //=========profile like search=============
+    }
 
-  $scope.getUser = $.jStorage.get('userProfile');
-  console.log('$scope.getUser', $scope.getUser);
-
-  if ($scope.getUser) {
+    console.log('$scope.userId', $scope.userId);
+    // ===================End of Profilectrl===============
 
 
+    // =================== t code ===============================
+    // Upload Profile Pic
+    $scope.imagetobeup = "img/profile.png";
+    $scope.selectImage = function () {
+      var options = {
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 100,
+        targetHeight: 100,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
+      };
+      $cordovaCamera.getPicture(options).then(function (imageURI) {
+        $scope.profileImage = imageURI;
+        $scope.uploadImage($scope.profileImage);
+        //  $scope.uploadImageBackground($scope.profileImage);
+      }, function (err) {
+        // error
+      });
+    };
+    $scope.selectImageBg = function () {
+      var options = {
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 320,
+        targetHeight: 150,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
+      };
+      $cordovaCamera.getPicture(options).then(function (imageURI) {
+        $scope.profileImage = imageURI;
+        //  $scope.uploadImage($scope.profileImage);
+        $scope.uploadImageBackground($scope.profileImage);
+      }, function (err) {
+        // error
+      });
+    };
 
-    MyServices.getprofile($scope.getUser._id, function(user) {
-      $scope.userdata = user.data;
-      // $scope.userdata.bgimage = 'img/artistPage.jpeg';
-      // $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
-      console.log($scope.userdata);
-    });
-    // $scope.getSearch = function() {}
-    MyServices.getUserDetails(function(data) {
-      $scope.getArtist10 = data.data;
-      console.log('$scope.getArtist10', $scope.getArtist10);
+    //Upload Image
+    $scope.uploadImage = function (imageURI) {
+      console.log('imageURI', imageURI);
+      // $scope.showLoading('Uploading Image...', 10000);
+      $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
+        .then(function (result) {
+          // Success!
+          console.log(result.response);
+          result.response = JSON.parse(result.response);
+          $scope.profileData.image = result.response.data[0];
+          // $scope.submitData($scope.formData);
+          // $scope.submitProfile($scope.profileData);
+        }, function (err) {
+          // Error
+          // $scope.hideLoading();
+          $scope.showLoading('Error!', 2000);
+        }, function (progress) {
+          // constant progress updates
+        });
+    };
+    $scope.uploadImageBackground = function (imageURI) {
 
-    });
+      console.log('imageURI', imageURI);
+      // $scope.showLoading('Uploading Image...', 10000);
+      $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
+        .then(function (result) {
+          // Success!
+          console.log(result.response);
+          result.response = JSON.parse(result.response);
+          $scope.profileData.bgimage = result.response.data[0];
+          // $scope.profileData.bgimage = $filter('uploadpath')($scope.profileData.bgimage);
+          // $scope.submitProfile($scope.profileData);
+        }, function (err) {
+          // Error
+          // $scope.hideLoading();
+          $scope.showLoading('Error!', 2000);
+        }, function (progress) {
+          // constant progress updates
+        });
+    };
+    // =================== end of t code =========================
 
-  }
+    //=========profile like search=============
 
-  //=========profile like search=============
+    $scope.getUser = $.jStorage.get('userProfile');
+    console.log('$scope.getUser', $scope.getUser);
+
+    if ($scope.getUser) {
 
 
-})
 
-// ====================================
+      MyServices.getprofile($scope.getUser._id, function (user) {
+        $scope.userdata = user.data;
+        // $scope.userdata.bgimage = 'img/artistPage.jpeg';
+        // $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
+        console.log($scope.userdata);
+      });
+      // $scope.getSearch = function() {}
+      MyServices.getUserDetails(function (data) {
+        $scope.getArtist10 = data.data;
+        console.log('$scope.getArtist10', $scope.getArtist10);
 
-.controller('LoginCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicPopup, $state, $timeout) {
+      });
+
+    }
+
+    //=========profile like search=============
+
+
+  })
+
+  // ====================================
+
+  .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicPopup, $state, $timeout) {
     console.log($.jStorage.get('userProfile'));
     if ($.jStorage.get('userProfile')) {
       $state.go('app.search-artist');
@@ -221,20 +221,20 @@ angular.module('starter.controllers', [])
     $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
       scope: $scope,
       animation: 'slide-in-up'
-    }).then(function(modal) {
+    }).then(function (modal) {
       $scope.modal = modal;
     });
-    $scope.openModal = function() {
+    $scope.openModal = function () {
       $scope.modal.show();
     };
-    $scope.closeModal = function() {
+    $scope.closeModal = function () {
       $scope.modal.hide();
     };
     $scope.forgotPsws = {};
 
-    $scope.forgotSubmit = function(input, formName) {
+    $scope.forgotSubmit = function (input, formName) {
       console.log('forrrrrrrrrrrrr');
-      MyServices.forgotPassword(input, function(data) {
+      MyServices.forgotPassword(input, function (data) {
         if (data.data.comment == 'User not found') {
           $scope.showAlertNoData();
         } else {
@@ -252,20 +252,20 @@ angular.module('starter.controllers', [])
     $ionicModal.fromTemplateUrl('templates/modal/new-user.html', {
       scope: $scope,
       animation: 'slide-in-up'
-    }).then(function(modals) {
+    }).then(function (modals) {
       $scope.modals = modals;
     });
-    $scope.openModals = function() {
+    $scope.openModals = function () {
       $scope.modals.show();
     };
-    $scope.closeModals = function() {
+    $scope.closeModals = function () {
       $scope.modals.hide();
     };
     $scope.formData = {};
 
-    $scope.submitForm = function(userdata, formName) {
+    $scope.submitForm = function (userdata, formName) {
       console.log(formName.email.$touched);
-      MyServices.signup(userdata, function(data) {
+      MyServices.signup(userdata, function (data) {
         if (data.value === true) {
           console.log(data);
           $.jStorage.set('userProfile', data.data);
@@ -279,8 +279,8 @@ angular.module('starter.controllers', [])
         }
       });
     }
-    $scope.submitLoginForm = function(userdata) {
-      MyServices.login(userdata, function(data) {
+    $scope.submitLoginForm = function (userdata) {
+      MyServices.login(userdata, function (data) {
         if (data.data.message == 'No Data Found') {
           $scope.showAlertNoData();
         } else {
@@ -292,7 +292,7 @@ angular.module('starter.controllers', [])
 
       });
     }
-    $scope.showAlert = function() {
+    $scope.showAlert = function () {
       var alertPopup = $ionicPopup.alert({
         cssClass: 'text-center',
         buttons: [{
@@ -302,12 +302,12 @@ angular.module('starter.controllers', [])
         template: 'Registration Successfull !!'
       });
 
-      alertPopup.then(function(res) {
+      alertPopup.then(function (res) {
         $scope.closeModals();
         $state.go('app.profile');
       });
     };
-    $scope.okForgotPassword = function() {
+    $scope.okForgotPassword = function () {
       var alertPopup = $ionicPopup.alert({
         cssClass: 'text-center',
         buttons: [{
@@ -317,12 +317,12 @@ angular.module('starter.controllers', [])
         template: 'We have sent you a temporary password on your registered e-mail ID. You may use that to login for now.'
       });
 
-      alertPopup.then(function(res) {
+      alertPopup.then(function (res) {
         $scope.closeModal();
         // $state.go('login');
       });
     };
-    $scope.showAlertNoData = function() {
+    $scope.showAlertNoData = function () {
       var alertPopup = $ionicPopup.alert({
         cssClass: 'text-center',
         buttons: [{
@@ -332,27 +332,27 @@ angular.module('starter.controllers', [])
         template: 'User Not Registered !!'
       });
 
-      alertPopup.then(function(res) {
+      alertPopup.then(function (res) {
         console.log('Thank you for not eating my delicious ice cream cone');
       });
     };
   })
-  .controller('SignupCtrl', function($scope, MyServices) {
+  .controller('SignupCtrl', function ($scope, MyServices) {
 
   })
   // .controller('ProfileCtrl', function($scope, MyServices, $stateParams) {
   //
   // })
 
-.controller('ChangePasswordCtrl', function($scope, MyServices, $stateParams, $ionicPopup, $filter) {
+  .controller('ChangePasswordCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $filter) {
     var dataToSend = {};
     dataToSend._id = $stateParams.id;
     $scope.chngPassword = {};
-    $scope.submitChangePswd = function(input, formName) {
+    $scope.submitChangePswd = function (input, formName) {
       console.log(formName);
       dataToSend.password = input.password;
       dataToSend.changePassword = input.changePassword;
-      MyServices.getChangePassword(dataToSend, function(data) {
+      MyServices.getChangePassword(dataToSend, function (data) {
         if (data.data.message == 'No Data Found') {
           $scope.correctPasswordAlert();
           formName.oldpassword.$touched = false;
@@ -372,7 +372,7 @@ angular.module('starter.controllers', [])
       });
     }
 
-    $scope.showChangePasswordAlert = function() {
+    $scope.showChangePasswordAlert = function () {
       var alertPopup = $ionicPopup.alert({
         cssClass: 'text-center',
         buttons: [{
@@ -382,11 +382,11 @@ angular.module('starter.controllers', [])
         template: 'Password Changed Successfully !!'
       });
 
-      alertPopup.then(function(res) {
+      alertPopup.then(function (res) {
         console.log('Thank you for not eating my delicious ice cream cone');
       });
     };
-    $scope.correctPasswordAlert = function() {
+    $scope.correctPasswordAlert = function () {
       var alertPopup = $ionicPopup.alert({
         cssClass: 'text-center',
         buttons: [{
@@ -396,12 +396,12 @@ angular.module('starter.controllers', [])
         template: 'Please Insert Correct Password!!'
       });
 
-      alertPopup.then(function(res) {
+      alertPopup.then(function (res) {
         console.log('Thank you for not eating my delicious ice cream cone');
       });
     };
   })
-  .controller('SearchArtistCtrl', function($scope, MyServices, $filter, $state) {
+  .controller('SearchArtistCtrl', function ($scope, MyServices, $filter, $state) {
 
     $scope.getUser = $.jStorage.get('userProfile');
     console.log('$scope.getUser', $scope.getUser);
@@ -410,14 +410,14 @@ angular.module('starter.controllers', [])
 
 
 
-      MyServices.getprofile($scope.getUser._id, function(user) {
+      MyServices.getprofile($scope.getUser._id, function (user) {
         $scope.userdata = user.data;
         // $scope.userdata.bgimage = 'img/artistPage.jpeg';
         // $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
         console.log($scope.userdata);
       });
       // $scope.getSearch = function() {}
-      MyServices.getUserDetails(function(data) {
+      MyServices.getUserDetails(function (data) {
         $scope.getArtist10 = data.data;
         console.log('$scope.getArtist10', $scope.getArtist10);
 
@@ -427,63 +427,233 @@ angular.module('starter.controllers', [])
 
 
   })
-  .controller('ArtistCtrl', function($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
-    $ionicModal.fromTemplateUrl('templates/modal/image.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-    $scope.searchText = "";
 
-    $scope.openModal = function() {
-      $scope.modal.show();
-    };
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
-    $scope.tab = 'new';
-    $scope.classa = 'active';
-    $scope.classb = '';
-    $scope.goBackHandler = function() {
-      console.log("hi");
-      window.history.back(); //This works
-    }
-    $scope.tabchange = function(tab, a) {
-      console.log($scope.searchText);
-      $scope.searchText = "";
-      console.log($scope.searchText);
+  // .controller('ArtistCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
+  //   $scope.getListOfArtist = [];
+  //   $ionicModal.fromTemplateUrl('templates/modal/image.html', {
+  //     scope: $scope,
+  //     animation: 'slide-in-up'
+  //   }).then(function (modal) {
+  //     $scope.modal = modal;
+  //   });
+  //   $scope.searchText = "";
 
-      //        console.log(tab);
-      $scope.tab = tab;
-      if (a == 1) {
-        $scope.showArtistList();
-        $ionicScrollDelegate.scrollTop();
-        $scope.classa = "active";
-        $scope.classb = '';
-      } else {
-        $scope.showMyList();
-        $ionicScrollDelegate.scrollTop();
-        $scope.classa = '';
-        $scope.classb = "active";
-      }
-    };
-    $scope.getUserDetail = $.jStorage.get('userProfile');
-    console.log($scope.getUserDetail._id);
+  //   $scope.openModal = function () {
+  //     $scope.modal.show();
+  //   };
+  //   $scope.closeModal = function () {
+  //     $scope.modal.hide();
+  //   };
+  //   $scope.tab = 'new';
+  //   $scope.classa = 'active';
+  //   $scope.classb = '';
+  //   $scope.goBackHandler = function () {
+  //     console.log("hi");
+  //     window.history.back(); //This works
+  //   }
+  //   $scope.tabchange = function (tab, a) {
+  //     console.log($scope.searchText);
+  //     $scope.searchText = "";
+  //     console.log($scope.searchText);
 
-    // $sccope.getArtist = [{
-    //   "name":"abc",
-    //   "city":"mumbai",
-    //   "image":"img/download.jpg"
-    // },{
-    //   "name":"xyz",
-    //   "city":"pune",
-    //   "image":"img/images.jpg"
-    // },{
-    //   "name":"jkl",
-    //   "city":"paris",
-    //   "image":"img/download.jpg"
-    // }]
+  //     //        console.log(tab);
+  //     $scope.tab = tab;
+  //     if (a == 1) {
+  //       $scope.showArtistList();
+  //       $ionicScrollDelegate.scrollTop();
+  //       $scope.classa = "active";
+  //       $scope.classb = '';
+  //     } else {
+  //       $scope.showMyList();
+  //       $scope.getListOfArtist = [];
+  //       $ionicScrollDelegate.scrollTop();
+  //       $scope.classa = '';
+  //       $scope.classb = "active";
+  //     }
+  //   };
+  //   $scope.getUserDetail = $.jStorage.get('userProfile');
+  //   console.log($scope.getUserDetail._id);
+
+  //   // $sccope.getArtist = [{
+  //   //   "name":"abc",
+  //   //   "city":"mumbai",
+  //   //   "image":"img/download.jpg"
+  //   // },{
+  //   //   "name":"xyz",
+  //   //   "city":"pune",
+  //   //   "image":"img/images.jpg"
+  //   // },{
+  //   //   "name":"jkl",
+  //   //   "city":"paris",
+  //   //   "image":"img/download.jpg"
+  //   // }]
+  //   var dataToSend = {
+  //     artistName: $stateParams.search,
+  //     artistCity: $stateParams.city,
+  //     talent: $stateParams.talent,
+  //     artistGenre: $stateParams.genre,
+  //     budget: $stateParams.budget,
+  //   };
+  //   $scope.showArtistList = function () {
+  //     MyServices.filterResult(dataToSend, function (data) {
+  //       $scope.getArtist = data.data;
+  //       console.log('$scope.getArtist', $scope.getArtist[0]);
+
+  //     });
+  //   }
+  //   $scope.selectArtist = function () {
+  //     // $scope.getUserDetail.shortList = [];
+  //     // MyServices.signup($scope.getUserDetail, function (data) {
+  //     //   $scope.getArtist = data.data;
+  //     //   console.log('$scope.getArtist', $scope.getArtist[0]);
+
+  //     // });
+  //   }
+  //   $scope.showArtistList();
+
+  //   $scope.limit = 5;
+  //   $scope.checked = 0;
+  //   // ==========================================================================================shortList===================
+  //   $scope.addToWishlist = function (id, flag) {
+  //     if (flag == true) {
+  //       $scope.checked++;
+  //       console.log('funid', id);
+  //       var input = {
+  //         artist: id,
+  //         timestamp: new Date()
+  //       };
+  //       $scope.getUserDetail.shortList.push(input);
+  //       console.log('$scope.getUserDetail.shortList', $scope.getUserDetail.shortList);
+  //     } else {
+  //       $scope.checked--;
+
+  //       function checkAdult(o) {
+  //         return o.artist == id;
+  //       }
+
+  //       var index = $scope.getUserDetail.shortList.findIndex(checkAdult);
+  //       if (index != -1) {
+  //         $scope.getUserDetail.shortList.splice(index, 1);
+  //         console.log('$scope.getUserDetail.shortList splice', $scope.getUserDetail.shortList);
+  //       }
+  //     }
+
+
+  //     console.log(flag);
+
+
+  //   };
+  //   $scope.submitOnMyList = function () {
+  //     // $scope.getListOfArtist = $scope.getUserDetail.shortList;
+  //     $scope.getListOfArtist = [];
+  //     _.each($scope.getUserDetail.shortList, function (n) {
+  //       if (n.timestamp != undefined) {
+  //         $scope.getListOfArtist.push(n);
+  //       }
+  //     })
+  //     // console.log("############################ $scope.getUserDetail.shortList", $scope.getUserDetail.shortList[0].timestamp);
+  //     $scope.getUserDetail.shortList = [];
+  //     $scope.tab = "already";
+  //     // MyServices.signup($scope.getUserDetail, function(data) {
+
+  //     //   console.log('inside save');
+  //     //   if (data.value === true) {
+  //     //     $scope.checked=0;
+  //     //     console.log($scope.checked);
+  //     //     $scope.searchText = "";
+  //     //     console.log(data);
+  //     //     $scope.tabchange('already', 2);
+  //     //     // $scope.getUserDetail.shortList = [];
+  //     //     // $scope.mesg.push({
+  //     //     //     type: 'success',
+  //     //     //     msg: 'Added To Your Shortlist'
+  //     //     // });
+  //     //     // MyServices.getUser(function(logindata) {
+  //     //     //     _.each($scope.expertdata, function(n) {
+  //     //     //         n.showbtn = $filter('showbtn')(n._id, logindata);
+  //     //     //
+  //     //     //     })
+  //     //     // })
+  //     //   }
+  //     //   // $scope.closeAlert = function(index) {
+  //     //   //     $scope.mesg.splice(index, 1);
+  //     //   // }
+  //     // });
+  //   }
+  //   MyServices.getprofile($scope.getUserDetail._id, function (user) {
+  //     $scope.userdata = user.data;
+  //     // $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
+  //     console.log($scope.userdata);
+  //   });
+  //   $scope.showMyList = function () {
+  //     // MyServices.addedList($scope.getUserDetail._id, function (data) {
+  //     //   $scope.getListOfArtist = data.data.shortList;
+  //     //   console.log('$scope.getListOfArtist', $scope.getListOfArtist);
+
+  //     // });
+  //   }
+
+  //   $scope.showMyList();
+  //   $scope.removeWishlist = function (id) {
+  //     MyServices.removeFromList(id, function (data) {
+  //       $scope.showMyList();
+  //     })
+  //     $scope.showMyList();
+  //   };
+  //   $scope.showSendListAlert = function () {
+  //     var alertPopup = $ionicPopup.alert({
+  //       cssClass: 'text-center',
+  //       buttons: [{
+  //         text: 'Ok',
+  //         type: 'button-assertive'
+  //       }],
+  //       template: 'Thank you for enquiry.You will get quotation shortly.'
+  //     });
+
+  //     alertPopup.then(function (res) {
+  //       MyServices.emptyList($scope.getUserDetail._id, function (data) {
+  //         console.log(data);
+  //         // $scope.showMyList();
+  //         $state.go('app.search-artist');
+  //       })
+  //     });
+  //   };
+  //   $scope.sendProfile = function () {
+  //     if (!_.isEmpty($scope.getUserDetail.shortList)) {
+  //       MyServices.sendProfileToBackend($scope.getUserDetail._id, function (data) {
+  //         console.log(data);
+  //         if (data.value == true) {
+
+  //           $scope.showSendListAlert();
+  //           $scope.getUserDetail.shortList = [];
+  //         }
+  //       })
+  //     } else {
+  //       var alertPopup = $ionicPopup.alert({
+  //         cssClass: 'text-center',
+  //         buttons: [{
+  //           text: 'Ok',
+  //           type: 'button-assertive'
+  //         }],
+  //         template: 'There is no artist added in your MyList.'
+  //       });
+
+  //       alertPopup.then(function (res) {
+
+  //       });
+  //     }
+
+  //   }
+
+  // })
+
+  .controller('ArtistCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
+    $scope.getListOfArtist = [];
+    $scope.getArtist = [];
+
+    $scope.getUserDetail = $.jStorage.get('userProfile'); //TO get user details
+
+    //Get data from state param to get artist list from backend;
     var dataToSend = {
       artistName: $stateParams.search,
       artistCity: $stateParams.city,
@@ -491,130 +661,122 @@ angular.module('starter.controllers', [])
       artistGenre: $stateParams.genre,
       budget: $stateParams.budget,
     };
-    $scope.showArtistList = function() {
-      MyServices.filterResult(dataToSend, function(data) {
+
+    //To get artist list from backend.
+    $scope.showArtistList = function () {
+      MyServices.filterResult(dataToSend, function (data) {
         $scope.getArtist = data.data;
-        console.log('$scope.getArtist', $scope.getArtist[0]);
+        // console.log('$scope.getArtist', $scope.getArtist[0]);
 
       });
-    }
-    $scope.selectArtist = function() {
-      $scope.getUserDetail.shortList=[];
-      MyServices.signup($scope.getUserDetail, function(data) {
-        $scope.getArtist = data.data;
-        console.log('$scope.getArtist', $scope.getArtist[0]);
+    };
 
-      });
-    }
     $scope.showArtistList();
 
+    $ionicModal.fromTemplateUrl('templates/modal/image.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
+    $scope.searchText = "";
+
+    $scope.openModal = function () {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
+    $scope.tab = 'new';
+    $scope.classa = 'active';
+    $scope.classb = '';
+    $scope.goBackHandler = function () {
+      // console.log("hi");
+      window.history.back(); //This works
+    }
+
+    //To handle tab switch
+    $scope.tabchange = function (tab, a) {
+      // console.log($scope.searchText);
+      $scope.searchText = "";
+      // console.log($scope.searchText);
+
+      //        console.log(tab);
+      $scope.tab = tab;
+      if (a == 1) {
+        $ionicScrollDelegate.scrollTop();
+        $scope.getListOfArtist = [];
+        $scope.showArtistList();
+        $scope.classa = "active";
+        $scope.classb = '';
+      } else {
+        $ionicScrollDelegate.scrollTop();
+        $scope.getArtist = [];
+        $scope.classa = '';
+        $scope.classb = "active";
+      }
+    };
+
+    //Set limit to select
     $scope.limit = 5;
     $scope.checked = 0;
-    // ==========================================================================================shortList===================
-    $scope.addToWishlist = function(id, flag) {
-        if (flag == true) {
-          $scope.checked++;
-          console.log('funid', id);
-          var input = {
-            artist: id,
-            timestamp: new Date()
-          };
-          $scope.getUserDetail.shortList.push(input);
-          console.log('$scope.getUserDetail.shortList', $scope.getUserDetail.shortList);
-        } else {
-          $scope.checked--;
-          function checkAdult(o) {
-            return o.artist == id;
+
+    //List of selected artist
+    $scope.addToWishlist = function (data, flag) {
+      if (flag == true) {
+        $scope.checked++;
+        var artistObj = _.find($scope.getListOfArtist, function (o) {
+          if (data._id === o._id) {
+            return o;
           }
-
-          var index = $scope.getUserDetail.shortList.findIndex(checkAdult);
-          if (index != -1) {
-            $scope.getUserDetail.shortList.splice(index, 1);
-            console.log('$scope.getUserDetail.shortList splice', $scope.getUserDetail.shortList);
+        });
+        if (artistObj === undefined) {
+          $scope.getListOfArtist.push(data);
+        }
+      } else {
+        $scope.checked--;
+        var artistObj = _.find($scope.getListOfArtist, function (o) {
+          if (data._id === o._id) {
+            return o;
           }
+        });
+        if (artistObj !== undefined) {
+          _.pull($scope.getListOfArtist, artistObj);
         }
-
-
-      console.log(flag);
-
+      }
 
     };
-    $scope.submitOnMyList = function() {
-      MyServices.signup($scope.getUserDetail, function(data) {
 
-        console.log('inside save');
-        if (data.value === true) {
-          $scope.checked=0;
-          console.log($scope.checked);
-          $scope.searchText = "";
-          console.log(data);
-          $scope.tabchange('already', 2);
-          // $scope.getUserDetail.shortList = [];
-          // $scope.mesg.push({
-          //     type: 'success',
-          //     msg: 'Added To Your Shortlist'
-          // });
-          // MyServices.getUser(function(logindata) {
-          //     _.each($scope.expertdata, function(n) {
-          //         n.showbtn = $filter('showbtn')(n._id, logindata);
-          //
-          //     })
-          // })
+    //to go to my list tab
+    $scope.submitOnMyList = function () {
+      // console.log("$scope.getListOfArtist", $scope.getListOfArtist);
+      $scope.tab = "already";
+    };
+
+    //To remove article from list
+    $scope.removeWishlist = function (value) {
+      var artistObj = _.find($scope.getListOfArtist, function (o) {
+        if (value === o._id) {
+          return o;
         }
-        // $scope.closeAlert = function(index) {
-        //     $scope.mesg.splice(index, 1);
-        // }
       });
-    }
-    MyServices.getprofile($scope.getUserDetail._id, function(user) {
-      $scope.userdata = user.data;
-      // $scope.userdata.bgimage = $filter('uploadpath')($scope.userdata.bgimage);
-      console.log($scope.userdata);
-    });
-    $scope.showMyList = function() {
-      MyServices.addedList($scope.getUserDetail._id, function(data) {
-        $scope.getListOfArtist = data.data.shortList;
-        console.log('$scope.getListOfArtist', $scope.getListOfArtist);
-
-      });
-    }
-
-    $scope.showMyList();
-    $scope.removeWishlist = function(id) {
-      MyServices.removeFromList(id, function(data) {
-        $scope.showMyList();
-      })
-      $scope.showMyList();
+      if (artistObj !== undefined) {
+        _.pull($scope.getListOfArtist, artistObj);
+      }
     };
-    $scope.showSendListAlert = function() {
-      var alertPopup = $ionicPopup.alert({
-        cssClass: 'text-center',
-        buttons: [{
-          text: 'Ok',
-          type: 'button-assertive'
-        }],
-        template: 'Thank you for enquiry.You will get quotation shortly.'
-      });
 
-      alertPopup.then(function(res) {
-        MyServices.emptyList($scope.getUserDetail._id, function(data) {
-          console.log(data);
-          // $scope.showMyList();
-          $state.go('app.search-artist');
-        })
-      });
-    };
-    $scope.sendProfile = function() {
-      if(!_.isEmpty($scope.getUserDetail.shortList)){
-        MyServices.sendProfileToBackend($scope.getUserDetail._id, function(data) {
-          console.log(data);
+    //To send profile to backend
+    $scope.sendProfile = function () {
+      if (!_.isEmpty($scope.getListOfArtist)) {
+        MyServices.sendProfileToBackend($scope.getUserDetail._id, function (data) {
+          // console.log(data);
           if (data.value == true) {
 
             $scope.showSendListAlert();
-            $scope.getUserDetail.shortList = [];
+            $scope.getListOfArtist = [];
           }
         })
-      }else{
+      } else {
         var alertPopup = $ionicPopup.alert({
           cssClass: 'text-center',
           buttons: [{
@@ -624,13 +786,33 @@ angular.module('starter.controllers', [])
           template: 'There is no artist added in your MyList.'
         });
 
-        alertPopup.then(function(res) {
+        alertPopup.then(function (res) {
 
         });
       }
 
-    }
+    };
+
+    //after Successfull submit
+    $scope.showSendListAlert = function () {
+      var alertPopup = $ionicPopup.alert({
+        cssClass: 'text-center',
+        buttons: [{
+          text: 'Ok',
+          type: 'button-assertive'
+        }],
+        template: 'Thank you for enquiry.You will get quotation shortly.'
+      });
+
+      alertPopup.then(function (res) {
+        MyServices.emptyList($scope.getUserDetail._id, function (data) {
+          // console.log(data);
+          // $scope.showMyList();
+          $state.go('app.search-artist');
+        })
+      });
+    };
 
   })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {});
+  .controller('PlaylistCtrl', function ($scope, $stateParams) {});
