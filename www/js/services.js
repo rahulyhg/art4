@@ -14,15 +14,15 @@ var uploadurl = imgurl;
 var foods = [];
 
 angular.module('starter.services', [])
-  .factory('MyServices', function($http) {
+  .factory('MyServices', function ($http) {
     return {
-      all: function() {
+      all: function () {
         return chats;
       },
-      remove: function(chat) {
+      remove: function (chat) {
         chats.splice(chats.indexOf(chat), 1);
       },
-      get: function(chatId) {
+      get: function (chatId) {
         for (var i = 0; i < chats.length; i++) {
           if (chats[i].id === parseInt(chatId)) {
             return chats[i];
@@ -30,48 +30,49 @@ angular.module('starter.services', [])
         }
         return null;
       },
-      signup: function(signup, callback) {
+      signup: function (signup, callback) {
         return $http({
-          url: adminurl + 'AppUser/save',
+          // url: adminurl + 'AppUser/save', 
+          url: adminurl + 'AppUser/UserSignUp',
           method: "POST",
           data: signup
         }).success(callback);
       },
-      getChangePassword: function(input, callback) {
+      getChangePassword: function (input, callback) {
         return $http({
           url: adminurl + 'AppUser/changePassword',
           method: "POST",
           data: input
         }).success(callback);
       },
-      login: function(input, callback) {
+      login: function (input, callback) {
         return $http({
           url: adminurl + 'AppUser/login',
           method: "POST",
           data: input
         }).success(callback);
       },
-      forgotPassword: function(input, callback) {
+      forgotPassword: function (input, callback) {
         return $http({
           url: adminurl + 'AppUser/forgotPassword',
           method: "POST",
           data: input
         }).success(callback);
       },
-      getUserDetails: function(callback) {
+      getUserDetails: function (callback) {
         return $http({
           url: adminurl + 'AppUser/getUserDetails',
           method: "POST",
         }).success(callback);
       },
-      filterResult: function(input, callback) {
+      filterResult: function (input, callback) {
         return $http({
           url: adminurl + 'AppUser/filterResult',
           method: "POST",
           data: input
         }).success(callback);
       },
-      getprofile: function(id, callback) {
+      getprofile: function (id, callback) {
         return $http({
           url: adminurl + 'AppUser/getOne',
           method: "POST",
@@ -80,7 +81,7 @@ angular.module('starter.services', [])
           }
         }).success(callback);
       },
-      removeFromList: function(id, callback) {
+      removeFromList: function (id, callback) {
         return $http({
           url: adminurl + 'AppUser/removeFromList',
           method: "POST",
@@ -89,7 +90,7 @@ angular.module('starter.services', [])
           }
         }).success(callback);
       },
-      emptyList: function(id, callback) {
+      emptyList: function (id, callback) {
         return $http({
           url: adminurl + 'AppUser/emptyList',
           method: "POST",
@@ -98,7 +99,7 @@ angular.module('starter.services', [])
           }
         }).success(callback);
       },
-      sendProfileToBackend: function(id, callback) {
+      sendProfileToBackend: function (id, callback) {
         return $http({
           url: adminurl + 'AppUser/sendProfile',
           method: "POST",
@@ -107,7 +108,7 @@ angular.module('starter.services', [])
           }
         }).success(callback);
       },
-      addedList: function(id, callback) {
+      addedList: function (id, callback) {
         return $http({
           url: adminurl + 'AppUser/getShortlist',
           method: "POST",
