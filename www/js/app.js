@@ -18,35 +18,35 @@
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+  .run(function ($ionicPlatform) {
+    $ionicPlatform.ready(function () {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
+  })
 
-.config(function($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
       .state('app', {
-        cache:false,
-      url: '/app',
-      abstract: true,
-      templateUrl: 'templates/menu.html',
-      controller: 'AppCtrl'
-    })
+        cache: false,
+        url: '/app',
+        abstract: true,
+        templateUrl: 'templates/menu.html',
+        controller: 'AppCtrl'
+      })
 
-    .state('app.search', {
-      cache:false,
+      .state('app.search', {
+        cache: false,
 
         url: '/search',
         views: {
@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       //   }
       // })
       .state('app.change-password', {
-        cache:false,
+        cache: false,
         url: '/change-password/:id',
         views: {
           'menuContent': {
@@ -82,7 +82,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('app.artist', {
-        cache:false,
+        cache: false,
         url: '/:artist/:search/:city/:talent/:genre/:budget',
         views: {
           'menuContent': {
@@ -92,22 +92,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
 
-    .state('login', {
-      cache:false,
+      .state('login', {
+        cache: false,
         url: '/login',
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
 
       })
       .state('signup', {
-        cache:false,
+        cache: false,
         url: '/signup',
         templateUrl: 'templates/signup.html',
         controller: 'SignupCtrl'
 
       })
+      .state('otp', {
+        cache: false,
+        url: '/otp',
+        templateUrl: 'templates/otp.html',
+        controller: 'OtpCtrl'
+      })
       .state('app.profile', {
-        cache:false,
+        cache: false,
         url: '/profile',
         views: {
           'menuContent': {
@@ -117,7 +123,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
       .state('app.search-artist', {
-        cache:false,
+        cache: false,
         url: '/search-artist',
         views: {
           'menuContent': {
@@ -139,8 +145,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
   })
-  .filter('uploadpath', function() {
-    return function(input, width, height, style) {
+  .filter('uploadpath', function () {
+    return function (input, width, height, style) {
       // console.log('input', input);
       var other = "";
       if (width && width != "") {

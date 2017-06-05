@@ -118,5 +118,23 @@ angular.module('starter.services', [])
         }).success(callback);
       },
 
+      //To verfiy OTP
+      verifyOTP: function (data, callback) {
+        return $http({
+          url: adminurl + 'AppUser/verifyOTP',
+          method: "POST",
+          data: data
+        }).success(callback);
+      },
+
+      //To resend OTP
+      resendOTP: function (data, callback) {
+        return $http({
+          url: adminurl + 'AppUser/resendOTP',
+          method: "POST",
+          data: data
+        }).success(callback);
+      }
+
     };
   });

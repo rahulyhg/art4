@@ -274,8 +274,18 @@ angular.module('starter.controllers', [])
           formName.number.$touched = false;
           formName.web.$touched = false;
           formName.email.$touched = false;
-          $scope.showAlert();
+          //$scope.showAlert();
           $scope.formData = {};
+          $state.go('otp');
+        } else {
+          var alertPopup = $ionicPopup.alert({
+            cssClass: 'text-center',
+            buttons: [{
+              text: 'Ok',
+              type: 'button-assertive'
+            }],
+            template: 'Unable to generate OTP.'
+          });
         }
       });
     }
@@ -818,4 +828,82 @@ angular.module('starter.controllers', [])
 
   })
 
+
+  .controller('OtpCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, MyServices) {
+
+    var userData = $.jStorage.get('userProfile');
+    //To submit OTP to backend for verification
+    $scope.submitOTP = function (value) {
+      var dataObj = {
+        otp: value.otp,
+        mobile: userData.mobile,
+        _id: userData._id
+      }
+      MyServices.verifyOTP(dataObj, function (data) {
+        if (data.data) {
+          if (_.isEmpty(data.data)) {
+            var alertPopup = $ionicPopup.alert({
+              cssClass: 'text-center',
+              buttons: [{
+                text: 'Ok',
+                type: 'button-assertive'
+              }],
+              template: 'OTP validation failed'
+            });
+            $.jStorage.flush('userProfile');
+            $state.go('login');
+          } else {
+            $.jStorage.flush('userProfile');
+            $.jStorage.set('userProfile', data.data);
+            $scope.myuserId = data.data._id;
+            var alertPopup = $ionicPopup.alert({
+              cssClass: 'text-center',
+              buttons: [{
+                text: 'Ok',
+                type: 'button-assertive'
+              }],
+              template: 'Registration Successfull !!'
+            });
+
+            alertPopup.then(function (res) {
+              $state.go('app.profile');
+            });
+          }
+        } else {
+          $.jStorage.flush('userProfile');
+          var alertPopup = $ionicPopup.alert({
+            cssClass: 'text-center',
+            buttons: [{
+              text: 'Ok',
+              type: 'button-assertive'
+            }],
+            template: 'OTP validation failed'
+          });
+          $state.go('login');
+        }
+      });
+    };
+
+    //To resend OTP
+    $scope.resendOtp = function () {
+
+      var dataObj = {
+        _id: userData._id
+      }
+      MyServices.resendOTP(dataObj, function (data) {
+        if (data.data) {
+          console.log("OTP resent");
+        } else {
+          var alertPopup = $ionicPopup.alert({
+            cssClass: 'text-center',
+            buttons: [{
+              text: 'Ok',
+              type: 'button-assertive'
+            }],
+            template: 'Unable to send OTP'
+          });
+        }
+      });
+    }
+  })
   .controller('PlaylistCtrl', function ($scope, $stateParams) {});

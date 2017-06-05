@@ -1,0 +1,27 @@
+<ion-view>
+  <ion-content class="bg-login">
+    <div class="logo mt25">
+      <img src="img/logo.jpg" alt="Coach Mentor">
+    </div>
+    <div class="login-form padding-horizontal">
+      <form name="formName" ng-submit="submitOTP(userData);">
+        <div class="list">
+          <label class="item item-input ps-relative">
+            <input type="text" placeholder="Enter OTP" name="otp" ng-model="userData.otp" required>
+            <div class="error-msg" ng-show="formName.otp.$error.required && formName.otp.$dirty">OTP is required</div>
+          </label>
+
+          <div class="clearfix"></div>
+        </div>
+        <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
+          <button class="button button-assertive button-block">
+            Submit
+          </button>
+        </div>
+      </form>
+      <div class="text-center pr15 fr-pw">
+        <a href="" class="color-dark" ng-click="resendOtp()">Resend OTP</a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
