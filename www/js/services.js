@@ -38,6 +38,13 @@ angular.module('starter.services', [])
           data: signup
         }).success(callback);
       },
+      updateProfile: function (signup, callback) {
+        return $http({
+          url: adminurl + 'AppUser/save',
+          method: "POST",
+          data: signup
+        }).success(callback);
+      },
       getChangePassword: function (input, callback) {
         return $http({
           url: adminurl + 'AppUser/changePassword',

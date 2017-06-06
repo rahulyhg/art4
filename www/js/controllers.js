@@ -61,7 +61,7 @@ angular.module('starter.controllers', [])
       // $scope.profileData.bgimage = res[1];
       // $scope.profileData.bgimage = "58ece7f1fe67247ce2ad7b0d.jpg";
       console.log('$scope.profileData.bgimage', $scope.profileData.bgimage);
-      MyServices.signup($scope.profileData, function (data) {
+      MyServices.updateProfile($scope.profileData, function (data) {
         console.log($scope.profileData, data);
         // $scope.getMyProfile();
         MyServices.getprofile($.jStorage.get('userProfile')._id, function (data) {
@@ -268,7 +268,7 @@ angular.module('starter.controllers', [])
       MyServices.signup(userdata, function (data) {
         if (data.value === true) {
           console.log(data);
-          $.jStorage.set('userProfile', data.data);
+          $.jStorage.set('userProfileOTP', data.data);
           formName.name.$touched = false;
           formName.agency.$touched = false;
           formName.number.$touched = false;
@@ -832,7 +832,7 @@ angular.module('starter.controllers', [])
 
   .controller('OtpCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, MyServices) {
 
-    var userData = $.jStorage.get('userProfile');
+    var userData = $.jStorage.get('userProfileOTP');
     //To submit OTP to backend for verification
     $scope.submitOTP = function (value) {
       var dataObj = {
@@ -851,10 +851,10 @@ angular.module('starter.controllers', [])
               }],
               template: 'OTP validation failed'
             });
-            $.jStorage.flush('userProfile');
+            $.jStorage.flush('userProfileOTP');
             $state.go('login');
           } else {
-            $.jStorage.flush('userProfile');
+            $.jStorage.flush('userProfileOTP');
             $.jStorage.set('userProfile', data.data);
             $scope.myuserId = data.data._id;
             var alertPopup = $ionicPopup.alert({
@@ -871,7 +871,7 @@ angular.module('starter.controllers', [])
             });
           }
         } else {
-          $.jStorage.flush('userProfile');
+          $.jStorage.flush('userProfileOTP');
           var alertPopup = $ionicPopup.alert({
             cssClass: 'text-center',
             buttons: [{
