@@ -8,8 +8,8 @@
 
     <div class="bg-cover"  >
       <div class="bgs"  ng-click="selectImageBg();">
-        <img ng-src="{{imagetobeup}}" ng-if="!profileData.image" class="full-image">
-        <img ng-src="{{profileData.bgimage| uploadpath}}" ng-if="profileData.image"  class="full-image">
+        <img ng-src="{{imagetobeup}}" ng-if="!profileData.image">
+        <img ng-src="{{profileData.bgimage| uploadpath}}" ng-if="profileData.image">
       </div>
       <div class="pro-img" ng-click="selectImage();" >
         <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
@@ -21,7 +21,7 @@
       <div class="name display-inline ml-5">
         <h4 class="redcol">{{profileData.name}}</h4>
         <!-- <span class="redcol">{{profileData.email}}</span> -->
-        <p class="redcol">{{profileData.mobile}}</p>
+        <p class="redcol"><a href="tel:{{profileData.mobile}}"></a>{{profileData.mobile}}</p>
       </div>
       <!-- <div class="edit-btn">
         <i class="ln-edit2 edit-i color-assertive" ng-click="selectImageBg();"></i>

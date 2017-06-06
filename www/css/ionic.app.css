@@ -165,7 +165,7 @@ $dark:                            #444 !default;
   z-index: 999; }
   .profile-bg .bg-cover, .pr-bg .bg-cover {
     padding: 15px;
-    background-color: rgba(199, 32, 61, 0.22);
+    background-color: #f2bbbb;
     height: 75px; }
   .profile-bg .pro-sec, .pr-bg .pro-sec {
     width: 50px;
@@ -173,12 +173,12 @@ $dark:                            #444 !default;
     overflow: hidden;
     border-radius: 50%; }
   .profile-bg .pro-img, .pr-bg .pro-img {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     overflow: hidden;
     border-radius: 50%;
     position: absolute;
-    top: 3px;
+    top: 7px;
     left: 15px; }
   .profile-bg .edit-btn, .pr-bg .edit-btn {
     font-size: 25px;
@@ -435,13 +435,15 @@ input[type="date"]:valid:before {
 .bgs {
   height: 110px;
   width: 110px;
-  display: block;
   position: absolute;
-  top: 15px;
-  right: 15px;
-  z-index: 999; }
+  bottom: -55px;
+  right: 10px;
+  z-index: 999;
+  display: flex; }
   .bgs img {
-    height: 100%; }
+    max-width: 100%;
+    max-height: 100%;
+    align-self: center; }
 
 .bg-cover {
   position: relative; }
@@ -454,7 +456,7 @@ input[type="date"]:valid:before {
     background: white;
     width: 100%;
     z-index: 99;
-    padding-left: 10px; }
+    padding-left: 15px; }
 
 /*!
   Ionicons, v2.0.1
