@@ -276,6 +276,7 @@ angular.module('starter.controllers', [])
           formName.email.$touched = false;
           //$scope.showAlert();
           $scope.formData = {};
+          $scope.modals.hide();
           $state.go('otp');
         } else {
           var alertPopup = $ionicPopup.alert({
@@ -829,7 +830,7 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('OtpCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, MyServices) {
+  .controller('OtpCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, MyServices) {
 
     var userData = $.jStorage.get('userProfile');
     //To submit OTP to backend for verification
