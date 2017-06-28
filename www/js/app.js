@@ -132,6 +132,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
         }
       })
+       .state('tabs', {
+        cache: false,
+        url: '/tabs',
+        templateUrl: 'templates/tabs.html',
+        controller: 'TabsCtrl'
+      })
 
     // .state('app.single', {
     //   url: '/playlists/:playlistId',
@@ -144,6 +150,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
+    // $urlRouterProvider.otherwise('/tabs');
   })
   .filter('uploadpath', function () {
     return function (input, width, height, style) {

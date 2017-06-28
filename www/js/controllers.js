@@ -827,7 +827,7 @@ angular.module('starter.controllers', [])
       });
     };
 
-  })
+  }) 
 
 
   .controller('OtpCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, MyServices) {
@@ -907,4 +907,12 @@ angular.module('starter.controllers', [])
       });
     }
   })
+
+
+.controller('TabsCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, MyServices) {
+
+  //Variable declaration
+  $scope.tab = 1; //Default tab will be news tab
+})
+
   .controller('PlaylistCtrl', function ($scope, $stateParams) {});

@@ -458,6 +458,9 @@ input[type="date"]:valid:before {
     z-index: 99;
     padding-left: 15px; }
 
+.noPadding {
+  padding: 0px !important; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
