@@ -33,10 +33,21 @@
             <input type="text" placeholder="Contact Number" name="number" ng-model="formData.mobile" required>
             <div class="error-msg" ng-show="formName.number.$invalid && formName.number.$touched">Contact Number is required</div>
           </label>
-          <label class="item item-input ps-relative">
+                    <label class="item item-input ps-relative">
             <i class="ln-earth"></i>
-            <input type="text" placeholder="Website URL" name="web" ng-model="formData.website" required>
+                        <input type="text" placeholder="Website URL" name="web" ng-model="formData.website" required>
             <div class="error-msg" ng-show="formName.web.$invalid && formName.web.$touched">Website is required</div>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-unlock"></i>
+            <input type="password" placeholder="New Password" name="newpassword" ng-model="formData.password" required>
+            <div class="error-msg" ng-show="formData.password.$invalid && formData.password.$touched">Password is required</div>
+          </label>
+          <label class="item item-input ps-relative">
+            <i class="ln-unlock"></i>
+            <input type="password" placeholder="Confirm Password" name="confirmpassword" ng-model="formData.confirmpassword" required>
+            <div class="error-msg" ng-show="formData.confirmpassword.$invalid && formData.confirmpassword.$touched">Please Confirm Password</div>
+            <div class="error-msg" ng-show="formData.password != formData.confirmpassword">Password Mismatch</div>
           </label>
         </div>
         <div class="text-center mt35 padding-horizontal sb-btn">

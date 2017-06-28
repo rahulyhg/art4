@@ -213,11 +213,16 @@ angular.module('starter.controllers', [])
 
   // ====================================
 
-  .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicPopup, $state, $timeout) {
+  .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicPopup, $state) {
     console.log($.jStorage.get('userProfile'));
-    if ($.jStorage.get('userProfile')) {
-      $state.go('app.search-artist');
+     var getUserProfile = $.jStorage.get('userProfile');
+     console.log(getUserProfile.status)
+    if ((getUserProfile.status == true)) {
+      if ($.jStorage.get('userProfile')) {
+        $state.go('app.search-artist');
+      }
     }
+
     $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -292,8 +297,9 @@ angular.module('starter.controllers', [])
     }
     $scope.submitLoginForm = function (userdata) {
       MyServices.login(userdata, function (data) {
-        if (data.data.message == 'No Data Found') {
+        if ((data.data.message == 'No Data Found') || (data.data.status == false)) {
           $scope.showAlertNoData();
+          console.log("no data found");
         } else {
           $.jStorage.set('userProfile', data.data);
           $scope.myuserId = data.data._id;
@@ -827,7 +833,7 @@ angular.module('starter.controllers', [])
       });
     };
 
-  }) 
+  })
 
 
   .controller('OtpCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, MyServices) {
@@ -863,11 +869,11 @@ angular.module('starter.controllers', [])
                 text: 'Ok',
                 type: 'button-assertive'
               }],
-              template: 'Registration Successfull !!'
+              template: 'Please Wait for the Confirmation'
             });
 
             alertPopup.then(function (res) {
-              $state.go('app.profile');
+              $state.go('login');
             });
           }
         } else {
@@ -909,10 +915,10 @@ angular.module('starter.controllers', [])
   })
 
 
-.controller('TabsCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, MyServices) {
+  .controller('TabsCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, MyServices) {
 
-  //Variable declaration
-  $scope.tab = 1; //Default tab will be news tab
-})
+    //Variable declaration
+    $scope.tab = 1; //Default tab will be news tab
+  })
 
   .controller('PlaylistCtrl', function ($scope, $stateParams) {});
