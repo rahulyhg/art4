@@ -215,10 +215,11 @@ angular.module('starter.controllers', [])
 
   .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicPopup, $state) {
     console.log($.jStorage.get('userProfile'));
-     var getUserProfile = $.jStorage.get('userProfile');
-     console.log(getUserProfile.status)
-    if ((getUserProfile.status == true)) {
-      if ($.jStorage.get('userProfile')) {
+    var getUserProfile = $.jStorage.get('userProfile');
+    //  console.log(getUserProfile.status)
+
+    if ($.jStorage.get('userProfile')) {
+      if ((getUserProfile.status == true)) {
         $state.go('app.search-artist');
       }
     }
