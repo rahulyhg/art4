@@ -220,7 +220,7 @@ angular.module('starter.controllers', [])
 
     if ($.jStorage.get('userProfile')) {
       if ((getUserProfile.status == true)) {
-        $state.go('app.search-artist');
+        $state.go('app.profile');
       }
     }
 
@@ -304,7 +304,7 @@ angular.module('starter.controllers', [])
         } else {
           $.jStorage.set('userProfile', data.data);
           $scope.myuserId = data.data._id;
-          $state.go('app.search-artist')
+          $state.go('app.profile')
           console.log(data);
         }
 
