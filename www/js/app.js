@@ -45,16 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'AppCtrl'
       })
 
-      .state('app.search', {
-        cache: false,
-
-        url: '/search',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/search.html'
-          }
-        }
-      })
+   
       // .state('app.email', {
       //   url: '/email',
       //   views: {
@@ -99,13 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'LoginCtrl'
 
       })
-      .state('signup', {
-        cache: false,
-        url: '/signup',
-        templateUrl: 'templates/signup.html',
-        controller: 'SignupCtrl'
 
-      })
       .state('otp', {
         cache: false,
         url: '/otp',

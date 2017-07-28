@@ -355,12 +355,7 @@ angular.module('starter.controllers', [])
       });
     };
   })
-  .controller('SignupCtrl', function ($scope, MyServices) {
 
-  })
-  // .controller('ProfileCtrl', function($scope, MyServices, $stateParams) {
-  //
-  // })
 
   .controller('ChangePasswordCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $filter) {
     var dataToSend = {};
