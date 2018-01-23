@@ -84,23 +84,89 @@
     </div> -->
     <div>
       <form name="formName">
-        <div class="search mt60">
+        <!-- <div class="search mt60">
           <div class="list list-inset">
             <label class="item item-input">
               <i class="icon ln-magnifier placeholder-icon"></i>
-              <input type="text" placeholder="Search by Artist name" ng-model="searchData.artistName">
+              <input type="text" placeholder="Search by Artist name"  class="form-control" ng-model="keyword.keyword" ng-change="search(keyword)" name="keyword">
+             
+            </label>
+          </div> -->
+            <!-- <div class="" ng-if="keyword.keyword != '' && isText == true">
+              <div class="video ">
+                
+                      <div class="artist mt15">
+                        <div class="list">
+                          <div class="list ">
+                            <div class="ps-relative " ng-repeat="data in artist">
+                
+                              <div class="chck">
+                                <label class="checkbox">
+                                  <input type="checkbox" ng-change="addToWishlist(data,item.checked)"  ng-disabled="checked==limit && !item.checked" ng-model="item.checked">
+                                </label>
+                
+                              </div>
+                              <a class="item item-thumbnail-left f18" ng-class="{'pending-delete': item.checked}">
+                                <img ng-src="{{data.pic1 | uploadpath}}" ng-click="openModal()">
+                                <h2 class="color-dark ">{{data.artistName}}</h2>
+                                <div class="all-cat">
+                                  <div class="display-inline">
+                                    <p class="color-base"><i class="ln-map-marker"></i>
+                                      <span class="mid-align">{{data.artistCity}}</span></p>
+                                  </div> -->
+                                    
+                                  <!-- <div class="display-inline ml5" ng-click="showVideo(data.artistVideo)" >
+                                    <p class="color-base">
+                                      <i class="ln-film-play"></i>
+                                      <span class="mid-align">Video</span>
+                                      
+                                    </p>
+                                    
+                                  </div> -->
+                                 
+                                  <!-- </div>
+                                  <p class="color-base">
+                                    <i class="ln-mic2"></i>
+                                    <span class="mid-align">{{data.talent}}</span>
+                                  </p>
+                
+                              
+                              </a>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class= "no-artist" ng-if="'artist.length==0'">
+                            No Artist Found.
+                          </div>
+                      </div>
+                     
+                    
+        </div>
+       
+                       </div>     -->
+                        
+                       
+        
+        <div class="search mt60" ng-if="keyword.keyword == '' || !keyword.keyword || keyword.keyword == null">
+          <div class="list ">
+            <label class="item-input txtcolor">
+              
+              <label class="" for="">Please select all the fields.</label>
             </label>
           </div>
         </div>
-        <div class="login-form padding-horizontal" ng-init="searchData={}">
+        <div class="login-form padding-horizontal" ng-if="keyword.keyword == '' || !keyword.keyword || keyword.keyword == null">
 
-          <div class="list">
-
-            <label class="item item-input ps-relative">
+          <div class="list display" >
+           
+            <label class="item item-input ps-relative item-select sl-sft display">
               <i class="ln-calendar3"></i>
-              <input type="date" placeholder="Event Date" name="date" required class="m">
-              <div class="error-msg" ng-show="formName.date.$error.required && formName.date.$dirty">date is required</div>
+              <input type="date" placeholder="Event Date" ng-model="date" name= "Date"  class="m" required >
+               <div class="error-msg" ng-if="formName.Date.$error.required && formName.Date.$touched">Date is required</div> 
             </label>
+          
+            
             <!-- <label class="item item-input ps-relative item-select sl-sft">
               <i class="ln-calendar3"></i>
 
@@ -118,15 +184,16 @@
 
               <div class="input-label">
                 Event City
+               
               </div>
-              <select class="mt15" ng-model="searchData.artistCity">
+              <select class="mt15" ng-model="searchData.artistCity" name= "city" required>
                 <option value="" class selected>Select</option>
                 <option ng-repeat="data in getArtist10.getArtistCity">{{data._id}}</option>
                 <!-- <option selected>Delhi</option>
                 <option>Pune</option> -->
               </select>
 
-              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+               <div class="error-msg" ng-if="formName.city.$error.required && formName.city.$touched">City is required</div> 
             </label>
             <label class="item item-input ps-relative item-select sl-sft" ng-hide="searchData.artistName.length>0">
               <i class="ln-medal"></i>
@@ -134,7 +201,7 @@
               <div class="input-label">
                 Talent
               </div>
-              <select class="mt15"  ng-model="searchData.talent">
+              <select class="mt15"  ng-model="searchData.talent" name="talent" required>
                 <option value="" class selected>Select</option>
 
                 <option ng-repeat="data in getArtist10.getTalent">{{data._id}}</option>
@@ -142,7 +209,7 @@
                 <option>Sport</option> -->
               </select>
 
-              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+               <div class="error-msg" ng-show="formName.talent.$error.required && formName.talent.$touched">Talent is required</div> 
             </label>
             <label class="item item-input ps-relative item-select sl-sft" ng-hide="searchData.artistName.length>0">
               <i class="ln-playlist"></i>
@@ -150,7 +217,7 @@
               <div class="input-label">
                 Genre
               </div>
-              <select class="mt15"  ng-model="searchData.artistGenre">
+              <select class="mt15"  ng-model="searchData.artistGenre" name="genre" required>
                 <option value="" class selected>Select</option>
 
                 <option ng-repeat="data in getArtist10.getArtistGenre">{{data._id}}</option>
@@ -159,7 +226,7 @@
                 <option>Music</option> -->
               </select>
 
-              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+               <div class="error-msg" ng-show="formName.genre.$error.required && formName.genre.$touched">Genre is required</div> 
             </label>
             <label class="item item-input ps-relative item-select sl-sft" ng-hide="searchData.artistName.length>0">
               <i class="ln-cash"></i>
@@ -167,7 +234,7 @@
               <div class="input-label">
                 Budget
               </div>
-              <select class="mt15" ng-model="searchData.budget">
+              <select class="mt15" ng-model="searchData.budget" name="budget" required>
                 <option value="" class selected>Select</option>
 
                 <option ng-repeat="data in getArtist10.getBudget">{{data._id}}</option>
@@ -176,18 +243,24 @@
                 <option>20000</option> -->
               </select>
 
-              <!-- <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Password is required</div> -->
+               <div class="error-msg" ng-show="formName.budget.$error.required && formName.budget.$touched">Budget is required</div> 
             </label>
 
           </div>
+          
           <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
-            <button class="button button-assertive button-block" ui-sref="app.artist({search:searchData.artistName,city:searchData.artistCity,talent:searchData.talent,genre:searchData.artistGenre,budget:searchData.budget})" >
+            <button ng-disabled="formName.$invalid" type="submit" class="button button-assertive button-block" ui-sref="app.artist({search:searchData.artistName,city:searchData.artistCity,talent:searchData.talent,genre:searchData.artistGenre,budget:searchData.budget})"  >
               Submit
             </button>
           </div>
-
+</div>
       </form>
       </div>
-    </div>
+    
   </ion-content>
+  <div class="bar bar-footer" ng-if="keyword.keyword != ''">
+      <button  type="submit" class="button button-assertive button-block margin0" ui-sref='app.mylist'  >
+        Submit
+      </button>
+    </div>
 </ion-view>

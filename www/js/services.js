@@ -1,8 +1,8 @@
-// var adminurl = "http://192.168.100.108/api/";
+ var adminurl = "http://192.168.1.133/api/";
 // var adminurl = "http://192.168.100.104/api/";
 // var adminurl = "http://192.168.0.114/api/";
 // var adminurl = "http://192.168.0.110/api/";
-var adminurl = "http://exchange.wohlig.co.in/api/";
+// var adminurl = "http://exchange.wohlig.co.in/api/";
 // var adminurl = "http://localhost:80/api/";
 var imgurl = adminurl + "upload/";
 var imgpath = imgurl + "readFile";
@@ -138,6 +138,39 @@ angular.module('starter.services', [])
       resendOTP: function (data, callback) {
         return $http({
           url: adminurl + 'AppUser/resendOTP',
+          method: "POST",
+          data: data
+        }).success(callback);
+      },
+
+      addToList: function (data, callback) {
+        return $http({
+          url: adminurl + 'AppUser/addToList2',
+          method: "POST",
+          data: data
+        }).success(callback);
+      },
+
+      search: function (data, callback) {
+        data.page=1;
+        return $http({
+          url: adminurl + 'Excel/artistSearch',
+          method: "POST",
+          data: data
+        }).success(callback);
+      },
+      
+      Otp: function (data, callback) {
+        return $http({
+          url: adminurl + 'AppUser/finalOtp',
+          method: "POST",
+          data: data
+        }).success(callback);
+      },
+
+      submitOtp: function (data, callback) {
+        return $http({
+          url: adminurl + 'AppUser/userVerifyOTP',
           method: "POST",
           data: data
         }).success(callback);

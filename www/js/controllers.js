@@ -35,7 +35,7 @@ angular.module('starter.controllers', [])
 
 
   // ===============================
-  .controller('ProfileCtrl', function ($scope, $stateParams, $ionicPopup, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera, $filter, $state) {
+  .controller('ProfileCtrl', function ($scope, $stateParams, $state, $ionicPopup, $cordovaFileTransfer, $ionicLoading, $cordovaImagePicker, MyServices, $cordovaCamera, $filter, $state) {
     // =============ProfilectrlCode====================
     var getUserProfile = $.jStorage.get('userProfile');
     if ($.jStorage.get('userProfile')) {
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
             });
 
             alertPopup.then(function (res) {
-
+              $state.go('app.search-artist')
             });
 
           }
@@ -214,6 +214,7 @@ angular.module('starter.controllers', [])
   // ====================================
 
   .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicPopup, $state) {
+   
     console.log($.jStorage.get('userProfile'));
     var getUserProfile = $.jStorage.get('userProfile');
     //  console.log(getUserProfile.status)
@@ -414,8 +415,34 @@ angular.module('starter.controllers', [])
       });
     };
   })
-  .controller('SearchArtistCtrl', function ($scope, MyServices, $filter, $state) {
-
+  .controller('SearchArtistCtrl', function ($scope, MyServices, $ionicPopup, $ionicModal, $timeout, $filter, $state, $stateParams) {
+    $scope.artistList = {}
+    $scope.getListOfArtist = [];
+    $scope.getArtist = [];
+    $scope.otp = {}
+    $scope.otpToSend = '';
+    $scope.resend = true;
+    $scope.getUserDetail = $.jStorage.get('userProfile'); //TO get user details
+    var _id = $scope.getUserDetail._id
+    $scope.otp._id = $scope.getUserDetail._id;
+    $scope.artistList._id = _id
+    $scope.artistList.shortList = []
+ 
+  
+    // $scope.artistList.shortList = $scope.getListOfArtist
+console.log("hellocheck",$scope.getArtist)
+    //Get data from state param to get artist list from backend;
+    var dataToSend = {
+      artistName: $stateParams.search,
+      artistCity: $stateParams.city,
+      talent: $stateParams.talent,
+      artistGenre: $stateParams.genre,
+      budget: $stateParams.budget,
+    };
+    $scope.playerVars = {
+    controls: 0,
+    autoplay: 1
+};
     $scope.getUser = $.jStorage.get('userProfile');
     console.log('$scope.getUser', $scope.getUser);
 
@@ -437,9 +464,173 @@ angular.module('starter.controllers', [])
       });
 
     }
+    $scope.keyword = {
+      'keyword':''
+    };
+    $scope.search = function (value) {
+      // var length = 0;
+      $scope.companyCategory = [];
+      $scope.isText = true;
+      console.log("searchvalue",value)
+      if (value != "") {
+          console.log("searchvalue1",value)
+          
+          MyServices.search(value, function (data) {
+              console.log("searchvalue2",value,data)
+              if (data.value) {
+                  console.log("Event data", data.data.results);
+                  $scope.artist = data.data.results;
+                  
+                  console.log("close",$scope.artist);
+              } else {
+                  console.log("Event data false");
+              }
+          // else{
+          //     console.log("not working")
+          // }
+          });
+      }
+  };
 
+
+  $scope.limit = 5;
+  $scope.checked = 0;
+  $scope.addToWishlist = function (data, flag) {
+    console.log("helloflag",flag)
+    if (flag == true) {
+      $scope.checked++;
+      var artistObj = _.find($scope.getListOfArtist, function (o) {
+        // console.log("check",$scope.getListOfArtist)
+        if (data._id === o._id) {
+          return o;
+        }
+      });
+
+     
+      
+      if (artistObj === undefined) {
+        $scope.getListOfArtist.push(data);
+       
+      }
+    } else {
+      $scope.checked--;
+      var artistObj = _.find($scope.getListOfArtist, function (o) {
+        if (data._id === o._id) {
+          return o;
+        }
+      });
+      _.pull($scope.getListOfArtist,artistObj );
+      console.log("pullnotworking",$scope.getListOfArtist)
+      
+   
+    }
+    $scope.getUserDetail.getListOfArtist = $scope.getListOfArtist
+    $.jStorage.set('userProfile', $scope.getUserDetail);
+    console.log("check",$scope.getListOfArtist)
+  };
+
+ 
+
+    $ionicModal.fromTemplateUrl('templates/modal/generateOtp.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function () {
+    $scope.modal.show();
+    _.each($scope.getListOfArtist,function(val){
+      console.log("helloids",val)
+      $scope.artistList.shortList.push({
+        artist:val._id
+      })
+      console.log("artistid",$scope.artistList)
+    })
+    MyServices.Otp($scope.otp, function (data){
+      console.log("otpplease",data)
+    });
+  };
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+
+  $scope.submitOtp=function(){
+    console.log("almostder",$scope.artistList)
+MyServices.submitOtp($scope.artistList, function (data){
+console.log("submitOtp",data)
+if(data.value=true){
+  var alertPopup = $ionicPopup.alert({
+    cssClass: 'text-center',
+    buttons: [{
+      text: 'Ok',
+      type: 'button-assertive',
+      onTap: function (e) {
+                          $state.go('app.profile');
+                          $scope.closeModal()
+                      }
+    }],
+    template: 'SMS Sent Successfully!!!'
+  });
+}
+})
+  }
+
+  $scope.resendOtp=function(){
+    $scope.resend = false;
+    MyServices.Otp($scope.otp, function (data){
+      console.log("otpplease",data)
+      $timeout(function () {
+        $scope.resend = true;
+      }, 10000);
+    });
+  }
+
+  var init = function () {
+    return $ionicModal.fromTemplateUrl('templates/modal/video.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal;
+
+    });
+  };
+
+  $scope.video = {};
+  $scope.showVideo = function (url) {
+    init().then(function () {
+      $scope.modal.show();
+    });
+    $scope.url=url;
+    if(url)
+    var link = url.split("=");
+    if (link) {
+      $scope.video.url = link[1] + "?autoplay=1";
+    }else{
+      console.log(url);
+      $scope.video.url = url + "?autoplay=1";
+    }
+  };
+
+  $scope.closeVideo = function () {
+   
+   
+  };
 
   })
+  // $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
+  //   scope: $scope,
+  //   animation: 'slide-in-up'
+  // }).then(function (modal) {
+  //   $scope.modal = modal;
+  // });
+  // $scope.openModal = function () {
+  //   $scope.modal.show();
+  // };
+  // $scope.closeModal = function () {
+  //   $scope.modal.hide();
+  // };
+
+ 
 
   // .controller('ArtistCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
   //   $scope.getListOfArtist = [];
@@ -661,11 +852,19 @@ angular.module('starter.controllers', [])
   // })
 
   .controller('ArtistCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, $timeout, $ionicLoading, $stateParams, $state, MyServices, $filter, $ionicModal) {
+    $scope.artistList = {}
     $scope.getListOfArtist = [];
     $scope.getArtist = [];
-
+    $scope.otp = {}
+    $scope.otpToSend = '';
+    $scope.resend = true;
     $scope.getUserDetail = $.jStorage.get('userProfile'); //TO get user details
-
+    var _id = $scope.getUserDetail._id
+    $scope.otp._id = $scope.getUserDetail._id;
+    $scope.artistList._id = _id
+    $scope.artistList.shortList = []
+    // $scope.artistList.shortList = $scope.getListOfArtist
+console.log("hellocheck",$scope.getArtist)
     //Get data from state param to get artist list from backend;
     var dataToSend = {
       artistName: $stateParams.search,
@@ -679,19 +878,33 @@ angular.module('starter.controllers', [])
     $scope.showArtistList = function () {
       MyServices.filterResult(dataToSend, function (data) {
         $scope.getArtist = data.data;
-        // console.log('$scope.getArtist', $scope.getArtist[0]);
-
+        console.log('$scope.getArtist', $scope.getArtist);
+       if ($scope.getArtist.length == 0){
+         var alertPopup = $ionicPopup.alert({
+          cssClass: 'text-center',
+          buttons: [{
+            text: 'Ok',
+            type: 'button-assertive',
+            onTap: function (e) {
+                                $state.go("app.search-artist");
+                            }
+          }],
+          template: 'Bummer! The artist you’re looking for has not been born yet! Try looking for another one!'
+        });
+       }else{
+         console.log("artist available")
+       }
       });
     };
 
     $scope.showArtistList();
 
-    $ionicModal.fromTemplateUrl('templates/modal/image.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function (modal) {
-      $scope.modal = modal;
-    });
+    // $ionicModal.fromTemplateUrl('templates/modal/image.html', {
+    //   scope: $scope,
+    //   animation: 'slide-in-up'
+    // }).then(function (modal) {
+    //   $scope.modal = modal;
+    // });
     $scope.searchText = "";
 
     $scope.openModal = function () {
@@ -736,15 +949,22 @@ angular.module('starter.controllers', [])
 
     //List of selected artist
     $scope.addToWishlist = function (data, flag) {
+      console.log("helloflag",flag)
       if (flag == true) {
         $scope.checked++;
         var artistObj = _.find($scope.getListOfArtist, function (o) {
+          // console.log("check",$scope.getListOfArtist)
           if (data._id === o._id) {
             return o;
           }
         });
+  
+       
+        
         if (artistObj === undefined) {
           $scope.getListOfArtist.push(data);
+          
+          console.log("check",$scope.getListOfArtist)
         }
       } else {
         $scope.checked--;
@@ -753,12 +973,89 @@ angular.module('starter.controllers', [])
             return o;
           }
         });
-        if (artistObj !== undefined) {
-          _.pull($scope.getListOfArtist, artistObj);
-        }
+        _.pull($scope.getListOfArtist,artistObj );
+        console.log("pullnotworking",$scope.getListOfArtist)
+       
+       
       }
-
+    
     };
+
+    $ionicModal.fromTemplateUrl('templates/modal/generateOtp.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function () {
+      $scope.modal.show();
+      _.each($scope.getListOfArtist,function(val){
+        console.log("helloids",val)
+        $scope.artistList.shortList.push({
+          artist:val._id
+        })
+        console.log("artistid",$scope.artistList)
+      })
+      MyServices.Otp($scope.otp, function (data){
+        console.log("otpplease",data)
+      });
+    };
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
+  
+    $scope.submitOtp=function(){
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+      console.log("almostder",$scope.artistList)
+  MyServices.submitOtp($scope.artistList, function (data){
+   
+  console.log("submitOtp",data)
+  if(data.value == true){
+    $ionicLoading.hide()
+    var alertPopup = $ionicPopup.alert({
+      cssClass: 'text-center',
+      buttons: [{
+        text: 'Ok',
+        type: 'button-assertive',
+        onTap: function (e) {
+                            $scope.closeModal()
+                            $state.go('app.search-artist')
+                        }
+      }],
+      template: 'Thank You!!!'
+    });
+  }else{
+    $ionicLoading.hide()
+    var alertPopup = $ionicPopup.alert({
+      cssClass: 'text-center',
+      buttons: [{
+        text: 'Ok',
+        type: 'button-assertive',
+        onTap: function (e) {
+                           
+                        }
+      }],
+      template: 'Incorrect Otp!!!'
+    });
+  }
+  })
+    }
+  
+    $scope.resendOtp=function(){
+      $scope.resend = false;
+      MyServices.Otp($scope.otp, function (data){
+        console.log("otpplease",data)
+        $timeout(function () {
+          $scope.resend = true;
+        }, 10000);
+      });
+    }
 
     //to go to my list tab
     $scope.submitOnMyList = function () {
@@ -778,18 +1075,26 @@ angular.module('starter.controllers', [])
       });
       if (artistObj !== undefined) {
         _.pull($scope.getListOfArtist, artistObj);
+        // console.log("check",$scope.getListOfArtist)
       }
     };
+
+    
 
     //To send profile to backend
     $scope.sendProfile = function () {
       if (!_.isEmpty($scope.getListOfArtist)) {
+        console.log("findid",$scope.getUserDetail._id)
+   MyServices.addToList($scope.artistList, function(data){
+     console.log("heyyssp",$scope.artistList);
+        })     
         MyServices.sendProfileToBackend($scope.getUserDetail._id, function (data) {
-          // console.log(data);
+           console.log(data);
           if (data.value == true) {
 
             $scope.showSendListAlert();
             $scope.getListOfArtist = [];
+            // console.log("check",$scope.getListOfArtist)
           }
         })
       } else {
@@ -826,6 +1131,57 @@ angular.module('starter.controllers', [])
           // $scope.showMyList();
           $state.go('app.search-artist');
         })
+      });
+    };
+
+    var init = function () {
+      return $ionicModal.fromTemplateUrl('templates/modal/video.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function (modal) {
+        $scope.modal = modal;
+
+      });
+    };
+
+    $scope.video = {};
+    
+    $scope.showVideo = function (url) {
+      
+      init().then(function () {
+        $scope.modal.show();
+      });
+      $scope.url=url;
+      if(url)
+      var link = url.split("=");
+      console.log('hellourl',link);
+      if (link) {
+        $scope.video.url = link[1] + "?autoplay=1&controls=0&showinfo=0";
+      }else{
+        console.log(url);
+        $scope.video.url = url + "?autoplay=1&controls=0&showinfo=0";
+      }
+    };
+
+    $scope.closeVideo = function () {
+      var alertPopup = $ionicPopup.alert({
+        cssClass: 'text-center',
+        buttons: [{
+          text: 'YES',
+          type: 'button-assertive',
+          onTap: function (e) {
+            $scope.modal.remove()
+            .then(function () {
+              $scope.modal = null;
+            });
+                          }
+        },{
+          text: 'No',
+          type: 'button-assertive',
+          onTap: function (e) {
+                          }
+        }],
+        template: 'Are you sure you want to exit?'
       });
     };
 
@@ -915,6 +1271,158 @@ angular.module('starter.controllers', [])
 
     //Variable declaration
     $scope.tab = 1; //Default tab will be news tab
+  })
+
+  .controller('MylistCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $ionicLoading, MyServices, $timeout,$stateParams) {
+    $scope.artistList = {}
+    $scope.otprequest = {}
+    $scope.artistList = {}
+    $scope.otp={}
+    $scope.resend = true;
+    $scope.artistList.shortList = []
+    $scope.getUserDetail = $.jStorage.get('userProfile'); 
+    var _id = $scope.getUserDetail._id
+    $scope.otp._id = $scope.getUserDetail._id;
+    // $scope.otp._id = $scope.getUserDetail._id;
+     $scope.artistList._id = _id
+   
+     var init = function () {
+      return $ionicModal.fromTemplateUrl('templates/modal/video.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function (modal) {
+        $scope.modal = modal;
+  
+      });
+    };
+  
+
+     $scope.video = {};
+     $scope.showVideo = function (url) {
+       init().then(function () {
+         $scope.modal.show();
+       });
+       $scope.url=url;
+       if(url)
+       var link = url.split("=");
+       if (link) {
+         $scope.video.url = link[1] + "?autoplay=1";
+       }else{
+         console.log(url);
+         $scope.video.url = url + "?autoplay=1";
+       }
+     };
+   
+     $scope.closeVideo = function () {
+       $scope.modal.remove()
+         .then(function () {
+           $scope.modal = null;
+         });
+     };
+   
+
+    console.log("hellostorage", $scope.getUserDetail)
+    $scope.getArtistList = []
+    $scope
+     $scope.otprequest._id = $scope.getUserDetail._id
+    $scope.getArtistList = $scope.getUserDetail.getListOfArtist
+    console.log("getartist", $scope.getArtistList)
+    $scope.removeWishlist = function (value) {
+      console.log("valuemyboy", value)
+            var artistObj = _.find($scope.getArtistList, function (o) {
+              if (value === o._id) {
+                return o;
+              }
+            });
+         
+              _.pull($scope.getArtistList, artistObj);
+              // console.log("check",$scope.getListOfArtist)
+           
+          };
+    $scope.goBackHandler = function () {
+      // console.log("hi");
+      window.history.back(); //This works
+    }
+    $ionicModal.fromTemplateUrl('templates/modal/generateOtp.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function () {
+      $scope.modal.show();
+      _.each($scope.getArtistList,function(val){
+        console.log("helloids",val)
+        $scope.artistList.shortList.push({
+          artist:val._id
+        })
+        console.log("artistid",$scope.artistList)
+      })
+      MyServices.Otp($scope.otprequest, function (data){
+        console.log("otpplease",data)
+      });
+    };
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
+  
+    $scope.submitOtp=function(){
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+      console.log("almostder",$scope.artistList)
+  MyServices.submitOtp($scope.artistList, function (data){
+   
+  console.log("submitOtp",data)
+  if(data.value==true){
+    $ionicLoading.hide()
+    // $scope.getListOfArtist = []
+    $scope.getUserDetail.getListOfArtist = []
+    $.jStorage.set('userProfile', $scope.getUserDetail);
+    // $.jStorage.userProfile..flush();
+    var alertPopup = $ionicPopup.alert({
+      cssClass: 'text-center',
+      buttons: [{
+        text: 'Ok',
+        type: 'button-assertive',
+        onTap: function (e) {
+                           $state.go('app.search-artist')
+                            $scope.modal.hide();
+                        }
+      }],
+      template: 'Thank You!!!'
+    });
+  }else{
+    $ionicLoading.hide()
+    var alertPopup = $ionicPopup.alert({
+      cssClass: 'text-center',
+      buttons: [{
+        text: 'Ok',
+        type: 'button-assertive',
+        onTap: function (e) {
+
+                        }
+      }],
+      template: 'Incorrect Otp!!!'
+    });
+  }
+  })
+    }
+  
+    $scope.resendOtp=function(){
+      $scope.resend = false;
+      MyServices.Otp($scope.otp, function (data){
+        console.log("otpplease",data)
+        $timeout(function () {
+          $scope.resend = true;
+        }, 10000);
+      });
+    }
+  
   })
 
   .controller('PlaylistCtrl', function ($scope, $stateParams) {});

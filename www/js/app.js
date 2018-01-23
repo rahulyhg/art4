@@ -107,6 +107,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
         }
       })
+
+      .state('app.mylist', {
+        cache: false,
+        url: '/mylist',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/mylist.html',
+            controller: 'MylistCtrl'
+          }
+        }
+      })
+
       .state('app.search-artist', {
         cache: false,
         url: '/search-artist',
@@ -137,6 +149,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $urlRouterProvider.otherwise('/login');
     // $urlRouterProvider.otherwise('/tabs');
   })
+
+.directive('youtube', function ($sce) {
+	return {
+		restrict: 'EA',
+		scope: {
+			code: '='
+		},
+		replace: true,
+		template: '<iframe id="popup-youtube-player" style="overflow:hidden;height:auto;width:100%" width="100%" height="229" src="{{url}}" frameborder="0" allowscriptaccess="always"></iframe>',
+		link: function (scope) {
+			scope.$watch('code', function (newVal) {
+				if (newVal) {
+					scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
+				}
+			});
+		}
+	};
+})
+
   .filter('uploadpath', function () {
     return function (input, width, height, style) {
       // console.log('input', input);
@@ -158,4 +189,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     };
-  });
+  })
+
+  .directive("limitTo", [function () {
+    return {
+      restrict: "A",
+      link: function (scope, elem, attrs) {
+        var limit = parseInt(attrs.limitTo);
+        angular.element(elem).on("keypress", function (e) {
+          if (this.value.length == limit) e.preventDefault();
+        });
+      }
+    }
+  }]);

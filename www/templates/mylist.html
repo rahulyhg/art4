@@ -1,0 +1,116 @@
+<ion-view hide-nav-bar="true" view-title="Artist">
+        <div class="">
+                <div class="tabs-striped tabs-background-assertive tabs-color-light tabs-top ">
+                  <div class="tabs c-tab top0">
+                    <a class="backarrow" ng-click="goBackHandler();">
+                      <i class="ion ion-chevron-left"></i>
+                    </a>
+                    <a class="header" >
+                      <span>My List</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="fixed-div">
+                  <div class="profile-bg">
+            
+            
+                    <!--
+                ng-style="{'background':'url('+userdata.bgimage+')'}"
+                <div class="profile-bg" ng-style="{'background-image':'url({{userdata.bgimage|uploadpath}})'}"> -->
+            
+                    <div class="bg-cover">
+                      <div class="bgs">
+                        <img ng-src="{{imagetobeup}}" ng-show="!getUserDetail.image" class="full-image">
+                        <img ng-src="{{getUserDetail.bgimage | uploadpath}}" ng-show="getUserDetail.image" class="full-image">
+                      </div>
+                      <div class="pro-img">
+                        <!-- <img ng-src="{{imagetobeup}}" alt=""> -->
+                        <img ng-src="{{imagetobeup}}" ng-show="!getUserDetail.image" class="full-image">
+                        <img ng-src="{{getUserDetail.image | uploadpath}}" ng-show="getUserDetail.image" class="full-image">
+                        <!-- <div class="elogo" ng-show="!userdata.image">Edit Logo</div> -->
+                        <!-- <img src="img/profile.png" alt=""> -->
+                      </div>
+                      <div class="name display-inline ml-5">
+                        <h4 class="redcol">{{getUserDetail.name}}</h4>
+                        <!-- <span class="redcol">{{userdata.email}}</span> -->
+                        <p class="redcol">{{getUserDetail.mobile}}</p>
+                      </div>
+                      <!-- <div class="edit-btn">
+                      <i class="ln-edit2 edit-i color-assertive" ng-click="selectImageBg();"></i>
+                      <p class="" >Edit Company Logo</p>
+                    </div>
+            
+                    <div class="edit-btn edt-2" ng-click="selectImage();" ng-show="!userdata.image">
+                      <i class="ln-photo color-assertive"></i>
+                    </div> -->
+                    </div>
+            
+                  </div>
+                </div>
+                <!-- <div class="fixed-search">
+                  <div class="search" ng-show="tab=='new'">
+                    <div class="list list-inset">
+                      <label class="item item-input">
+                              <i class="icon ln-magnifier placeholder-icon"></i>
+            
+                              <input type="text" placeholder="Search by Name, City" ng-model="searchText" value="searchText">
+                            </label>
+                    </div>
+                  </div>
+                  
+                </div> -->
+                <div class="h2-tg fixed-search" >
+                  <h4 class="">
+                    We recommend selecting 2 Artists*
+                  </h4>
+                </div>
+            
+              </div>
+              <ion-content>
+                    <div class="video mt-200" >
+                            
+                             <div class="artist mt15">
+                               <div class="list">
+                                 <div class="list ">
+                                   <div class="ps-relative" ng-repeat="data in getArtistList">
+                                     <div class="chck">
+                                       <a class="del-btn"><i class="ln-trash2" ng-click="removeWishlist(data._id)"></i></a>
+                                     </div>
+                                     <a class="item item-thumbnail-left f18">
+                                       <img ng-src="{{data.pic1 | uploadpath}}" ng-click="openModal()">
+                                       <h2 class="color-dark">{{data.artistName}}</h2>
+                                       <div class="all-cat">
+                                         <div class="display-inline">
+                                           <p class="color-base"><i class="ln-map-marker"></i>{{data.artistCity}}</p>
+                                         </div>
+                                         <div class="display-inline ml5" ng-click="showVideo(data.artistVideo)" >
+                                          <p class="color-base">
+                                            <i class="ln-film-play"></i>
+                                            <span class="mid-align">Video</span>
+                                            
+                                          </p>
+                                          
+                                        </div>
+                                         <p class="color-base"><i class="ln-mic2"></i>{{data.talent}}</p>
+                       
+                                       </div>
+                                     </a>
+                                   </div>
+                                 
+                                 </div>
+                               </div>
+                             </div>
+                             <!-- <div class="text-center mt35 padding-horizontal sb-btn">
+                       
+                             </div> -->
+                           </div>
+              </ion-content>
+              <div class="bar bar-footer">
+                    <button class="button button-assertive button-block margin0"  ng-click="openModal()">
+                      Send Profile &amp; Costs
+                    </button>
+                    <!-- <button class="button button-assertive button-block margin0" ng-click="sendProfile()" >
+                      Send Profile
+                    </button> -->
+                  </div>
+</ion-view>

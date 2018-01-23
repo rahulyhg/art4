@@ -1,3 +1,4 @@
+
 <ion-view view-title="Profile">
   <div class="profile-bg" >
 
@@ -47,10 +48,10 @@
             <input type="text" placeholder="Full name" name="email" ng-model="profileData.name" required>
             <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Name is required</div>
           </label>
-          <label class="item item-input ps-relative">
-            <i class="ln-envelope"></i>
-            <input type="email" placeholder="Email" name="email" ng-model="profileData.email" required>
-            <div class="error-msg" ng-show="formName.email.$error.required && formName.email.$dirty">Email is required</div>
+          <label class="item item-input ps-relative colordisable">
+            <i class="ln-envelope "></i>
+            <input class="colordisable" type="email" placeholder="Email" name="email" ng-model="profileData.email" required disabled>
+            <div class="error-msg colordisable" ng-show="formName.email.$error.required && formName.email.$dirty">Email is required</div>
           </label>
           <label class="item item-input ps-relative">
             <i class="ln-iphone"></i>
@@ -63,13 +64,31 @@
             <div class="error-msg" ng-show="formName.web.$error.required && formName.web.$dirty">Website is required</div>
           </label>
 
+          <label class="item item-input ps-relative item-select sl-sft">
+               <i class="ln-briefcase"></i> 
+
+               <div class="input-label color">
+                Query Type*
+               
+              </div> 
+              <select class="mt15 color" ng-model="profileData.meeting" name= "meeting" required>
+                <option value="" class="color" selected></option>
+                <option >Client Meeting</option>
+              <option >Pitch Research</option>
+                <option>General Inquiry</option>
+              </select>
+
+               <div class="error-msg" ng-if="formName.meeting.$error.required && formName.meeting.$touched">Please Select</div> 
+            </label>
+
         </div>
-        <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all">
-          <button class="button button-assertive button-block">
+        <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all" >
+          <button class="button button-assertive button-block" ng-disabled="formName.$invalid">
             Submit
           </button>
         </div>
 
     </form>
   </ion-content>
+  
 </ion-view>

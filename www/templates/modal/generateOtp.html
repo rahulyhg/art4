@@ -1,0 +1,36 @@
+<ion-modal-view>
+        <ion-header-bar class="bar-assertive bar bar-header">
+                <h1 class="title">OTP</h1>
+                <span class="right-badge-modal ln ln-cross ln-fit" ng-click="closeModal()">
+                </span>
+              </ion-header-bar>
+    <ion-content class="bg-login">
+        <div class="logo mt25 modalimgae" ng-if="getUserDetail.bgimage || getUserDetail.bgimage !='' || getUserDetail.bgimage != null">
+            <img ng-src="{{getUserDetail.bgimage | uploadpath}}" alt="Coach Mentor">
+          </div>
+      <div class="logo mt25 modalimgae" ng-if="!getUserDetail.bgimage || getUserDetail.bgimage == '' || getUserDetail.bgimage == null">
+        <img src="img/logo.jpg" alt="Coach Mentor">
+      </div>
+      <div class="login-form padding-horizontal">
+        <form name="formName">
+          <div class="list">
+            <label class="item item-input ps-relative">
+              <input type="text" limit-to="4" placeholder="Enter OTP" name="otp" ng-model="artistList.otp" required>
+              <div class="error-msg" ng-show="formName.otp.$invalid && formName.otp.$touched">OTP is required</div>
+            </label>
+  
+            <div class="clearfix"></div>
+          </div>
+          <div class="text-center mt30 padding-horizontal sb-btn mt35 btn-all"  ng-click="submitOtp()">
+            <button class="button button-assertive button-block"  ng-disabled="formName.$invalid">
+              Submit
+            </button>
+          </div>
+        </form>
+        <div class="text-center pr15 fr-pw">
+          <a href="" class="color-dark" ng-if="resend" ng-click="resendOtp()">Resend OTP</a>
+        </div>
+      </div>
+    </ion-content>
+</ion-modal-view>
+  

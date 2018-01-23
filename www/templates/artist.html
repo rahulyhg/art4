@@ -98,19 +98,25 @@
                     <p class="color-base"><i class="ln-map-marker"></i>
                       <span class="mid-align">{{data.artistCity}}</span></p>
                   </div>
-                  <div class="display-inline ml5">
+                    
+                  <div class="display-inline ml5" ng-click="showVideo(data.artistVideo)" >
                     <p class="color-base">
                       <i class="ln-film-play"></i>
                       <span class="mid-align">Video</span>
+                      
                     </p>
+                    
+                  </div>
+                 
                   </div>
                   <p class="color-base">
                     <i class="ln-mic2"></i>
                     <span class="mid-align">{{data.talent}}</span>
                   </p>
 
-                </div>
+              
               </a>
+            </div>
             </div>
             <!-- <div class="ps-relative">
               <div class="chck">
@@ -245,7 +251,7 @@
     </button>
   </div>
   <div class="bar bar-footer" ng-show="tab=='already'">
-    <button class="button button-assertive button-block margin0" ng-click="sendProfile()">
+    <button class="button button-assertive button-block margin0"  ng-click="openModal()">
       Send Profile &amp; Costs
     </button>
     <!-- <button class="button button-assertive button-block margin0" ng-click="sendProfile()" >

@@ -22,3 +22,32 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 @import "www/lib/scss/main.scss";
 @import "www/lib/ionic/scss/ionic";
+
+.modalimgae{
+    width: 60%;
+    text-align: center;
+    margin: 25% auto;
+    img{
+        width: 100%;
+    }
+}
+
+.ytp-icon-sharrow{
+    display: none!important;
+}
+
+
+.videocss {
+    overflow: hidden;
+    height: 42% !important;
+    width: 100% !important;
+    position: absolute;
+    top: 33%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    z-index: 100; 
+    .ytp-icon-sharrow{
+      display: none!important;
+  }
+  }

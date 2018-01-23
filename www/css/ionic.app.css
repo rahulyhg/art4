@@ -89,6 +89,12 @@ $dark:                            #444 !default;
   .fr-pw a {
     text-decoration: none; }
 
+.display div {
+  display: block !important; }
+
+.display-block {
+  display: block !important; }
+
 .error-msg {
   background-color: #3b5998;
   color: #fff;
@@ -97,8 +103,19 @@ $dark:                            #444 !default;
   top: 2px;
   position: absolute;
   left: 50%;
+  display: block !important;
   transform: translateX(-50%);
   font-size: 11px; }
+  .error-msg:before {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #3b5998;
+    bottom: -4px;
+    content: '';
+    position: absolute;
+    left: 50%; }
   .error-msg:after {
     width: 0;
     height: 0;
@@ -109,6 +126,11 @@ $dark:                            #444 !default;
     content: '';
     position: absolute;
     left: 50%; }
+
+.txtcolor {
+  margin: 0px !important; }
+  .txtcolor label {
+    color: #3b5998; }
 
 .right-badge-modal {
   position: absolute;
@@ -335,8 +357,11 @@ $dark:                            #444 !default;
 .bar.bar-assertive {
   background-color: #3b5998 !important; }
 
-.tab-item {
-  font-size: 16px !important; }
+.header {
+  font-size: 16px !important;
+  color: white !important;
+  width: 50%;
+  text-align: center; }
 
 .name h4 {
   margin-bottom: 0px; }
@@ -432,6 +457,9 @@ input[type="date"]:valid:before {
 .mt-160 {
   margin-top: 160px; }
 
+.mt-200 {
+  margin-top: 200px; }
+
 .bgs {
   height: 110px;
   width: 110px;
@@ -460,6 +488,61 @@ input[type="date"]:valid:before {
 
 .noPadding {
   padding: 0px !important; }
+
+.color {
+  color: #778aa6 !important; }
+
+.videotransparent {
+  background: black !important;
+  opacity: 0.95 !important; }
+
+.modal-header {
+  position: absolute;
+  bottom: 61%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  background: black !important;
+  width: 100%;
+  z-index: 100 !important; }
+  .modal-header button {
+    border: none; }
+
+.video-close {
+  background: transparent !important; }
+  .video-close .button.button-light:active {
+    border: none !important; }
+  .video-close .button.button-light:hover {
+    border: none !important; }
+  .video-close i {
+    font-size: 30px;
+    color: white; }
+
+.video-modal {
+  height: 30% !important;
+  background: black !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 100%;
+  transform: translate(-50%, -50%) !important; }
+
+.videocss {
+  overflow: hidden;
+  height: 42% !important;
+  width: 100% !important;
+  position: absolute;
+  top: 33%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  z-index: 100; }
+
+.no-artist {
+  text-align: center;
+  font-size: 20px; }
+
+.colordisable {
+  background: transparent !important; }
 
 /*!
   Ionicons, v2.0.1
@@ -10260,3 +10343,26 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.modalimgae {
+  width: 60%;
+  text-align: center;
+  margin: 25% auto; }
+  .modalimgae img {
+    width: 100%; }
+
+.ytp-icon-sharrow {
+  display: none !important; }
+
+.videocss {
+  overflow: hidden;
+  height: 42% !important;
+  width: 100% !important;
+  position: absolute;
+  top: 33%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  z-index: 100; }
+  .videocss .ytp-icon-sharrow {
+    display: none !important; }
