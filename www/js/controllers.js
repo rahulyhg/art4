@@ -987,7 +987,7 @@ console.log("hellocheck",$scope.getArtist)
     }).then(function (modal) {
       $scope.modal = modal;
     });
-    $scope.openModal = function () {
+    $scope.openModal1 = function () {
       $scope.modal.show();
       _.each($scope.getListOfArtist,function(val){
         console.log("helloids",val)

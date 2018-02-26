@@ -6,10 +6,10 @@
               </ion-header-bar>
     <ion-content class="bg-login">
         <div class="logo mt25 modalimgae" ng-if="getUserDetail.bgimage || getUserDetail.bgimage !='' || getUserDetail.bgimage != null">
-            <img ng-src="{{getUserDetail.bgimage | uploadpath}}" alt="Coach Mentor">
+            <img ng-src="{{getUserDetail.bgimage | uploadpath}}" >
           </div>
       <div class="logo mt25 modalimgae" ng-if="!getUserDetail.bgimage || getUserDetail.bgimage == '' || getUserDetail.bgimage == null">
-        <img src="img/logo.jpg" alt="Coach Mentor">
+        <img src="img/logo.jpg" >
       </div>
       <div class="login-form padding-horizontal">
         <form name="formName">
